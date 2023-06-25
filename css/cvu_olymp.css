@@ -1,0 +1,116 @@
+/* for olymp sites library */
+
+/* ---- CVU_PRICE ----------------------------------------------------------- */
+.cvu_price {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.cvu_price * {
+    line-height: 1;
+    position: relative;
+}
+.cvu_price > p:first-child {
+    color: #4caf50;
+    font-size: 42px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 0 12px 0 0;
+}
+.cvu_price > p:last-child {
+    display: flex;
+    flex-direction: column;
+}
+.cvu_price > p:last-child > u {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4caf50;
+    text-decoration: underline;
+    margin: 4px 0 0 0
+}
+.cvu_price > p:last-child > b {
+    white-space: nowrap;
+    color: #37474f;
+    font-size: 14px;
+    font-style: normal;
+    text-transform: uppercase;
+    margin: 4px 0 0 0;
+}
+/* ---- cvu_old_price ------------------------------------------------------- */
+.cvu_old_price > p:first-child {
+    color: #37474f;
+}
+.cvu_old_price > p:first-child:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: calc(100% + 32px);
+    height: 2px;
+    bottom: 44%;
+    right: -24px;
+    background: #f44336;
+    -webkit-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+    z-index: 100;
+}
+.cvu_old_price > p:last-child > u {
+    color: #37474f;
+}
+/* ---- cvu_price_32 -------------------------------------------------------- */
+.cvu_price_32 > p:first-child {
+    font-size: 32px;
+    margin: 0 6px 0 0;
+}
+.cvu_price_32 > p:last-child > u {
+    font-size: 14px;
+    margin: 2px 0 0 0
+}
+.cvu_price_32 > p:last-child > b {
+    font-size: 12px;
+    margin: 4px 0 0 0;
+}
+/* ---- cvu_price_30 -------------------------------------------------------- */
+.cvu_price_30 > p:first-child {
+    font-size: 30px;
+    margin: 0 4px 0 0;
+}
+.cvu_price_30 > p:last-child > u {
+    font-size: 12px;
+    margin: 2px 0 0 0
+}
+.cvu_price_30 > p:last-child > b {
+    font-size: 11px;
+    margin: 2px 0 0 0;
+}
+/* ---- cvu_price_24 -------------------------------------------------------- */
+.cvu_price_24 > p:first-child {
+    font-size: 24px;
+    margin: 0 4px 0 0;
+}
+.cvu_price_24 > p:last-child > u {
+    font-size: 12px;
+    margin: 2px 0 0 0
+}
+.cvu_price_24 > p:last-child > b {
+    font-size: 11px;
+    margin: 2px 0 0 0;
+}
+/* ---- cvu_price_22 -------------------------------------------------------- */
+.cvu_price_22 > p:first-child {
+    font-size: 22px;
+    margin: 0 4px 0 0;
+}
+.cvu_price_22 > p:last-child > u {
+    font-size: 10px;
+    margin: 0
+}
+.cvu_price_22 > p:last-child > b {
+    font-size: 8px;
+    margin: 1px 0 0 0;
+}
+.cvu_price_22.cvu_old_price > p:first-child:after{
+    width: calc(100% + 22px);
+    right: -12px;
+}
+/* -------------------------------------------------------------------------- */
