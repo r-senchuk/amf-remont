@@ -9,7 +9,7 @@
 }
 /* -------------------------------------------------------------------------- */
 div[otype="article"].black {
-  background-color: #19326b;
+  background-color: #486e71;
   position: relative;
 }
 div[otype="article"].black:before {
@@ -25,8 +25,8 @@ div[otype="article"].black:before {
 div[otype="article"].black [otype="header"] > div > *:first-child {
   color: whitesmoke;
   font-weight: 400;
-  text-shadow: #0b23ff 0px 0px 1px, #0b23ff 0px 0px 2px, #0b23ff 0px 0px 3px,
-    #0b23ff 0px 0px 4px, #0b23ff 0px 0px 6px;
+  text-shadow: #5b9397 0px 0px 1px, #5b9397 0px 0px 2px, #5b9397 0px 0px 3px,
+    #5b9397 0px 0px 4px, #5b9397 0px 0px 6px;
 }
 div[otype="article"].black [otype="header"] > div > p {
   color: rgba(255, 255, 255, 0.75);

@@ -7,11 +7,11 @@ body.ol-table#tinymce {
 }
 .ol-article {
   font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 400;
   color: #37474f;
   display: block;
-  line-height: 22px;
+  line-height: 28px;
 }
 .ol-article b,
 .ol-article strong {

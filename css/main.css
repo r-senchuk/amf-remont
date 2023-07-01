@@ -944,7 +944,7 @@ div.cvu-input__focused:after {
 }
 header {
   position: relative;
-  background: url(../d/i/hbg.png) center bottom repeat-x #19326b;
+  background: url(../d/i/hbg.png) center bottom repeat-x #486e71;
 }
 body > header > div[otype] {
   padding: 0 12px;
@@ -1049,10 +1049,10 @@ header .phone#phone_de > span {
 header .phone > a {
   font-size: 19px;
   font-weight: 400;
-  color: #cc71cd;
+  color: #f89f47f2;
 }
 header .phone#phone_de > a {
-  color: #95b7fb;
+  color: #f89f47f2;
 }
 header .phone > a:hover {
   color: rgba(255, 255, 255, 0.9) !important;
@@ -1490,7 +1490,7 @@ body > * > div[otype]#breadcrumbs > div > div[otype] {
   color: rgba(84, 110, 122, 0.25);
 }
 footer {
-  background: #19326b;
+  background: #486e71;
 }
 footer > div div,
 footer a {
@@ -1596,7 +1596,7 @@ footer #footer_copyright p strong {
 }
 .sidenav li#sidenav_head {
   height: 133px;
-  background: url(../d/i/hr2.png) repeat-x bottom left #19326b;
+  background: url(../d/i/hr2.png) repeat-x bottom left #486e71;
   display: flex;
   margin: 0 0 12px 0;
 }
@@ -1613,7 +1613,7 @@ footer #footer_copyright p strong {
   color: #333333;
 }
 .sidenav li > a > i {
-  color: #19326b;
+  color: #ff942a;
 }
 .sidenav li > a:hover {
   color: #fff;
