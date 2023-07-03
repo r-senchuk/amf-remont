@@ -216,7 +216,6 @@ body > * > div[otype].w_shadow {
 }
 body > * > div[otype] > div > div[otype] {
   width: calc(100% - 24px);
-  padding: 12px;
   margin: 0;
 }
 body > * > div[otype] > div > div[otype].w1 {
