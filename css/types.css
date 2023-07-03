@@ -1,3 +1,9 @@
+@media only screen and (min-width: 969px) {
+  .pad-rt-20 {
+    padding-right: 85px;
+  }
+}
+
 div[otype="button"] {
   display: flex;
   justify-content: flex-start;
@@ -760,9 +766,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
 }
 
 @media only screen and (max-width: 1859px) {
-  .pad-rt-20 {
-    padding-right: 125px;
-  }
 
   [otype="welcome"] #w_bus {
     bottom: 18px;
@@ -773,9 +776,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 }
 @media only screen and (max-width: 1749px) {
-  .pad-rt-20 {
-    padding-right: 115px;
-  }
 
   [otype="welcome"] #w_triangle1 {
     bottom: -234px;
@@ -797,9 +797,7 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
     background-size: cover;
     background-position: 0px 0px;
   }
-  .pad-rt-20 {
-    padding-right: 105px;
-  }
+
   [otype="welcome"] #w_text_left {
     height: 515px;
   }
@@ -827,9 +825,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 }
 @media only screen and (max-width: 1199px) {
-  .pad-rt-20 {
-    padding-right: 105px;
-  }
 
   [otype="welcome"] #book_form_cont {
     margin: -12px auto 570px auto;
@@ -861,9 +856,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 }
 @media only screen and (max-width: 1078px) {
-  .pad-rt-20 {
-    padding-right: 85px;
-  }
 
   [otype="welcome"] #w_corner_ow {
     width: calc(100% - 230px);
@@ -881,9 +873,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 }
 @media only screen and (max-width: 969px) {
-  .pad-rt-20 {
-    padding-right: 45px;
-  }
 
   [otype="welcome"] #w_triangle1 {
     bottom: -135px;
@@ -901,18 +890,12 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 }
 @media only screen and (max-width: 869px) {
-  .pad-rt-20 {
-    padding-right: 40px;
-  }
 
   [otype="welcome"] #w_bus {
     right: 0px;
   }
 }
 @media only screen and (max-width: 829px) {
-  .pad-rt-20 {
-    padding-right: 25px;
-  }
 
   [otype="welcome"] #w_text_bottom {
     left: calc(50% + 0px);
@@ -932,9 +915,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 }
 @media only screen and (max-width: 649px) {
-  .pad-rt-20 {
-    padding-right: 25px;
-  }
 
   [otype="welcome"] #w_text_left {
     display: flex;
@@ -1020,9 +1000,6 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
 }
 
 @media only screen and (max-width: 549px) {
-  .pad-rt-20 {
-    padding-right: 0px;
-  }
 
   [otype="welcome"] #w_text_bottom em {
     font-size: 18px;
