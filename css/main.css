@@ -79,13 +79,13 @@ footer {
   margin: 0;
 }
 body > * > div[otype] {
-  width: calc(100% - 24px);
+  width: calc(100% - 40px);
+  padding: 12px 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  padding: 12px;
   margin: 0;
 }
 body > * > div[otype] > div {
