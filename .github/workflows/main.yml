@@ -1,29 +1,29 @@
-# name: Build & deploy
+name: Build & deploy
 
-# on:
-#   push:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - main
 
-# permissions:
-#   id-token: write # This is required for requesting the JWT
-#   contents: read  # This is required for actions/checkout
-# env:
-#   BUCKET_NAME : "4k-koval.com"
-#   AWS_REGION : "eu-central-1"
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Git clone the repository
-#         uses: actions/checkout@v3
-#       - name: configure aws credentials
-#         uses: aws-actions/configure-aws-credentials@v2
-#         with:
-#           role-to-assume: arn:aws:iam::863809951348:role/GitHubActions
-#           role-session-name: GitHubActions
-#           aws-region: ${{ env.AWS_REGION }}
-#       # Upload a file to AWS s3
-#       - name:  Copying to s3
-#         run: |
-#           aws s3 cp . s3://${{ env.BUCKET_NAME }} --exclude ".git*/*" --recursive
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+env:
+  BUCKET_NAME : "amfgroup.pl"
+  AWS_REGION : "eu-central-1"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::863809951348:role/GitHubActions
+          role-session-name: GitHubActions
+          aws-region: ${{ env.AWS_REGION }}
+      # Upload a file to AWS s3
+      - name:  Copying to s3
+        run: |
+          aws s3 cp . s3://${{ env.BUCKET_NAME }} --exclude ".git*/*" --recursive
