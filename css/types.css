@@ -237,10 +237,10 @@ body > * > div[otype="welcome"] > div > div[otype] {
   font-size: 24px;
 }
 [otype="welcome"] .w_form .fs_26 {
-  font-size: 30px;
+  font-size: 26px;
 }
 [otype="welcome"] .w_form b {
-  font-weight: 600;
+  font-weight: 500;
 }
 [otype="welcome"] .w_form .fw_m {
   font-weight: 500;
@@ -261,7 +261,7 @@ body > * > div[otype="welcome"] > div > div[otype] {
   margin-left: 48px;
 }
 [otype="welcome"] .w_form .mb_4 {
-  margin-bottom: 4px;
+  margin-bottom: 40%;
 }
 [otype="welcome"] .w_form .mb_8 {
   margin-bottom: 8px;
@@ -305,9 +305,9 @@ body > * > div[otype="welcome"] > div > div[otype] {
   left: 0;
 }
 [otype="welcome"] #w_text_left > div {
-  width: 280px;
+  width: 360px;
   height: 100%;
-  margin-left: calc(50% - 300px - 280px);
+  margin-left: calc(50% - 300px - 200px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,7 +374,7 @@ body > * > div[otype="welcome"] > div > div[otype] {
 }
 .leftimg {
   float: left; /* Вирівнювання по лівому краю */
-  margin: 0px 7px 7px 0; /* Відступи навколо картинки */
+  margin: 0px 15px 7px 0; /* Відступи навколо картинки */
   line-height: normal;
 }
 [otype="welcome"] #w_bus > img {
@@ -827,7 +827,7 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 
   [otype="welcome"] .w_form .fs_26 {
-    font-size: 30px;
+    font-size: 26px;
   }
 
   [otype="welcome"] .w_form .ml_32 {
@@ -838,7 +838,7 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
     height: calc(100% - 320px);
   }
   [otype="welcome"] #w_text_left > div {
-    width: 280px;
+    width: 360px;
     height: auto;
     margin: 0 0 18px 0 !important;
     position: absolute;
@@ -920,7 +920,7 @@ div[otype="welcome"] .select-dropdown.dropdown-content li.selected {
   }
 
   [otype="welcome"] #w_text_left > div {
-    width: 280px;
+    width: 360px;
     height: auto;
     margin: 0 auto 18px auto !important;
     position: relative;
@@ -2813,7 +2813,7 @@ div[otype="contacts_and_feedback"] .cf_emails span {
   flex-direction: column;
 }
 div[otype="contacts_and_feedback"] .cf_emails a {
-  margin: 10px 0 0 0;
+  margin: 10px 0 10px 0;
   font-size: 16px;
   font-weight: 700;
   text-decoration: none;
