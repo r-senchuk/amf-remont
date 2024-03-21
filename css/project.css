@@ -8,6 +8,7 @@
   margin: 0 auto;
 }
 /* -------------------------------------------------------------------------- */
+
 div[otype="article"].black {
   background-color: #486e71;
   position: relative;
@@ -35,6 +36,7 @@ div[otype="article"].black .ol-article {
   color: rgba(255, 255, 255, 0.75);
 }
 /* -------------------------------------------------------------------------- */
+
 #cid18 {
   margin-bottom: -24px;
   padding-top: 24px;
