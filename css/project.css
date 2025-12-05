@@ -10,7 +10,7 @@
 /* -------------------------------------------------------------------------- */
 
 div[otype="article"].black {
-  background-color: #486e71;
+  background-color: var(--color-bg-dark);
   position: relative;
 }
 div[otype="article"].black:before {

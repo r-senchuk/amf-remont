@@ -326,8 +326,15 @@ amf-remont/
   - Easy photo management (add/remove/reorder via JSON)
   - Touch and keyboard navigation support
 
+- **STEP 2: Design System Foundation** - Modern CSS design system
+  - CSS custom properties (variables) for colors, spacing, typography
+  - Centralized color palette and design tokens
+  - Utility classes for common styling needs
+  - Removed all inline styles from HTML
+  - Consistent typography scale and spacing system
+  - Improved maintainability and consistency
+
 ### 🚧 In Progress
-- STEP 2: Design System Foundation
 - STEP 3: Content Structure & SEO
 - STEP 4: Mobile Responsiveness
 - STEP 5: Image Optimization
@@ -366,10 +373,50 @@ amf-remont/
   - JS: `https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js`
 - **AMP Runtime** - Still included for other components (forms, etc.)
 
+## Design System
+
+### CSS Variables
+
+The design system uses CSS custom properties (variables) defined in `css/design-system.css`. All colors, spacing, typography, shadows, and transitions are centralized here.
+
+#### Color Palette
+- **Primary Colors**: `--color-primary` (#1a49a7), `--color-primary-dark` (#19326b), `--color-primary-light` (#95b7fb)
+- **Accent Colors**: `--color-accent-orange` (#ff942a), `--color-accent-purple` (#a70da9), `--color-accent-green` (#4caf50)
+- **Neutral Colors**: `--color-text-primary` (#37474f), `--color-text-secondary` (#546e7a), `--color-bg-light` (#eceff1), `--color-bg-lighter` (#f4f7f9), `--color-bg-dark` (#486e71)
+
+#### Spacing Scale (8px base unit)
+- `--spacing-xs`: 4px
+- `--spacing-sm`: 8px
+- `--spacing-md`: 16px
+- `--spacing-lg`: 24px
+- `--spacing-xl`: 32px
+- `--spacing-2xl`: 48px
+- `--spacing-3xl`: 64px
+
+#### Typography
+- Font families: `--font-family-primary` (Geometria, Open Sans), `--font-family-secondary` (Open Sans)
+- Font sizes: `--font-size-xs` (12px) through `--font-size-3xl` (32px)
+- Line heights: `--line-height-tight` (1.2), `--line-height-normal` (1.5), `--line-height-relaxed` (1.75)
+
+#### Utility Classes
+
+Common utility classes available:
+- **Background**: `.bg-light`, `.bg-lighter`, `.bg-primary`, `.bg-accent-light`
+- **Text Colors**: `.text-primary`, `.text-accent-orange`, `.text-accent-green`, `.text-accent-purple`
+- **Spacing**: `.mt-*`, `.mb-*`, `.pt-*`, `.pb-*` (xs, sm, md, lg, xl)
+
+### Usage Guidelines
+
+1. **Always use CSS variables** instead of hardcoded colors or spacing values
+2. **Use utility classes** for common styling needs (backgrounds, text colors)
+3. **Maintain consistency** by using the design system tokens
+4. **No inline styles** - use utility classes or add styles to appropriate CSS files
+
 ## Notes
 
 - GLightbox is used for gallery lightbox functionality (replaces AMP lightbox-gallery for dynamic content)
 - AMP components still used for other features (forms, etc.)
+- Design system variables are defined in `css/design-system.css` and used throughout all CSS files
 - Maintain backward compatibility during migration
 - Test thoroughly before each deployment
 - Document any breaking changes

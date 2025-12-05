@@ -133,9 +133,9 @@
             var figure = document.createElement('figure');
             figure.className = 'tag_by_width';
 
-            // Build image paths
+            // Build image paths (both absolute for consistency)
             var fullImagePath = '/i/' + photo.folder + '/' + photo.filename;
-            var thumbImagePath = 'i/' + photo.folder + '/' + photo.thumbFilename;
+            var thumbImagePath = '/i/' + photo.folder + '/' + photo.thumbFilename;
 
             // Create link wrapper for lightbox
             var link = document.createElement('a');
@@ -156,15 +156,14 @@
             img.style.width = '100%';
             img.style.height = '100%';
             img.style.objectFit = 'cover';
+            img.style.display = 'block';
             
-            // Set background image style for thumbnail effect
+            // Set link styles
             link.style.display = 'block';
             link.style.width = '100%';
             link.style.height = '100%';
-            link.style.backgroundImage = 'url(' + thumbImagePath + ')';
-            link.style.backgroundSize = 'cover';
-            link.style.backgroundPosition = 'center';
             link.style.cursor = 'pointer';
+            link.style.overflow = 'hidden';
 
             // Add hover effect
             link.addEventListener('mouseenter', function() {
@@ -194,6 +193,8 @@
                 zoomIcon.style.opacity = '0';
             });
 
+            // Append image and zoom icon to link
+            link.appendChild(img);
             link.appendChild(zoomIcon);
             figure.appendChild(link);
             
