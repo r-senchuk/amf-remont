@@ -134,13 +134,29 @@ export class BaseComponent extends HTMLElement {
 
   async connectedCallback() {
     if (!this._initialized) {
-      // Handle async render
-      const renderResult = this.render();
-      if (renderResult instanceof Promise) {
-        await renderResult;
+      try {
+        // Handle async render
+        const renderResult = this.render();
+        if (renderResult instanceof Promise) {
+          await renderResult;
+        }
+        this.init();
+        this._initialized = true;
+        
+        if (import.meta.env.DEV) {
+          console.log(`${this.constructor.name}: Initialized and rendered`);
+        }
+      } catch (error) {
+        console.error(`${this.constructor.name}: Error in connectedCallback:`, error);
+        if (this.shadowRoot) {
+          this.shadowRoot.innerHTML = `
+            <div style="padding: 2rem; text-align: center; color: red;">
+              <h2>Error loading component</h2>
+              <p>${error.message}</p>
+            </div>
+          `;
+        }
       }
-      this.init();
-      this._initialized = true;
     }
   }
 

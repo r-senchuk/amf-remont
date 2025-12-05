@@ -82,8 +82,15 @@ export class Router {
     
     if (!route) {
       // 404 - route not found
+      if (import.meta.env.DEV) {
+        console.warn('Router: Route not found:', normalizedPath, 'Available routes:', Array.from(this.routes.keys()));
+      }
       this.handle404(normalizedPath);
       return;
+    }
+    
+    if (import.meta.env.DEV) {
+      console.log('Router: Handling route:', normalizedPath);
     }
 
     // Save current scroll position
@@ -143,8 +150,20 @@ export class Router {
       }
       
       if (this.currentComponent) {
+        // Clear container
         this.container.innerHTML = '';
+        
+        // Append component to container
         this.container.appendChild(this.currentComponent);
+        
+        if (import.meta.env.DEV) {
+          console.log('Router: Component appended to container:', this.container.id || this.container.tagName);
+          console.log('Router: Component element:', this.currentComponent);
+          console.log('Router: Component shadowRoot:', this.currentComponent.shadowRoot);
+        }
+        
+        // Wait a bit for component to render (connectedCallback is async)
+        await new Promise(resolve => setTimeout(resolve, 100));
         
         // Update SEO meta tags
         this.updateMetaTags(route, normalizedPath);
@@ -236,10 +255,16 @@ export class Router {
       try {
         const element = await route.component();
         if (element instanceof HTMLElement) {
+          if (import.meta.env.DEV) {
+            console.log('Router: Component loaded:', element.tagName || element.constructor.name);
+          }
           return element;
+        } else {
+          console.error('Router: Component function did not return HTMLElement:', element);
         }
       } catch (error) {
         console.error('Error loading component:', error);
+        throw error; // Re-throw to be caught by handleError
       }
       // Fallback
       return document.createElement('div');

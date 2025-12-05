@@ -29,6 +29,17 @@ class App {
     // Initialize router with main container
     // This will handle the initial route now that routes are registered
     const mainContainer = document.querySelector('#app-main') || document.querySelector('main') || document.body;
+    
+    if (!mainContainer) {
+      console.error('Router: Main container not found!');
+      return;
+    }
+    
+    if (import.meta.env.DEV) {
+      console.log('Router: Initializing with container:', mainContainer);
+      console.log('Router: Registered routes:', Array.from(router.routes.keys()));
+    }
+    
     router.init(mainContainer);
 
     // Handle link clicks for client-side navigation
@@ -50,8 +61,17 @@ class App {
   async registerRoutes() {
     // Home page
     router.register('/', async () => {
-      await import('../components/pages/HomePage/HomePage.js');
-      return document.createElement('amf-home-page');
+      try {
+        await import('../components/pages/HomePage/HomePage.js');
+        const element = document.createElement('amf-home-page');
+        if (import.meta.env.DEV) {
+          console.log('App: Created HomePage element:', element);
+        }
+        return element;
+      } catch (error) {
+        console.error('App: Error loading HomePage:', error);
+        throw error;
+      }
     }, {
       title: 'AMF GROUP - Wykończenie wnętrz we Wrocławiu',
       description: 'Profesjonalne wykończenie wnętrz we Wrocławiu. Remonty pod klucz, 24-miesięczna gwarancja. Setki zrealizowanych projektów. Zadzwoń już dziś!',

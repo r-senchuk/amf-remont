@@ -4,7 +4,6 @@
  */
 import { BaseComponent } from '../../../js/base-component.js';
 import { loadDesignSystem } from '../../../js/design-system-loader.js';
-import template from './HomePage.html?raw';
 
 class HomePage extends BaseComponent {
   constructor() {
@@ -12,16 +11,57 @@ class HomePage extends BaseComponent {
   }
 
   async render() {
-    // Load design system CSS variables
-    const designSystemStyles = await loadDesignSystem();
+    try {
+      // Try to load template - use relative path from src root
+      let template = await this.loadTemplate('./components/pages/HomePage/HomePage.html');
+      
+      // Fallback: try absolute path
+      if (!template) {
+        template = await this.loadTemplate('/components/pages/HomePage/HomePage.html');
+      }
+      
+      // Load design system CSS variables
+      const designSystemStyles = await loadDesignSystem();
 
-    this.shadowRoot.innerHTML = `
-      <style>
-        ${designSystemStyles}
-        ${this.getComponentStyles()}
-      </style>
-      ${template}
-    `;
+      if (!template) {
+        console.error('HomePage: Failed to load template, using fallback content');
+        // Fallback content if template fails to load
+        template = `
+          <div class="homePage">
+            <section class="hero">
+              <div class="heroContent">
+                <h1 class="heroTitle">Tworzymy Twoje wymarzone wnętrze</h1>
+                <p class="heroSubtitle">Od pomysłu do klucza - kompleksowe wykończenie wnętrz we Wrocławiu z 24-miesięczną gwarancją</p>
+                <a href="/contact" class="heroCTA">
+                  <span>Zadzwoń teraz</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      this.shadowRoot.innerHTML = `
+        <style>
+          ${designSystemStyles}
+          ${this.getComponentStyles()}
+        </style>
+        ${template}
+      `;
+      
+      if (import.meta.env.DEV) {
+        console.log('HomePage: Rendered successfully');
+      }
+    } catch (error) {
+      console.error('HomePage: Error in render:', error);
+      this.shadowRoot.innerHTML = `
+        <div style="padding: 2rem; text-align: center;">
+          <h2>Error loading page</h2>
+          <p>${error.message}</p>
+        </div>
+      `;
+    }
   }
 
   getComponentStyles() {
