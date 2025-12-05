@@ -141,7 +141,11 @@
             var link = document.createElement('a');
             link.href = fullImagePath;
             link.className = 'gallery-item';
-            link.setAttribute('data-glightbox', 'title: ' + (photo.title || photo.alt));
+            
+            // Escape title for safe HTML attribute insertion
+            var title = (photo.title || photo.alt || '').toString();
+            title = title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            link.setAttribute('data-glightbox', 'title: ' + title);
             link.setAttribute('data-glightbox-index', index);
 
             // Create image element (regular img, not amp-img)

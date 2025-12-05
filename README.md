@@ -260,7 +260,7 @@ amf-remont/
 │   ├── main.start.js         # Initialization (minimal)
 │   ├── main.end.js           # Main functionality (enhance)
 │   ├── type.end.js           # Type-specific JS
-│   ├── gallery.js            # NEW: Gallery module (uses GLightbox) (uses GLightbox)
+│   ├── gallery.js            # NEW: Gallery module (uses GLightbox)
 │   └── reserve.js            # Form handling
 ├── data/
 │   ├── gallery.json          # NEW: Gallery configuration
@@ -334,23 +334,6 @@ amf-remont/
 - STEP 6: JavaScript Enhancements
 - STEP 7: Deployment Optimization
 
-## Implementation Status
-
-### ✅ Completed
-- **STEP 1: Photo Gallery System** - JSON-based gallery with GLightbox
-  - Dynamic gallery generation from `data/gallery.json`
-  - GLightbox integration for lightbox functionality
-  - Easy photo management (add/remove/reorder via JSON)
-  - Touch and keyboard navigation support
-
-### 🚧 In Progress
-- STEP 2: Design System Foundation
-- STEP 3: Content Structure & SEO
-- STEP 4: Mobile Responsiveness
-- STEP 5: Image Optimization
-- STEP 6: JavaScript Enhancements
-- STEP 7: Deployment Optimization
-
 ## Future Enhancements (Post-MVP)
 
 1. **React Integration (Optional)**
@@ -380,7 +363,7 @@ amf-remont/
 - **Materialize CSS** - Already included
 - **GLightbox** - Modern lightbox library (added in STEP 1)
   - CSS: `https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css`
-  - JS: `https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js`
+  - JS: `https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js`
 - **AMP Runtime** - Still included for other components (forms, etc.)
 
 ## Notes
