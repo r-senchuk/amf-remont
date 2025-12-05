@@ -30,7 +30,7 @@
          */
         loadGallery: function() {
             var self = this;
-            fetch('data/gallery.json')
+            fetch('/data/gallery.json')
                 .then(function(response) {
                     if (!response.ok) {
                         throw new Error('Failed to load gallery.json');

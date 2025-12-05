@@ -250,29 +250,34 @@ Create `data/gallery.json`:
 
 ```
 amf-remont/
-├── css/
-│   ├── main.css              # Main styles (refactor)
-│   ├── project.css           # Component styles (update)
-│   ├── types.css             # Gallery & content styles (update)
-│   ├── ol-article.css        # Article styles
-│   └── cvu_olymp.css         # Form styles
-├── js/
-│   ├── main.start.js         # Initialization (minimal)
-│   ├── main.end.js           # Main functionality (enhance)
-│   ├── type.end.js           # Type-specific JS
-│   ├── gallery.js            # NEW: Gallery module (uses GLightbox)
-│   └── reserve.js            # Form handling
-├── data/
-│   ├── gallery.json          # NEW: Gallery configuration
-│   └── content.json          # NEW: Optional content data
-├── images/
-│   └── gallery/
-│       ├── full/             # NEW: Full-size images
-│       └── thumbs/           # NEW: Thumbnails
-├── i/                        # Current image folders (migrate)
-├── include/                  # External libraries
-├── index.html                # Main HTML (restructure)
-├── Makefile                  # Deployment script
+├── src/                      # Source files (processed by Vite)
+│   ├── index.html            # Main HTML entry point
+│   └── css/                  # CSS files (processed, can use CSS Modules)
+│       ├── design-system.css # CSS variables and design tokens
+│       ├── main.css          # Main styles
+│       ├── project.css       # Component styles
+│       ├── types.css         # Gallery & content styles
+│       ├── ol-article.css    # Article styles
+│       └── cvu_olymp.css     # Form styles
+├── public/                   # Static assets (copied as-is)
+│   ├── js/                   # JavaScript files
+│   │   ├── utils.js          # Utility functions module
+│   │   ├── main.start.js     # Initialization
+│   │   ├── main.end.js       # Main functionality
+│   │   ├── type.end.js       # Type-specific JS
+│   │   ├── gallery.js        # Gallery module (GLightbox)
+│   │   └── reserve.js        # Form handling
+│   ├── i/                    # Gallery images
+│   ├── d/                    # Design assets (logo, icons)
+│   ├── include/              # External libraries (Materialize, fonts)
+│   ├── data/                 # JSON data files
+│   │   └── gallery.json      # Gallery configuration
+│   ├── favicon.ico
+│   └── sitemap.xml
+├── dist/                     # Build output (gitignored)
+├── package.json              # Node.js dependencies
+├── vite.config.js            # Vite configuration
+├── Makefile                  # Build and deployment scripts
 └── README.md                 # This file
 ```
 
@@ -304,18 +309,75 @@ amf-remont/
 - Provide alt text
 - Implement lazy loading
 
+## Build System
+
+### Vite Configuration
+
+The project uses **Vite** as a build tool for:
+- Fast development server with hot module replacement (HMR)
+- Production builds with optimized assets
+- CSS Modules support (`.module.css` files)
+- Modern JavaScript bundling
+
+### Commands
+
+```bash
+# Install dependencies (first time setup)
+make install
+
+# Start development server (http://localhost:3000)
+make dev
+
+# Build for production
+make build
+
+# Preview production build locally
+make preview
+
+# Deploy to S3 (builds first)
+make deploy
+
+# Clean build artifacts
+make clean
+```
+
+### CSS Modules
+
+CSS Modules are supported for scoped component styles:
+
+```css
+/* src/css/components/Gallery.module.css */
+.galleryItem {
+  display: block;
+  /* Scoped - won't conflict with other .galleryItem classes */
+}
+```
+
+```javascript
+// In JavaScript
+import styles from './Gallery.module.css';
+element.className = styles.galleryItem; // Becomes: Gallery__galleryItem___abc12
+```
+
+**Migration strategy:**
+- Existing `.css` files continue to work as global styles
+- New components can use `.module.css` for scoped styles
+- Migrate gradually, file by file
+
 ## Deployment
 
 ### Current Setup
 - AWS S3 bucket: `amfgroup.pl`
 - CloudFront distribution
+- Build tool: Vite
 - Deploy using: `make deploy`
 
 ### Deployment Process
-1. Test changes locally
-2. Run `make deploy` to upload to S3
-3. Invalidate CloudFront cache if needed
-4. Verify on live site
+1. Test changes locally with `make dev`
+2. Build production version with `make build`
+3. Run `make deploy` to upload `dist/` to S3
+4. Invalidate CloudFront cache if needed
+5. Verify on live site
 
 ## Implementation Status
 
@@ -343,11 +405,20 @@ amf-remont/
   - Modern event handling and smooth scrolling
   - Better performance with native browser APIs
 
+- **STEP 4: Vite Build System** - Modern build tooling
+  - Vite configuration for static site building
+  - CSS Modules support for scoped component styles
+  - Project restructured: `src/` for source, `public/` for static assets
+  - Development server with hot module replacement (HMR)
+  - Production builds with asset optimization
+  - Updated Makefile with build commands
+  - Foundation for Web Components integration
+
 ### 🚧 In Progress
-- STEP 4: Content Structure & SEO
-- STEP 5: Mobile Responsiveness
-- STEP 6: Image Optimization
-- STEP 7: Deployment Optimization
+- STEP 5: Content Structure & SEO
+- STEP 6: Mobile Responsiveness
+- STEP 7: Image Optimization
+- STEP 8: Deployment Optimization
 
 ## Future Enhancements (Post-MVP)
 
@@ -372,6 +443,9 @@ amf-remont/
    - CDN optimization
 
 ## Dependencies
+
+### Build Tools (npm)
+- **Vite** - Fast build tool with HMR and CSS Modules support
 
 ### External Libraries (CDN)
 - **Materialize CSS** - UI component library (uses cash internally, not jQuery)
