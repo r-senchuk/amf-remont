@@ -31,10 +31,26 @@ class Header extends BaseComponent {
     return `
       .header {
         position: relative;
-        background: url(/d/i/hbg.png) center bottom repeat-x var(--color-bg-dark);
-        box-shadow: var(--shadow-md);
-        z-index: 100;
+        background: var(--color-bg-dark);
+        background-image: url(/d/i/hbg.png);
+        background-position: center bottom;
+        background-repeat: repeat-x;
+        background-size: auto 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
         width: 100%;
+        isolation: isolate;
+      }
+      .header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(26, 73, 167, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 1;
       }
       @media (min-width: 1024px) {
         .header {
@@ -53,6 +69,7 @@ class Header extends BaseComponent {
         flex-wrap: wrap;
         align-items: flex-start;
         justify-content: flex-start;
+        z-index: 2;
       }
       .logo {
         position: absolute;
@@ -62,6 +79,11 @@ class Header extends BaseComponent {
         width: 312px;
         height: 180px;
         padding: 0;
+        z-index: 3;
+        transition: transform var(--transition-base);
+      }
+      .logo:hover {
+        transform: translateY(-2px);
       }
       .logo a {
         width: 160px;
@@ -69,10 +91,15 @@ class Header extends BaseComponent {
         justify-content: center;
         display: flex;
         align-items: center;
+        transition: opacity var(--transition-base);
+      }
+      .logo a:hover {
+        opacity: 0.9;
       }
       .logo img {
         width: 100%;
         height: auto;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
       }
       .phone {
         align-items: center;
@@ -80,6 +107,8 @@ class Header extends BaseComponent {
         position: absolute;
         top: 50px;
         display: flex;
+        z-index: 3;
+        gap: var(--spacing-sm);
       }
       .phoneUk {
         flex-direction: row-reverse;
@@ -95,24 +124,46 @@ class Header extends BaseComponent {
         height: 32px;
         display: flex;
         align-items: center;
-        opacity: 0.25;
+        opacity: 0.3;
+        transition: opacity var(--transition-base), transform var(--transition-base);
+      }
+      .phone:hover .phoneIcon {
+        opacity: 0.5;
+        transform: scale(1.05);
       }
       .phoneIcon img {
         width: 102px;
         height: 55px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
       }
       .phoneDe .phoneIcon img {
         transform: scaleX(-1);
       }
       .phoneLink {
         font-size: 19px;
-        font-weight: 400;
+        font-weight: 500;
         color: var(--color-accent-orange-light);
         text-decoration: none;
-        transition: var(--transition-base);
+        transition: all var(--transition-base);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        position: relative;
+      }
+      .phoneLink::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-sm);
+        opacity: 0;
+        transition: opacity var(--transition-base);
       }
       .phoneLink:hover {
-        color: rgba(255, 255, 255, 0.9);
+        color: #fff;
+        transform: translateY(-1px);
+      }
+      .phoneLink:hover::before {
+        opacity: 1;
       }
       .nav {
         flex-direction: row;
@@ -122,6 +173,8 @@ class Header extends BaseComponent {
         top: 90px;
         height: 28px;
         display: flex;
+        z-index: 3;
+        gap: var(--spacing-xs);
       }
       .navLeft {
         justify-content: flex-end;
@@ -137,25 +190,50 @@ class Header extends BaseComponent {
         align-items: center;
         height: 100%;
         font-size: var(--font-size-base);
-        font-weight: 200;
+        font-weight: 400;
         text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.5px;
+        color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
-        transition: var(--transition-base);
-        padding: 0 var(--spacing-sm);
+        transition: all var(--transition-base);
+        padding: var(--spacing-xs) var(--spacing-md);
+        border-radius: var(--radius-sm);
+        position: relative;
+      }
+      .navLink::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 60%;
+        height: 2px;
+        background: var(--color-accent-orange);
+        transition: transform var(--transition-base);
       }
       .navLink:hover {
         color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+      }
+      .navLink:hover::after {
+        transform: translateX(-50%) scaleX(1);
       }
       .navSeparator {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 40px;
+        opacity: 0.6;
+        transition: opacity var(--transition-base);
+      }
+      .nav:hover .navSeparator {
+        opacity: 0.8;
       }
       .navSeparator img {
         width: 100%;
         height: auto;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
       }
       .menuTrigger {
         display: none;
@@ -164,11 +242,22 @@ class Header extends BaseComponent {
         position: absolute;
         top: 6px;
         left: 8px;
-        z-index: 99;
-        background: transparent;
-        border: none;
+        z-index: 1001;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: var(--radius-md);
         cursor: pointer;
         padding: 0;
+        transition: all var(--transition-base);
+        backdrop-filter: blur(4px);
+      }
+      .menuTrigger:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+      .menuTrigger:active {
+        transform: scale(0.95);
       }
       @media (max-width: 1099px) {
         .nav {
@@ -189,20 +278,27 @@ class Header extends BaseComponent {
         .hamburgerLine {
           display: block;
           position: absolute;
-          height: 4px;
-          width: 36px;
-          border-radius: 4px;
+          height: 3px;
+          width: 28px;
+          border-radius: 2px;
           background: rgba(255, 255, 255, 1);
-          transition: var(--transition-base);
+          transition: all var(--transition-base);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
         .hamburgerLine:nth-child(1) {
           top: 0;
+          left: 4px;
         }
         .hamburgerLine:nth-child(2) {
           top: 10px;
+          left: 4px;
         }
         .hamburgerLine:nth-child(3) {
           top: 20px;
+          left: 4px;
+        }
+        .menuTrigger:hover .hamburgerLine {
+          background: var(--color-accent-orange-light);
         }
       }
       @media (max-width: 1279px) {
@@ -216,6 +312,9 @@ class Header extends BaseComponent {
         }
       }
       @media (max-width: 879px) {
+        .header {
+          background-size: auto 120%;
+        }
         .logo {
           left: calc(50% - 220px / 2);
           width: 220px;
@@ -235,6 +334,22 @@ class Header extends BaseComponent {
         }
         .phoneUk {
           align-items: flex-end !important;
+        }
+        .phoneLink {
+          font-size: 16px;
+        }
+      }
+      @media (max-width: 600px) {
+        .headerContainer {
+          padding: 0 12px;
+          width: calc(100% - 24px);
+        }
+        .phone {
+          width: 140px;
+        }
+        .phoneLink {
+          font-size: 14px;
+          padding: 2px 6px;
         }
       }
     `;
