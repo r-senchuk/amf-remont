@@ -2,13 +2,12 @@
  * React Router Configuration
  * Defines all application routes
  */
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import App from '../App.jsx';
 import HomePage from '../components/pages/HomePage/HomePage.jsx';
 import AboutPage from '../components/pages/AboutPage/AboutPage.jsx';
 import ServicesPage from '../components/pages/ServicesPage/ServicesPage.jsx';
 import GalleryPage from '../components/pages/GalleryPage/GalleryPage.jsx';
-import ContactPage from '../components/pages/ContactPage/ContactPage.jsx';
 
 // Route metadata for SEO
 const routesMeta = {
@@ -39,13 +38,6 @@ const routesMeta = {
     ogTitle: 'Galeria - AMF GROUP | Zrealizowane projekty',
     ogDescription: 'Zobacz efekty naszej pracy. Setki zrealizowanych projektów remontowych we Wrocławiu.',
     ogImage: '/assets/logo/logo.svg'
-  },
-  '/contact': {
-    title: 'Kontakt - AMF GROUP | Wykończenie wnętrz we Wrocławiu',
-    description: 'Skontaktuj się z AMF GROUP. Zadzwoń: +48 (796) 019-986 lub +48 (795) 621-905. Email: amfgroupremont@gmail.com',
-    ogTitle: 'Kontakt - AMF GROUP',
-    ogDescription: 'Gotowy na zmianę? Dzwonisz, a my zajmiemy się resztą. Kontakt z AMF GROUP - wykończenie wnętrz we Wrocławiu.',
-    ogImage: '/assets/logo/logo.svg'
   }
 };
 
@@ -74,8 +66,9 @@ const router = createBrowserRouter([
         element: <GalleryPage />
       },
       {
+        // Redirect /contact to home page (contact section is part of HomePage)
         path: 'contact',
-        element: <ContactPage />
+        element: <Navigate to="/#contact" replace />
       },
       {
         path: '*',
@@ -94,4 +87,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
-

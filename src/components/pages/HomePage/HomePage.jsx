@@ -4,6 +4,7 @@
  */
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ContactSection from './ContactSection';
 import './HomePage.css';
 
 function HomePage() {
@@ -252,6 +253,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <ContactSection />
     </div>
   );
 }

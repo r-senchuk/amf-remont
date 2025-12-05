@@ -36,6 +36,28 @@ function Header() {
     }
   }, []);
 
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    
+    // If not on home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
@@ -78,7 +100,13 @@ function Header() {
           <div className={styles.navSeparator}>
             <img src="/assets/images/h_nav.png" alt="" />
           </div>
-          <Link to="/contact" className={styles.navLink}>KONTAKT</Link>
+          <a 
+            href="/#contact" 
+            className={styles.navLink}
+            onClick={handleContactClick}
+          >
+            KONTAKT
+          </a>
         </nav>
 
         <button 
@@ -98,4 +126,3 @@ function Header() {
 }
 
 export default Header;
-

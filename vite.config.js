@@ -1,10 +1,14 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // Use React plugin
-  plugins: [react()],
+  // Use React and Tailwind plugins
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
   
   // Source files are in src/ directory
   root: 'src',
@@ -35,9 +39,7 @@ export default defineConfig({
       localsConvention: 'camelCase',
       // Generate scoped class names
       generateScopedName: '[name]__[local]___[hash:base64:5]'
-    },
-    // PostCSS configuration (if needed in future)
-    postcss: {}
+    }
   },
   
   // Resolve configuration for imports

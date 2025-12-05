@@ -1,8 +1,31 @@
 /**
- * Tailwind CSS Directives
- * Import this file to enable Tailwind utilities
+ * Tailwind CSS v4 Configuration
+ * Using the new @import syntax for Tailwind CSS v4+
  */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* Custom Theme Extensions for AMF Brand Colors */
+@theme {
+  /* Primary Colors */
+  --color-primary: #1a49a7;
+  --color-primary-dark: #19326b;
+  --color-primary-light: #95b7fb;
+  
+  /* Accent Colors */
+  --color-accent-orange: #ff942a;
+  --color-accent-orange-light: #f89f47;
+  --color-accent-purple: #a70da9;
+  --color-accent-green: #4caf50;
+  
+  /* Brand Neutral Colors */
+  --color-brand-text: #37474f;
+  --color-brand-text-secondary: #546e7a;
+  --color-brand-bg-light: #eceff1;
+  --color-brand-bg-lighter: #f4f7f9;
+  --color-brand-bg-dark: #486e71;
+  
+  /* Custom Shadows */
+  --shadow-card: 0 4px 8px rgba(38, 50, 56, 0.15);
+  --shadow-card-hover: 0 8px 16px rgba(38, 50, 56, 0.2);
+  --shadow-card-xl: 0 12px 24px rgba(38, 50, 56, 0.25);
+}

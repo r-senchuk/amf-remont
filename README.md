@@ -139,10 +139,10 @@ SEO metadata is defined per route in `routesMeta`:
 ```jsx
 const routesMeta = {
   '/': {
-    title: 'Page Title',
-    description: 'Page description',
-    ogTitle: 'OG Title',
-    ogDescription: 'OG Description',
+  title: 'Page Title',
+  description: 'Page description',
+  ogTitle: 'OG Title',
+  ogDescription: 'OG Description',
     ogImage: '/assets/logo/logo.svg'
   }
 };

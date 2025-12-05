@@ -3,10 +3,11 @@
  * Mobile sidebar navigation using Materialize
  */
 import { useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Navigation() {
   const navigate = useNavigate();
+  const location = useLocation();
   const sidenavRef = useRef(null);
   const instanceRef = useRef(null);
 
@@ -32,6 +33,31 @@ function Navigation() {
       instanceRef.current.close();
     }
     navigate(path);
+  };
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    if (instanceRef.current) {
+      instanceRef.current.close();
+    }
+    
+    // If not on home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -73,8 +99,8 @@ function Navigation() {
       <li>
         <a 
           className="waves-effect waves-light" 
-          href="/contact"
-          onClick={(e) => handleLinkClick(e, '/contact')}
+          href="/#contact"
+          onClick={handleContactClick}
         >
           <i className="material-icons">phone_in_talk</i>KONTAKT
         </a>
@@ -104,4 +130,3 @@ function Navigation() {
 }
 
 export default Navigation;
-
