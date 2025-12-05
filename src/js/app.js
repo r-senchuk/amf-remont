@@ -25,12 +25,7 @@ class App {
     // Remove loading class from body
     document.body.classList.remove('loading');
 
-    // Register routes BEFORE initializing router
-    // Router.init() immediately handles the initial route, so routes must be registered first
-    this.registerRoutes();
-
-    // Initialize router with main container
-    // This will handle the initial route now that routes are registered
+    // Get main container first
     const mainContainer = document.querySelector('#app-main') || document.querySelector('main') || document.body;
     
     if (!mainContainer) {
@@ -38,12 +33,20 @@ class App {
       return;
     }
     
+    // Initialize router with main container (must be done before registering routes)
+    router.init(mainContainer);
+    
+    // Register routes AFTER router is initialized
+    // Routes will be registered with Navigo as they're added
+    this.registerRoutes();
+    
     if (import.meta.env.DEV) {
-      console.log('Router: Initializing with container:', mainContainer);
+      console.log('Router: Initialized with container:', mainContainer);
       console.log('Router: Registered routes:', Array.from(router.routes.keys()));
     }
     
-    router.init(mainContainer);
+    // Resolve initial route with Navigo (after all routes are registered)
+    router.resolve();
 
     // Handle link clicks for client-side navigation
     this.setupLinkHandling();

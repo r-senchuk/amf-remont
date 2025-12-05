@@ -1,17 +1,20 @@
 /**
- * Client-Side Router
+ * Client-Side Router using Navigo
  * Handles navigation between pages
  */
+import Navigo from 'navigo';
+
 export class Router {
   constructor() {
     this.routes = new Map();
     this.currentRoute = null;
     this.currentComponent = null;
     this.container = null;
-    this.history = [];
     this.scrollPositions = new Map();
     this.loadingElement = null;
-    this._currentLoading = null; // Track current loading promise to prevent race conditions
+    this._currentLoading = null;
+    this.navigo = null;
+    this.isBackForward = false;
   }
 
   /**
@@ -21,14 +24,35 @@ export class Router {
   init(container) {
     this.container = container || document.querySelector('main') || document.body;
     
-    // Handle browser back/forward
-    window.addEventListener('popstate', (e) => {
-      const path = e.state?.path || window.location.pathname;
-      this.handleRoute(path, true); // true = is back/forward navigation
+    if (!this.container) {
+      console.error('Router: Container not found!');
+      return;
+    }
+
+    // Initialize Navigo
+    const root = window.location.origin;
+    this.navigo = new Navigo(root, { hash: false });
+
+    // Set up Navigo hooks
+    this.navigo.hooks({
+      before: (done, match) => {
+        // Track if this is a back/forward navigation
+        this.isBackForward = !match.url || match.url === window.location.pathname;
+        done();
+      },
+      after: (match) => {
+        // This runs after route is matched
+      }
     });
 
-    // Handle initial route
-    this.handleRoute(window.location.pathname, false);
+    // Handle 404
+    this.navigo.notFound(() => {
+      this.handle404(window.location.pathname);
+    });
+
+    if (import.meta.env.DEV) {
+      console.log('Router: Initialized with Navigo');
+    }
   }
 
   /**
@@ -43,6 +67,25 @@ export class Router {
       options,
       path
     });
+
+    // Register with Navigo
+    if (this.navigo) {
+      this.navigo.on(path, async (match) => {
+        await this.handleRoute(match.url || path, false);
+      });
+    } else {
+      // If Navigo not initialized yet, store route for later registration
+      // This happens if register() is called before init()
+    }
+  }
+
+  /**
+   * Resolve initial route - call this after all routes are registered
+   */
+  resolve() {
+    if (this.navigo) {
+      this.navigo.resolve();
+    }
   }
 
   /**
@@ -51,25 +94,23 @@ export class Router {
    * @param {boolean} pushState - Whether to push to history
    */
   navigate(path, pushState = true) {
-    // Prevent navigation to same route
     const normalizedPath = this.normalizePath(path);
-    if (normalizedPath === this.currentRoute) {
+    
+    if (normalizedPath === this.currentRoute && this.currentComponent) {
       return;
     }
 
-    if (pushState) {
-      window.history.pushState({ path: normalizedPath }, '', normalizedPath);
+    if (this.navigo) {
+      this.navigo.navigate(normalizedPath);
     }
-    this.handleRoute(normalizedPath, !pushState); // !pushState means it's back/forward
   }
 
   /**
    * Handle route change
    * @param {string} path - Route path
-   * @param {boolean} pushState - Whether this was a navigation
+   * @param {boolean} isBackForward - Whether this is a back/forward navigation
    */
-  async handleRoute(path, pushState = true) {
-    // Normalize path
+  async handleRoute(path, isBackForward = false) {
     const normalizedPath = this.normalizePath(path);
     
     // Prevent duplicate navigation
@@ -81,7 +122,6 @@ export class Router {
     const route = this.findRoute(normalizedPath);
     
     if (!route) {
-      // 404 - route not found
       if (import.meta.env.DEV) {
         console.warn('Router: Route not found:', normalizedPath, 'Available routes:', Array.from(this.routes.keys()));
       }
@@ -102,13 +142,12 @@ export class Router {
     this.showLoading();
 
     // Track loading promise to prevent race conditions
-    const loadingPromise = this._loadRoute(route, normalizedPath, pushState);
+    const loadingPromise = this._loadRoute(route, normalizedPath, isBackForward);
     this._currentLoading = loadingPromise;
     
     try {
       await loadingPromise;
     } finally {
-      // Clear loading promise if it's still the current one
       if (this._currentLoading === loadingPromise) {
         this._currentLoading = null;
       }
@@ -117,12 +156,12 @@ export class Router {
   }
 
   /**
-   * Internal method to load route (separated for race condition handling)
+   * Internal method to load route
    * @param {Object} route - Route object
    * @param {string} normalizedPath - Normalized path
-   * @param {boolean} pushState - Whether this was a navigation
+   * @param {boolean} isBackForward - Whether this is a back/forward navigation
    */
-  async _loadRoute(route, normalizedPath, pushState) {
+  async _loadRoute(route, normalizedPath, isBackForward) {
     const currentLoading = this._currentLoading;
 
     // Cleanup current component
@@ -146,7 +185,7 @@ export class Router {
       
       // Check if another navigation started while loading
       if (this._currentLoading !== currentLoading) {
-        return; // Abort, another navigation is in progress
+        return;
       }
       
       if (this.currentComponent) {
@@ -159,17 +198,16 @@ export class Router {
         if (import.meta.env.DEV) {
           console.log('Router: Component appended to container:', this.container.id || this.container.tagName);
           console.log('Router: Component element:', this.currentComponent);
-          console.log('Router: Component shadowRoot:', this.currentComponent.shadowRoot);
         }
         
-        // Wait a bit for component to render (connectedCallback is async)
+        // Wait a bit for component to render
         await new Promise(resolve => setTimeout(resolve, 100));
         
         // Update SEO meta tags
         this.updateMetaTags(route, normalizedPath);
         
         // Restore or reset scroll position
-        this.restoreScrollPosition(normalizedPath, pushState);
+        this.restoreScrollPosition(normalizedPath, isBackForward);
         
         // Focus management for accessibility
         this.focusMainContent();
@@ -194,6 +232,7 @@ export class Router {
    * @returns {string} Normalized path
    */
   normalizePath(path) {
+    if (!path) return '/';
     // Remove query string and hash
     path = path.split('?')[0].split('#')[0];
     
@@ -221,27 +260,7 @@ export class Router {
       return this.routes.get(path);
     }
     
-    // Try to find dynamic route (e.g., /page/:id)
-    for (const [routePath, route] of this.routes.entries()) {
-      const pattern = this.pathToRegex(routePath);
-      if (pattern.test(path)) {
-        return route;
-      }
-    }
-    
     return null;
-  }
-
-  /**
-   * Convert path pattern to regex
-   * @param {string} path - Path pattern
-   * @returns {RegExp} Regular expression
-   */
-  pathToRegex(path) {
-    const pattern = path
-      .replace(/\//g, '\\/')
-      .replace(/:(\w+)/g, '([^/]+)');
-    return new RegExp(`^${pattern}$`);
   }
 
   /**
@@ -251,7 +270,6 @@ export class Router {
    */
   async loadComponent(route) {
     if (typeof route.component === 'function') {
-      // Component function that returns element (can be async)
       try {
         const element = await route.component();
         if (element instanceof HTMLElement) {
@@ -264,12 +282,10 @@ export class Router {
         }
       } catch (error) {
         console.error('Error loading component:', error);
-        throw error; // Re-throw to be caught by handleError
+        throw error;
       }
-      // Fallback
       return document.createElement('div');
     } else if (typeof route.component === 'string') {
-      // HTML file path - load and inject
       try {
         const response = await fetch(route.component);
         const html = await response.text();
@@ -291,7 +307,6 @@ export class Router {
    */
   handle404(path) {
     console.warn('Route not found:', path);
-    // Default to home page or show 404 component
     if (this.routes.has('/')) {
       this.navigate('/', false);
     } else {
@@ -321,12 +336,12 @@ export class Router {
   toAbsoluteUrl(url) {
     if (!url) return url;
     if (url.startsWith('http://') || url.startsWith('https://')) {
-      return url; // Already absolute
+      return url;
     }
     if (url.startsWith('/')) {
-      return window.location.origin + url; // Relative path
+      return window.location.origin + url;
     }
-    return url; // Fallback
+    return url;
   }
 
   /**
@@ -392,7 +407,6 @@ export class Router {
    * @param {string} path - Route path
    */
   updateStructuredData(route, path) {
-    // Remove existing structured data
     const existingScript = document.querySelector('script[type="application/ld+json"][data-route]');
     if (existingScript) {
       existingScript.remove();
@@ -401,7 +415,6 @@ export class Router {
     const options = route.options || {};
     const baseUrl = window.location.origin;
 
-    // Create basic structured data
     const structuredData = {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
@@ -411,14 +424,12 @@ export class Router {
       'inLanguage': 'pl-PL'
     };
 
-    // Add organization data for all pages
     structuredData.publisher = {
       '@type': 'Organization',
       'name': 'AMF GROUP',
       'url': baseUrl
     };
 
-    // Add specific schema based on page type
     if (path === '/') {
       structuredData['@type'] = 'WebSite';
       structuredData.potentialAction = {
@@ -432,7 +443,6 @@ export class Router {
       structuredData['@type'] = 'Service';
     }
 
-    // Inject structured data
     const script = document.createElement('script');
     script.setAttribute('type', 'application/ld+json');
     script.setAttribute('data-route', path);
@@ -509,17 +519,14 @@ export class Router {
    * @param {boolean} isBackForward - Whether this is a back/forward navigation
    */
   restoreScrollPosition(path, isBackForward = false) {
-    // Use requestAnimationFrame to ensure DOM is ready
     requestAnimationFrame(() => {
       if (isBackForward && this.scrollPositions.has(path)) {
-        // Restore saved scroll position for back/forward
         const savedPosition = this.scrollPositions.get(path);
         window.scrollTo({
           top: savedPosition,
-          behavior: 'auto' // Instant scroll for back/forward
+          behavior: 'auto'
         });
       } else {
-        // Scroll to top for new navigation
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -535,12 +542,10 @@ export class Router {
     requestAnimationFrame(() => {
       const main = document.querySelector('main') || this.container;
       if (main) {
-        // Make main focusable temporarily
         if (!main.hasAttribute('tabindex')) {
           main.setAttribute('tabindex', '-1');
         }
         main.focus();
-        // Remove tabindex after focus to avoid tab navigation issues
         setTimeout(() => {
           main.removeAttribute('tabindex');
         }, 100);
@@ -553,19 +558,16 @@ export class Router {
    * @param {string} path - Route path
    */
   trackPageView(path) {
-    // Google Analytics 4
     if (window.gtag) {
       window.gtag('config', 'GA_MEASUREMENT_ID', {
         page_path: path
       });
     }
 
-    // Universal Analytics (legacy)
     if (window.ga) {
       window.ga('send', 'pageview', path);
     }
 
-    // Custom analytics event
     window.dispatchEvent(new CustomEvent('pageview', {
       detail: { path, timestamp: Date.now() }
     }));
@@ -579,7 +581,6 @@ export class Router {
   handleError(path, error) {
     console.error('Route error:', error);
     
-    // Show error message to user
     this.container.innerHTML = `
       <div style="
         padding: 4rem 2rem;
@@ -605,8 +606,7 @@ export class Router {
           border-radius: 8px;
           font-size: 16px;
           cursor: pointer;
-          transition: background 0.3s ease;
-        " onmouseover="this.style.background='#19326b'" onmouseout="this.style.background='var(--color-primary, #1a49a7)'">
+        ">
           Spróbuj ponownie
         </button>
         <p style="margin-top: 2rem;">
@@ -617,7 +617,6 @@ export class Router {
       </div>
     `;
 
-    // Emit error event
     window.dispatchEvent(new CustomEvent('routeerror', {
       detail: { path, error: error.message }
     }));
@@ -626,4 +625,3 @@ export class Router {
 
 // Export singleton instance
 export const router = new Router();
-
