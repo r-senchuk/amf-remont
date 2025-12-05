@@ -43,7 +43,7 @@ Simply change the `order` field in `data/gallery.json`. Lower numbers appear fir
 - **id**: Unique identifier (string)
 - **filename**: Full-size image filename
 - **thumbFilename**: Thumbnail filename
-- **title**: Display title (currently not shown, reserved for future use)
+- **title**: Display title (shown in lightbox when image is opened)
 - **alt**: Alt text for accessibility
 - **category**: Photo category (bathroom, kitchen, interior, etc.)
 - **order**: Display order (1, 2, 3...)
@@ -54,9 +54,23 @@ Simply change the `order` field in `data/gallery.json`. Lower numbers appear fir
 ## Technical Details
 
 - Gallery is generated dynamically by `js/gallery.js`
-- Uses AMP components (`amp-img`) for optimized loading
-- Lightbox functionality is handled by AMP lightbox gallery
+- Uses regular `<img>` elements with lazy loading
+- Lightbox functionality is handled by **GLightbox** library
 - Images are lazy-loaded for better performance
+- GLightbox provides touch navigation, keyboard controls, and smooth animations
+
+## GLightbox Library
+
+The gallery uses **GLightbox** for lightbox functionality:
+- **Website:** https://biati-digital.github.io/glightbox/
+- **GitHub:** https://github.com/biati-digital/glightbox
+- **Features:**
+  - Touch-friendly navigation
+  - Keyboard controls (arrow keys, ESC)
+  - Smooth fade animations
+  - Image titles/captions
+  - Loop through images
+  - Works with dynamically created content
 
 ## Future Migration
 

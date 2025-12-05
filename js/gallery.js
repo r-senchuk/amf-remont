@@ -1,6 +1,7 @@
 /**
  * AMF Group Gallery Module
  * Dynamically generates photo gallery from JSON configuration
+ * Uses GLightbox for lightbox functionality
  */
 
 (function() {
@@ -9,6 +10,7 @@
     var Gallery = {
         config: null,
         container: null,
+        lightbox: null,
 
         /**
          * Initialize the gallery
@@ -63,24 +65,71 @@
 
             // Generate gallery items
             var self = this;
+            var lightboxItems = [];
+            
             photos.forEach(function(photo) {
-                var figure = self.createGalleryItem(photo);
+                var figure = self.createGalleryItem(photo, lightboxItems.length);
                 self.container.appendChild(figure);
+                
+                // Add to lightbox items array
+                lightboxItems.push({
+                    href: '/i/' + photo.folder + '/' + photo.filename,
+                    type: 'image',
+                    title: photo.title || photo.alt
+                });
             });
 
-            // Upgrade AMP components if AMP runtime is available
-            if (window.AMP && window.AMP.upgradeElement) {
-                var ampImages = this.container.querySelectorAll('amp-img');
-                ampImages.forEach(function(img) {
-                    window.AMP.upgradeElement(img);
+            // Initialize GLightbox
+            this.initLightbox(lightboxItems);
+        },
+
+        /**
+         * Initialize GLightbox
+         */
+        initLightbox: function(items) {
+            // Destroy existing lightbox if any
+            if (this.lightbox) {
+                try {
+                    this.lightbox.destroy();
+                } catch (e) {
+                    // Ignore errors
+                }
+            }
+
+            // Wait for GLightbox to be available
+            if (typeof GLightbox !== 'undefined') {
+                this.lightbox = GLightbox({
+                    selector: '.gallery-item',
+                    touchNavigation: true,
+                    loop: true,
+                    autoplayVideos: false,
+                    openEffect: 'fade',
+                    closeEffect: 'fade'
                 });
+            } else {
+                // Wait a bit for script to load
+                var self = this;
+                setTimeout(function() {
+                    if (typeof GLightbox !== 'undefined') {
+                        self.lightbox = GLightbox({
+                            selector: '.gallery-item',
+                            touchNavigation: true,
+                            loop: true,
+                            autoplayVideos: false,
+                            openEffect: 'fade',
+                            closeEffect: 'fade'
+                        });
+                    } else {
+                        console.error('GLightbox library not loaded');
+                    }
+                }, 100);
             }
         },
 
         /**
          * Create a single gallery item
          */
-        createGalleryItem: function(photo) {
+        createGalleryItem: function(photo, index) {
             var figure = document.createElement('figure');
             figure.className = 'tag_by_width';
 
@@ -88,23 +137,67 @@
             var fullImagePath = '/i/' + photo.folder + '/' + photo.filename;
             var thumbImagePath = 'i/' + photo.folder + '/' + photo.thumbFilename;
 
-            // Create AMP image element
-            var ampImg = document.createElement('amp-img');
-            ampImg.setAttribute('lightbox', '');
-            ampImg.setAttribute('src', fullImagePath);
-            ampImg.setAttribute('style', 'background-image: url(\'' + thumbImagePath + '\')');
-            ampImg.setAttribute('width', photo.width.toString());
-            ampImg.setAttribute('height', photo.height.toString());
-            ampImg.setAttribute('alt', photo.alt);
-            ampImg.setAttribute('loading', 'lazy');
+            // Create link wrapper for lightbox
+            var link = document.createElement('a');
+            link.href = fullImagePath;
+            link.className = 'gallery-item';
+            link.setAttribute('data-glightbox', 'title: ' + (photo.title || photo.alt));
+            link.setAttribute('data-glightbox-index', index);
 
-            figure.appendChild(ampImg);
+            // Create image element (regular img, not amp-img)
+            var img = document.createElement('img');
+            img.src = thumbImagePath;
+            img.alt = photo.alt;
+            img.loading = 'lazy';
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            
+            // Set background image style for thumbnail effect
+            link.style.display = 'block';
+            link.style.width = '100%';
+            link.style.height = '100%';
+            link.style.backgroundImage = 'url(' + thumbImagePath + ')';
+            link.style.backgroundSize = 'cover';
+            link.style.backgroundPosition = 'center';
+            link.style.cursor = 'pointer';
+
+            // Add hover effect
+            link.addEventListener('mouseenter', function() {
+                this.style.opacity = '0.9';
+            });
+            link.addEventListener('mouseleave', function() {
+                this.style.opacity = '1';
+            });
+
+            // Add zoom icon overlay (optional visual indicator)
+            var zoomIcon = document.createElement('span');
+            zoomIcon.innerHTML = '🔍';
+            zoomIcon.style.position = 'absolute';
+            zoomIcon.style.top = '50%';
+            zoomIcon.style.left = '50%';
+            zoomIcon.style.transform = 'translate(-50%, -50%)';
+            zoomIcon.style.opacity = '0';
+            zoomIcon.style.transition = 'opacity 0.3s';
+            zoomIcon.style.fontSize = '2em';
+            zoomIcon.style.pointerEvents = 'none';
+            link.style.position = 'relative';
+            
+            link.addEventListener('mouseenter', function() {
+                zoomIcon.style.opacity = '0.7';
+            });
+            link.addEventListener('mouseleave', function() {
+                zoomIcon.style.opacity = '0';
+            });
+
+            link.appendChild(zoomIcon);
+            figure.appendChild(link);
+            
             return figure;
         },
 
         /**
-         * Add a new photo to the gallery
-         * Call this method after updating gallery.json
+         * Refresh gallery (reload from JSON)
          */
         refresh: function() {
             this.loadGallery();
@@ -115,19 +208,19 @@
      * Initialize gallery when ready
      */
     function initGallery() {
-        // Wait for DOM and AMP to be ready
+        // Wait for DOM to be ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                // Wait a bit for AMP to initialize
+                // Wait a bit for GLightbox script to load
                 setTimeout(function() {
                     Gallery.init();
-                }, 100);
+                }, 200);
             });
         } else {
-            // DOM already loaded, wait for AMP
+            // DOM already loaded
             setTimeout(function() {
                 Gallery.init();
-            }, 100);
+            }, 200);
         }
     }
 
@@ -138,4 +231,3 @@
     window.AMFGallery = Gallery;
 
 })();
-

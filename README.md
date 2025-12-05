@@ -20,10 +20,10 @@ This is the source code for the AMF Group website (https://www.amfgroup.pl) - a 
    - No clear content hierarchy
 
 3. **Photo Gallery Issues:**
-   - Photos hardcoded in HTML (20+ manual entries)
-   - Inconsistent naming (some with `_313` suffix, some without)
-   - No easy way to add/remove/replace photos
-   - Poor user experience for browsing
+   - ~~Photos hardcoded in HTML (20+ manual entries)~~ ✅ Fixed
+   - ~~Inconsistent naming (some with `_313` suffix, some without)~~ ✅ Standardized
+   - ~~No easy way to add/remove/replace photos~~ ✅ JSON-based system
+   - ~~Poor user experience for browsing~~ ✅ GLightbox implementation
 
 ## Implementation Plan: Progressive Enhancement
 
@@ -135,16 +135,17 @@ Create `data/gallery.json`:
 
 #### 3.3 Gallery Features
 - Auto-generate gallery from JSON config
-- Lightbox/modal view for full images
+- **GLightbox** library for lightbox/modal view (modern, lightweight, works with dynamic content)
 - Responsive grid layout
 - Lazy loading for performance
+- Touch navigation and keyboard controls
 - Easy to add/remove photos (just update JSON and add files)
 
 #### 3.4 Files to Create/Modify
 - `data/gallery.json` - Gallery configuration
 - `js/gallery.js` - Gallery functionality (new file)
-- `index.html` - Replace hardcoded gallery with dynamic generation
-- `css/types.css` - Update gallery styles
+- `index.html` - Replace hardcoded gallery with dynamic generation, add GLightbox library
+- `css/types.css` - Update gallery styles (if needed)
 
 ### Phase 4: JavaScript Enhancements
 
@@ -213,12 +214,18 @@ Create `data/gallery.json`:
 3. Extract hardcoded content (optional JSON)
 4. Add structured data
 
-### Step 4: Gallery Implementation
-1. Create `data/gallery.json`
-2. Implement `js/gallery.js`
-3. Update gallery HTML generation
-4. Test lightbox functionality
-5. Implement lazy loading
+### Step 4: Gallery Implementation ✅ COMPLETED
+1. Create `data/gallery.json` ✅
+2. Implement `js/gallery.js` with GLightbox integration ✅
+3. Update gallery HTML generation ✅
+4. Add GLightbox library to `index.html` ✅
+5. Test lightbox functionality ✅
+6. Implement lazy loading ✅
+
+**Library Used:** GLightbox (https://github.com/biati-digital/glightbox)
+- Modern, lightweight lightbox library
+- Works perfectly with dynamically created content
+- Touch navigation, keyboard controls, smooth animations
 
 ### Step 5: Image Migration
 1. Move images to new folder structure
@@ -253,7 +260,7 @@ amf-remont/
 │   ├── main.start.js         # Initialization (minimal)
 │   ├── main.end.js           # Main functionality (enhance)
 │   ├── type.end.js           # Type-specific JS
-│   ├── gallery.js            # NEW: Gallery module
+│   ├── gallery.js            # NEW: Gallery module (uses GLightbox) (uses GLightbox)
 │   └── reserve.js            # Form handling
 ├── data/
 │   ├── gallery.json          # NEW: Gallery configuration
@@ -310,6 +317,40 @@ amf-remont/
 3. Invalidate CloudFront cache if needed
 4. Verify on live site
 
+## Implementation Status
+
+### ✅ Completed
+- **STEP 1: Photo Gallery System** - JSON-based gallery with GLightbox
+  - Dynamic gallery generation from `data/gallery.json`
+  - GLightbox integration for lightbox functionality
+  - Easy photo management (add/remove/reorder via JSON)
+  - Touch and keyboard navigation support
+
+### 🚧 In Progress
+- STEP 2: Design System Foundation
+- STEP 3: Content Structure & SEO
+- STEP 4: Mobile Responsiveness
+- STEP 5: Image Optimization
+- STEP 6: JavaScript Enhancements
+- STEP 7: Deployment Optimization
+
+## Implementation Status
+
+### ✅ Completed
+- **STEP 1: Photo Gallery System** - JSON-based gallery with GLightbox
+  - Dynamic gallery generation from `data/gallery.json`
+  - GLightbox integration for lightbox functionality
+  - Easy photo management (add/remove/reorder via JSON)
+  - Touch and keyboard navigation support
+
+### 🚧 In Progress
+- STEP 2: Design System Foundation
+- STEP 3: Content Structure & SEO
+- STEP 4: Mobile Responsiveness
+- STEP 5: Image Optimization
+- STEP 6: JavaScript Enhancements
+- STEP 7: Deployment Optimization
+
 ## Future Enhancements (Post-MVP)
 
 1. **React Integration (Optional)**
@@ -332,9 +373,20 @@ amf-remont/
    - Advanced caching strategies
    - CDN optimization
 
+## Dependencies
+
+### External Libraries (CDN)
+- **jQuery 3.4.1** - Already included
+- **Materialize CSS** - Already included
+- **GLightbox** - Modern lightbox library (added in STEP 1)
+  - CSS: `https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css`
+  - JS: `https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js`
+- **AMP Runtime** - Still included for other components (forms, etc.)
+
 ## Notes
 
-- Keep AMP compatibility if needed (currently using AMP components)
+- GLightbox is used for gallery lightbox functionality (replaces AMP lightbox-gallery for dynamic content)
+- AMP components still used for other features (forms, etc.)
 - Maintain backward compatibility during migration
 - Test thoroughly before each deployment
 - Document any breaking changes
