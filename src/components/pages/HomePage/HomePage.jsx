@@ -2,10 +2,31 @@
  * Home Page Component (React)
  * Main landing page with hero section and overview
  */
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 function HomePage() {
+  const [galleryPhotos, setGalleryPhotos] = useState([]);
+
+  // Load gallery images for homepage
+  useEffect(() => {
+    async function loadGallery() {
+      try {
+        const response = await fetch('/data/gallery.json');
+        if (response.ok) {
+          const data = await response.json();
+          // Sort by order and take first 12 images for preview
+          const sortedPhotos = data.photos.slice().sort((a, b) => a.order - b.order);
+          setGalleryPhotos(sortedPhotos.slice(0, 12));
+        }
+      } catch (err) {
+        console.error('Error loading gallery for homepage:', err);
+      }
+    }
+    loadGallery();
+  }, []);
+
   return (
     <div className="homePage">
       {/* Hero Section */}
@@ -111,29 +132,52 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Gallery Preview Section */}
+      {/* Gallery Section */}
       <section className="section galleryPreviewSection">
         <h2 className="sectionTitle">GALERIA</h2>
         <div className="galleryPreview">
           <div className="galleryPreviewGrid">
-            <div className="galleryPreviewItem">
-              <img src="/i/9/korytarz_313.jpg" alt="korytarz" loading="lazy" />
-            </div>
-            <div className="galleryPreviewItem">
-              <img src="/i/10/szara_łazienka2_313.jpg" alt="szara_łazienka2" loading="lazy" />
-            </div>
-            <div className="galleryPreviewItem">
-              <img src="/i/8/wanna_wolnostojąca_313.jpg" alt="wanna_wolnostojąca" loading="lazy" />
-            </div>
-            <div className="galleryPreviewItem">
-              <img src="/i/7/jasna_łazienka_313.jpg" alt="jasna_łazienka" loading="lazy" />
-            </div>
-            <div className="galleryPreviewItem">
-              <img src="/i/11/łazienka313.jpg" alt="łazienka" loading="lazy" />
-            </div>
-            <div className="galleryPreviewItem">
-              <img src="/i/12/kuchnia313.jpg" alt="kuchnia" loading="lazy" />
-            </div>
+            {galleryPhotos.length > 0 ? (
+              galleryPhotos.map((photo, index) => (
+                <div key={photo.id || index} className="galleryPreviewItem">
+                  <Link to="/gallery">
+                    <img 
+                      src={`/gallery/${photo.thumbFilename}`} 
+                      alt={photo.alt || photo.title || ''} 
+                      loading="lazy"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block'
+                      }}
+                    />
+                  </Link>
+                </div>
+              ))
+            ) : (
+              // Fallback: show first 6 images while loading
+              <>
+                <div className="galleryPreviewItem">
+                  <img src="/gallery/korytarz_313.jpg" alt="korytarz" loading="lazy" />
+                </div>
+                <div className="galleryPreviewItem">
+                  <img src="/gallery/szara_łazienka2_313.jpg" alt="szara_łazienka2" loading="lazy" />
+                </div>
+                <div className="galleryPreviewItem">
+                  <img src="/gallery/wanna_wolnostojąca_313.jpg" alt="wanna_wolnostojąca" loading="lazy" />
+                </div>
+                <div className="galleryPreviewItem">
+                  <img src="/gallery/jasna_łazienka_313.jpg" alt="jasna_łazienka" loading="lazy" />
+                </div>
+                <div className="galleryPreviewItem">
+                  <img src="/gallery/łazienka313.jpg" alt="łazienka" loading="lazy" />
+                </div>
+                <div className="galleryPreviewItem">
+                  <img src="/gallery/kuchnia313.jpg" alt="kuchnia" loading="lazy" />
+                </div>
+              </>
+            )}
           </div>
           <div className="galleryPreviewCTA">
             <Link to="/gallery" className="sectionLink">Zobacz pełną galerię →</Link>
@@ -146,63 +190,63 @@ function HomePage() {
         <h2 className="sectionTitle">Oferta naszej firmy remontowej</h2>
         <p className="sectionSubtitle">Specjalizujemy się w następujących usługach:</p>
         <div className="servicesGrid">
-          <div className="serviceCard">
+          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
             <div className="serviceIcon"><i className="material-icons">home</i></div>
             <h3 className="serviceTitle">Zabudowy z płyt g-k</h3>
             <p className="serviceDescription">Zabudowy z płyt g-k.</p>
           </div>
           <div className="serviceCard">
-            <div className="serviceIcon"><i className="material-icons">engineering</i></div>
+            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">engineering</i></div>
             <h3 className="serviceTitle">Gładź gipsowa</h3>
             <p className="serviceDescription">Gładź gipsowa, szpachlowanie ścian, sufitów.</p>
           </div>
-          <div className="serviceCard">
+          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
             <div className="serviceIcon"><i className="material-icons">handyman</i></div>
             <h3 className="serviceTitle">Montaż ścian</h3>
             <p className="serviceDescription">Montaż ścian z płyt kartonowo-gipsowych.</p>
           </div>
           <div className="serviceCard">
-            <div className="serviceIcon"><i className="material-icons">construction</i></div>
+            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">construction</i></div>
             <h3 className="serviceTitle">Układanie paneli</h3>
             <p className="serviceDescription">Układanie paneli.</p>
           </div>
-          <div className="serviceCard">
+          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
             <div className="serviceIcon"><i className="material-icons">palette</i></div>
             <h3 className="serviceTitle">Malowanie</h3>
             <p className="serviceDescription">Malowanie ścian, pomieszczeń.</p>
           </div>
           <div className="serviceCard">
-            <div className="serviceIcon"><i className="material-icons">yard</i></div>
+            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">yard</i></div>
             <h3 className="serviceTitle">Tapetowanie</h3>
             <p className="serviceDescription">Tapetowanie ścian.</p>
           </div>
-          <div className="serviceCard">
+          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
             <div className="serviceIcon"><i className="material-icons">light</i></div>
             <h3 className="serviceTitle">Sufity podwieszane</h3>
             <p className="serviceDescription">Sufity podwieszane.</p>
           </div>
           <div className="serviceCard">
-            <div className="serviceIcon"><i className="material-icons">palette</i></div>
+            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">palette</i></div>
             <h3 className="serviceTitle">Ściany dekoracyjne</h3>
             <p className="serviceDescription">Ściany dekoracyjne.</p>
           </div>
-          <div className="serviceCard">
+          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
             <div className="serviceIcon"><i className="material-icons">handyman</i></div>
             <h3 className="serviceTitle">Suche tynki</h3>
             <p className="serviceDescription">Suche tynki kartonowo-gipsowe.</p>
           </div>
           <div className="serviceCard">
-            <div className="serviceIcon"><i className="material-icons">engineering</i></div>
+            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">engineering</i></div>
             <h3 className="serviceTitle">Wylewki</h3>
             <p className="serviceDescription">Wylewki samopoziomujące i wyrównawcze.</p>
           </div>
-          <div className="serviceCard">
+          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
             <div className="serviceIcon"><i className="material-icons">touch_app</i></div>
             <h3 className="serviceTitle">Glazura i terakota</h3>
             <p className="serviceDescription">Układanie glazury i terakoty.</p>
           </div>
           <div className="serviceCard">
-            <div className="serviceIcon"><i className="material-icons">construction</i></div>
+            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">construction</i></div>
             <h3 className="serviceTitle">Łazienki kompleksowo</h3>
             <p className="serviceDescription">Łazienki kompleksowo.</p>
           </div>

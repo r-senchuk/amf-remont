@@ -76,6 +76,18 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: <ContactPage />
+      },
+      {
+        path: '*',
+        element: (
+          <div style={{ padding: '2rem', textAlign: 'center' }}>
+            <h1>404 - Strona nie znaleziona</h1>
+            <p>Przepraszamy, strona której szukasz nie istnieje.</p>
+            <a href="/" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>
+              Wróć do strony głównej
+            </a>
+          </div>
+        )
       }
     ]
   }
