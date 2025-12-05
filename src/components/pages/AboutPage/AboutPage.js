@@ -1,0 +1,174 @@
+/**
+ * About Page Component
+ * Company story, experience, and values
+ */
+import { BaseComponent } from '../../../js/base-component.js';
+import { loadDesignSystem } from '../../../js/design-system-loader.js';
+import template from './AboutPage.html?raw';
+
+class AboutPage extends BaseComponent {
+  constructor() {
+    super();
+  }
+
+  async render() {
+    // Load design system CSS variables
+    const designSystemStyles = await loadDesignSystem();
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        ${designSystemStyles}
+        ${this.getComponentStyles()}
+      </style>
+      ${template}
+    `;
+  }
+
+  getComponentStyles() {
+    return `
+      :host {
+        display: block;
+        width: 100%;
+      }
+      .aboutPage {
+        width: 100%;
+      }
+      .pageHeader {
+        background: var(--color-bg-dark);
+        color: #fff;
+        padding: var(--section-padding-mobile) var(--spacing-md);
+        text-align: center;
+      }
+      .pageTitle {
+        font-size: var(--font-size-h1-mobile);
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        margin: 0;
+        color: #fff;
+      }
+      @media (min-width: 768px) {
+        .pageTitle {
+          font-size: var(--font-size-h1-desktop);
+        }
+        .pageHeader {
+          padding: var(--section-padding-tablet) var(--spacing-lg);
+        }
+      }
+      @media (min-width: 1024px) {
+        .pageHeader {
+          padding: var(--section-padding-desktop) var(--spacing-xl);
+        }
+      }
+      .section {
+        padding: var(--section-padding-mobile) var(--spacing-md);
+        max-width: var(--content-width-max);
+        margin: 0 auto;
+        width: 100%;
+      }
+      @media (min-width: 768px) {
+        .section {
+          padding: var(--section-padding-tablet) var(--spacing-lg);
+        }
+      }
+      @media (min-width: 1024px) {
+        .section {
+          padding: var(--section-padding-desktop) var(--spacing-xl);
+        }
+      }
+      .sectionTitle {
+        font-size: var(--font-size-h2-mobile);
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        margin-bottom: var(--spacing-lg);
+        color: var(--color-text-primary);
+        text-align: center;
+      }
+      @media (min-width: 768px) {
+        .sectionTitle {
+          font-size: var(--font-size-h2-desktop);
+        }
+      }
+      .content {
+        max-width: var(--content-width-narrow);
+        margin: 0 auto;
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-body);
+        color: var(--color-text-primary);
+      }
+      @media (min-width: 768px) {
+        .content {
+          font-size: var(--font-size-lg);
+        }
+      }
+      .content p {
+        margin-bottom: var(--spacing-md);
+      }
+      .content strong {
+        font-weight: 700;
+        color: var(--color-text-primary);
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-xl);
+      }
+      .featureCard {
+        background: var(--color-bg-white);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow-md);
+        transition: var(--transition-base);
+      }
+      .featureCard:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
+      }
+      .featureIcon {
+        font-size: 56px;
+        margin-bottom: var(--spacing-md);
+        color: var(--color-accent-orange);
+      }
+      .featureTitle {
+        font-size: var(--font-size-lg);
+        font-weight: 700;
+        margin-bottom: var(--spacing-sm);
+        color: var(--color-text-primary);
+      }
+      .featureDescription {
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-body);
+        color: var(--color-text-secondary);
+      }
+      .imageSection {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xl);
+        margin: var(--spacing-2xl) 0;
+      }
+      .imageSection img {
+        max-width: 320px;
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+      }
+      @media (max-width: 767px) {
+        .imageSection {
+          flex-direction: column;
+        }
+        .imageSection img {
+          max-width: 100%;
+        }
+      }
+    `;
+  }
+
+  init() {
+    // Page-specific initialization
+  }
+}
+
+customElements.define('amf-about-page', AboutPage);
+export default AboutPage;
+
