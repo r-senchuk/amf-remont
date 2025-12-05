@@ -31,11 +31,12 @@ class Header extends BaseComponent {
     return `
       .header {
         position: relative;
-        background: var(--color-bg-dark);
-        background-image: url(/d/i/hbg.png);
-        background-position: center bottom;
-        background-repeat: repeat-x;
-        background-size: auto 100%;
+        background: linear-gradient(
+          180deg,
+          var(--color-bg-dark) 0%,
+          var(--color-bg-dark) 85%,
+          rgba(72, 110, 113, 0.95) 100%
+        );
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         width: 100%;
@@ -48,7 +49,28 @@ class Header extends BaseComponent {
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(180deg, rgba(26, 73, 167, 0.1) 0%, transparent 50%);
+        background: linear-gradient(
+          180deg,
+          rgba(26, 73, 167, 0.08) 0%,
+          transparent 40%,
+          rgba(72, 110, 113, 0.1) 100%
+        );
+        pointer-events: none;
+        z-index: 1;
+      }
+      .header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 100%
+        );
         pointer-events: none;
         z-index: 1;
       }
