@@ -142,9 +142,10 @@
             link.href = fullImagePath;
             link.className = 'gallery-item';
             
-            // Escape title for safe HTML attribute insertion
+            // Escape title for safe JavaScript string insertion into attribute
+            // Escape quotes and backslashes for JavaScript string context
             var title = (photo.title || photo.alt || '').toString();
-            title = title.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            title = title.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
             link.setAttribute('data-glightbox', 'title: ' + title);
             link.setAttribute('data-glightbox-index', index);
 

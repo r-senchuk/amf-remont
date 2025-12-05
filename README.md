@@ -286,9 +286,9 @@ amf-remont/
 - Comment complex sections
 
 ### JavaScript
-- Modular approach
-- Keep jQuery for compatibility
-- Add modern JS where appropriate
+- Modern vanilla JavaScript (ES6+) - no jQuery dependency
+- Modular approach with utility functions
+- Use native browser APIs for DOM manipulation
 - Comment code clearly
 - Handle errors gracefully
 
@@ -334,11 +334,19 @@ amf-remont/
   - Consistent typography scale and spacing system
   - Improved maintainability and consistency
 
+- **STEP 3: jQuery to Modern JavaScript Refactoring** - Vanilla JavaScript migration
+  - Removed jQuery dependency (~30KB reduction)
+  - Created utility module (`js/utils.js`) for common DOM operations
+  - Refactored `js/main.end.js` to use vanilla JavaScript
+  - Refactored `js/type.end.js` to use vanilla JavaScript
+  - Updated Materialize CSS integration to use vanilla JS API
+  - Modern event handling and smooth scrolling
+  - Better performance with native browser APIs
+
 ### 🚧 In Progress
-- STEP 3: Content Structure & SEO
-- STEP 4: Mobile Responsiveness
-- STEP 5: Image Optimization
-- STEP 6: JavaScript Enhancements
+- STEP 4: Content Structure & SEO
+- STEP 5: Mobile Responsiveness
+- STEP 6: Image Optimization
 - STEP 7: Deployment Optimization
 
 ## Future Enhancements (Post-MVP)
@@ -366,12 +374,39 @@ amf-remont/
 ## Dependencies
 
 ### External Libraries (CDN)
-- **jQuery 3.4.1** - Already included
-- **Materialize CSS** - Already included
+- **Materialize CSS** - UI component library (uses cash internally, not jQuery)
 - **GLightbox** - Modern lightbox library (added in STEP 1)
   - CSS: `https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css`
   - JS: `https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js`
 - **AMP Runtime** - Still included for other components (forms, etc.)
+
+### JavaScript Architecture
+
+The project uses modern vanilla JavaScript (ES6+) with no jQuery dependency:
+
+- **`js/utils.js`** - Utility functions module providing:
+  - DOM query helpers (`$q`, `$qa`)
+  - Event delegation (`on`)
+  - Smooth scrolling (`smoothScrollTo`)
+  - DOM ready handler (`ready`)
+  - Element offset calculation (`getOffset`)
+
+- **`js/main.end.js`** - Main application logic:
+  - Smooth scrolling to sections
+  - Sidenav management
+  - Scroll-to-top button
+  - Anchor link handling
+  - Form error display
+
+- **`js/type.end.js`** - Form handling and component initialization:
+  - Materialize component initialization (FormSelect, Collapsible)
+  - Form submission handling
+  - Input masking
+  - PhotoSwipe integration (legacy)
+
+- **`js/gallery.js`** - Photo gallery module (already modern JS)
+
+- **`js/reserve.js`** - Reservation form handling (already modern JS)
 
 ## Design System
 
@@ -414,9 +449,12 @@ Common utility classes available:
 
 ## Notes
 
-- GLightbox is used for gallery lightbox functionality (replaces AMP lightbox-gallery for dynamic content)
-- AMP components still used for other features (forms, etc.)
-- Design system variables are defined in `css/design-system.css` and used throughout all CSS files
+- **jQuery removed**: All JavaScript has been refactored to use modern vanilla JavaScript (ES6+)
+- **GLightbox** is used for gallery lightbox functionality (replaces AMP lightbox-gallery for dynamic content)
+- **AMP components** still used for other features (forms, etc.)
+- **Materialize CSS** uses cash (jQuery-like) internally but doesn't require jQuery - components initialized via vanilla JS API
+- **Design system variables** are defined in `css/design-system.css` and used throughout all CSS files
+- **Utility functions** in `js/utils.js` provide jQuery-like helpers for common DOM operations
 - Maintain backward compatibility during migration
 - Test thoroughly before each deployment
 - Document any breaking changes
