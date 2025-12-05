@@ -1,7 +1,11 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  // Use React plugin
+  plugins: [react()],
+  
   // Source files are in src/ directory
   root: 'src',
   
@@ -18,7 +22,6 @@ export default defineConfig({
     
     // Generate source maps for debugging
     sourcemap: false,
-    
     
     // Enable CSS code splitting for better performance
     cssCodeSplit: true
@@ -42,7 +45,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src'),
       '@components': resolve(__dirname, 'src/components'),
-      '@js': resolve(__dirname, 'src/js'),
+      '@hooks': resolve(__dirname, 'src/hooks'),
       '@css': resolve(__dirname, 'src/css')
     }
   },

@@ -6,24 +6,23 @@ This is the source code for the AMF Group website (https://www.amfgroup.pl) - a 
 
 ## Architecture
 
-### Web Components Single Page Application (SPA)
+### React Single Page Application (SPA)
 
-The website is built as a modern **Single Page Application (SPA)** using **Web Components** with the following architecture:
+The website is built as a modern **Single Page Application (SPA)** using **React 19** with the following architecture:
 
-- **Web Components**: Custom elements using Shadow DOM for style encapsulation
-- **Client-Side Routing**: Custom router using History API for navigation
+- **React 19**: Latest React with functional components and hooks
+- **React Router v7**: Client-side routing with React Router DOM
 - **Component-Based**: Modular architecture with shared and page-specific components
 - **Design System**: Centralized CSS variables for consistent styling
-- **Lazy Loading**: Components loaded on-demand for optimal performance
-- **SEO Optimized**: Dynamic meta tags, structured data, and proper URL handling
+- **CSS Modules**: Scoped CSS for Header component
+- **SEO Optimized**: Dynamic meta tags and proper URL handling
 
 ### Technology Stack
 
-- **Build Tool**: Vite 7.2.6 (fast HMR, optimized builds)
-- **JavaScript**: ES6+ modules, vanilla JavaScript (no jQuery)
-- **Styling**: CSS Custom Properties, CSS Modules support
-- **Components**: Native Web Components (Custom Elements API)
-- **Routing**: Custom client-side router
+- **Build Tool**: Vite 7.2.6 with @vitejs/plugin-react (fast HMR, optimized builds)
+- **UI Framework**: React 19.2
+- **Routing**: React Router DOM 7.10
+- **Styling**: CSS Custom Properties, CSS Modules
 - **Lightbox**: GLightbox for gallery functionality
 
 ## Project Structure
@@ -32,41 +31,36 @@ The website is built as a modern **Single Page Application (SPA)** using **Web C
 amf-remont/
 ├── src/                          # Source files (processed by Vite)
 │   ├── index.html                # Main HTML entry point (SPA shell)
+│   ├── main.jsx                  # React entry point
+│   ├── App.jsx                   # Root React component
 │   ├── css/                      # Global CSS files
 │   │   ├── design-system.css     # CSS variables and design tokens
 │   │   ├── global.css            # Global styles
 │   │   ├── main.css              # Main styles
 │   │   ├── project.css           # Component styles
 │   │   ├── types.css             # Gallery & content styles
-│   │   ├── ol-article.css        # Article styles
-│   │   └── cvu_olymp.css         # Form styles
-│   ├── js/                       # Application JavaScript (ES modules)
-│   │   ├── app.js                # Main application entry point
-│   │   ├── router.js             # Client-side router
-│   │   ├── base-component.js     # Base class for Web Components
-│   │   └── design-system-loader.js # Design system CSS loader
-│   └── components/               # Web Components
+│   │   └── ol-article.css        # Article styles
+│   ├── routes/                   # React Router configuration
+│   │   └── index.jsx             # Route definitions and SEO metadata
+│   ├── hooks/                    # Custom React hooks
+│   │   ├── useSEO.js             # SEO meta tag management
+│   │   └── useScrollRestoration.js # Scroll position restoration
+│   └── components/               # React Components
 │       ├── shared/               # Shared components
 │       │   ├── Header/           # Site header component
 │       │   ├── Footer/           # Site footer component
-│       │   └── Navigation/      # Navigation component
+│       │   └── Navigation/       # Mobile navigation component
 │       └── pages/                # Page components
 │           ├── HomePage/         # Home page
 │           ├── AboutPage/        # About page
-│           ├── ServicesPage/      # Services page
+│           ├── ServicesPage/     # Services page
 │           ├── GalleryPage/      # Gallery page
-│           └── ContactPage/     # Contact page
+│           └── ContactPage/      # Contact page
 ├── public/                       # Static assets (copied as-is)
-│   ├── js/                       # Legacy JavaScript (non-module)
-│   │   ├── utils.js              # Utility functions
-│   │   ├── main.start.js         # Initialization
-│   │   ├── main.end.js           # Main functionality
-│   │   ├── type.end.js           # Form handling
-│   │   ├── gallery.js            # Gallery module (GLightbox)
-│   │   └── reserve.js            # Form handling
-│   ├── i/                        # Gallery images
-│   ├── d/                        # Design assets (logo, icons)
-│   ├── include/                 # External libraries (Materialize, fonts)
+│   ├── assets/                   # Images, icons, backgrounds
+│   ├── gallery/                  # Gallery images
+│   ├── i/                        # Gallery images (organized by ID)
+│   ├── libs/                     # External libraries (Materialize, fonts)
 │   ├── data/                     # JSON data files
 │   │   └── gallery.json          # Gallery configuration
 │   ├── favicon.ico
@@ -78,7 +72,7 @@ amf-remont/
 └── README.md                     # This file
 ```
 
-## Web Components Architecture
+## React Components Architecture
 
 ### Component Structure
 
@@ -86,117 +80,84 @@ Each component follows this structure:
 
 ```
 ComponentName/
-├── ComponentName.js      # Component class (extends BaseComponent)
-├── ComponentName.html    # HTML template
-└── ComponentName.module.css  # Scoped styles (CSS Module)
+├── ComponentName.jsx     # React component
+├── ComponentName.css     # Component styles
+└── ComponentName.module.css  # (optional) CSS Module for scoped styles
 ```
-
-### Base Component
-
-All components extend `BaseComponent` which provides:
-
-- **Shadow DOM**: Automatic style encapsulation
-- **Lifecycle Methods**: `render()`, `init()`, `cleanup()`
-- **Event Management**: Automatic event listener cleanup
-- **Design System**: Automatic design system CSS injection
-- **Utilities**: `$q()`, `$qa()`, `getAttr()`, `emit()`
 
 ### Example Component
 
-```javascript
-import { BaseComponent } from '../../../js/base-component.js';
-import { loadDesignSystem } from '../../../js/design-system-loader.js';
-import template from './MyComponent.html?raw';
+```jsx
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './MyComponent.css';
 
-class MyComponent extends BaseComponent {
-  constructor() {
-    super();
-  }
+function MyComponent() {
+  const [data, setData] = useState(null);
 
-  async render() {
-    // Load design system CSS variables
-    const designSystemStyles = await loadDesignSystem();
-
-    this.shadowRoot.innerHTML = `
-      <style>
-        ${designSystemStyles}
-        ${this.getComponentStyles()}
-      </style>
-      ${template}
-    `;
-  }
-
-  getComponentStyles() {
-    return `
-      :host {
-        display: block;
-      }
-      .myClass {
-        color: var(--color-primary);
-      }
-    `;
-  }
-
-  init() {
+  useEffect(() => {
     // Component initialization
-    const button = this.$q('.myButton');
-    if (button) {
-      this.addEventListener(button, 'click', () => {
-        // Handle click
-      });
-    }
-  }
+  }, []);
 
-  cleanup() {
-    // Cleanup is automatic via BaseComponent
-    // Override if needed
-  }
+  return (
+    <div className="myComponent">
+      <h1>My Component</h1>
+      <Link to="/about">About</Link>
+    </div>
+  );
 }
 
-customElements.define('my-component', MyComponent);
 export default MyComponent;
 ```
 
 ## Routing
 
-### Client-Side Router
+### React Router Configuration
 
-The application uses a custom router (`src/js/router.js`) that:
+Routes are defined in `src/routes/index.jsx`:
 
-- **Handles Navigation**: Client-side routing without page reloads
-- **History API**: Uses browser History API for proper back/forward support
-- **Lazy Loading**: Components loaded on-demand
-- **SEO Support**: Dynamic meta tags and structured data
-- **Scroll Management**: Saves/restores scroll positions
-- **Loading States**: Shows loading indicator during navigation
-- **Error Handling**: Graceful error handling with user feedback
-
-### Route Registration
-
-Routes are registered in `src/js/app.js`:
-
-```javascript
-router.register('/', async () => {
-  await import('../components/pages/HomePage/HomePage.js');
-  return document.createElement('amf-home-page');
-}, {
-  title: 'Page Title',
-  description: 'Page description',
-  ogTitle: 'OG Title',
-  ogDescription: 'OG Description',
-  ogImage: 'https://example.com/image.jpg'
-});
+```jsx
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'about', element: <AboutPage /> },
+      { path: 'services', element: <ServicesPage /> },
+      { path: 'gallery', element: <GalleryPage /> },
+      { path: 'contact', element: <ContactPage /> }
+    ]
+  }
+]);
 ```
 
-### Navigation
+### Route Metadata
 
-Internal links automatically use the router. External links, mailto, tel, and hash links are ignored.
+SEO metadata is defined per route in `routesMeta`:
+
+```jsx
+const routesMeta = {
+  '/': {
+    title: 'Page Title',
+    description: 'Page description',
+    ogTitle: 'OG Title',
+    ogDescription: 'OG Description',
+    ogImage: '/assets/logo/logo.svg'
+  }
+};
+```
+
+### Custom Hooks
+
+- **useSEO**: Updates document meta tags based on current route
+- **useScrollRestoration**: Saves and restores scroll positions
 
 ## Design System
 
 ### CSS Variables
 
-All design tokens are defined in `src/css/design-system.css` and automatically injected into Web Components via `design-system-loader.js`.
+All design tokens are defined in `src/css/design-system.css`.
 
 #### Color Palette
 - **Primary**: `--color-primary` (#1a49a7), `--color-primary-dark` (#19326b)
@@ -250,13 +211,9 @@ make dev
 make install
 
 # Start development server (http://localhost:3000)
-# - Hot module replacement (HMR)
-# - Fast refresh on changes
 make dev
 
 # Build for production
-# - Optimizes and minifies assets
-# - Outputs to dist/ directory
 make build
 
 # Preview production build (http://localhost:8080)
@@ -271,26 +228,22 @@ make clean
 
 ## Features
 
-### ✅ Implemented
+### Implemented
 
-- **Web Components Architecture**: Modular, reusable components
-- **Client-Side Routing**: SPA navigation with History API
+- **React 19 Architecture**: Modern functional components with hooks
+- **React Router v7**: Client-side routing with nested routes
 - **Design System**: Centralized CSS variables
-- **SEO Optimization**: Dynamic meta tags, structured data
-- **Loading States**: Visual feedback during navigation
+- **SEO Optimization**: Dynamic meta tags via useSEO hook
 - **Scroll Restoration**: Saves/restores scroll positions
-- **Error Handling**: User-friendly error messages
-- **Accessibility**: Focus management, keyboard navigation
-- **Performance**: Lazy loading, code splitting
 - **Photo Gallery**: JSON-based gallery with GLightbox
-- **Modern JavaScript**: ES6+ modules, no jQuery
+- **Material Icons**: Google Material Icons integration
+- **Mobile Navigation**: Materialize sidenav for mobile
+- **Scroll to Top**: Button to scroll to top of page
 
-### 🚧 Future Enhancements
+### Future Enhancements
 
 - **PWA Support**: Service worker, offline support
 - **Analytics Integration**: Google Analytics, custom events
-- **Prefetching**: Preload next page on hover
-- **State Management**: Global state management (if needed)
 - **Image Optimization**: WebP format, responsive images
 - **Testing**: Unit tests, E2E tests
 
@@ -298,25 +251,14 @@ make clean
 
 ### Implemented
 
-1. **Lazy Loading**: Components loaded on-demand
-2. **Code Splitting**: CSS code splitting enabled
-3. **Design System Caching**: CSS variables cached after first load
-4. **Race Condition Prevention**: Router prevents duplicate navigations
-5. **Event Listener Cleanup**: Automatic cleanup prevents memory leaks
-6. **Optimized Builds**: Vite optimizes and minifies production builds
-
-### Best Practices
-
-- **Use Design System Variables**: Always use CSS variables, never hardcode values
-- **Cleanup Event Listeners**: Use `this.addEventListener()` for automatic cleanup
-- **Async Rendering**: Components can use async `render()` methods
-- **Error Handling**: Always handle errors gracefully
-- **SEO**: Provide proper meta tags for each route
+1. **Code Splitting**: CSS code splitting enabled
+2. **Lazy Loading**: Images use `loading="lazy"`
+3. **Optimized Builds**: Vite optimizes and minifies production builds
+4. **Fast Refresh**: React Fast Refresh for development
 
 ## Browser Support
 
 - **Modern Browsers**: Chrome, Firefox, Safari, Edge (latest 2 versions)
-- **Web Components**: Native support (no polyfills needed for modern browsers)
 - **ES6 Modules**: Native support
 - **History API**: Native support
 
@@ -337,68 +279,21 @@ make clean
 4. Invalidate CloudFront cache (if needed)
 5. Verify on live site
 
-## SEO Features
-
-### Dynamic Meta Tags
-
-Each route can define:
-- `title`: Page title
-- `description`: Meta description
-- `ogTitle`: Open Graph title
-- `ogDescription`: Open Graph description
-- `ogImage`: Open Graph image
-
-### Structured Data
-
-JSON-LD structured data is automatically generated for each page:
-- WebPage schema
-- Organization schema
-- Page-specific schemas (ContactPage, Service, etc.)
-
-### URL Management
-
-- Clean URLs (no hash routing)
-- Proper canonical URLs
-- Browser history support
-- Shareable URLs
-
-## Troubleshooting
-
-### Component Not Rendering
-
-1. Check browser console for errors
-2. Verify component is registered: `customElements.define()`
-3. Check if `render()` method is async and awaited
-4. Verify design system is loading correctly
-
-### Routing Issues
-
-1. Check route registration in `app.js`
-2. Verify component import path
-3. Check browser console for navigation errors
-4. Verify link handling in `setupLinkHandling()`
-
-### Styling Issues
-
-1. Check if design system CSS is loaded
-2. Verify CSS variables are used correctly
-3. Check Shadow DOM styles (use `:host` selector)
-4. Verify component styles are injected
-
 ## Dependencies
 
-### Build Tools
-- **Vite 7.2.6**: Build tool with HMR
+### Runtime Dependencies
+- **react**: ^19.2.1
+- **react-dom**: ^19.2.1
+- **react-router-dom**: ^7.10.1
+
+### Dev Dependencies
+- **vite**: ^7.2.6
+- **@vitejs/plugin-react**: ^5.1.1
 
 ### External Libraries (CDN)
-- **Materialize CSS**: UI component library
+- **Materialize CSS**: UI component library (sidenav)
 - **GLightbox**: Modern lightbox library
-- **AMP Components**: Form components (legacy)
-
-### No Runtime Dependencies
-- Pure Web Components (no framework)
-- Vanilla JavaScript (no jQuery)
-- Native browser APIs
+- **Material Icons**: Google Material Icons
 
 ## License
 
