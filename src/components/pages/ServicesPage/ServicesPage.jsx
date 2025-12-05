@@ -6,18 +6,18 @@ import './ServicesPage.css';
 
 function ServicesPage() {
   const services = [
-    { icon: 'home', title: 'Zabudowy z płyt g-k', description: 'Profesjonalne zabudowy z płyt gipsowo-kartonowych' },
-    { icon: 'engineering', title: 'Gładź gipsowa', description: 'Szpachlowanie ścian i sufitów' },
-    { icon: 'handyman', title: 'Montaż ścian', description: 'Montaż ścian z płyt kartonowo-gipsowych' },
-    { icon: 'construction', title: 'Układanie paneli', description: 'Profesjonalne układanie paneli podłogowych' },
-    { icon: 'palette', title: 'Malowanie', description: 'Malowanie ścian i pomieszczeń' },
-    { icon: 'yard', title: 'Tapetowanie', description: 'Tapetowanie ścian' },
-    { icon: 'light', title: 'Sufity podwieszane', description: 'Montaż sufitów podwieszanych' },
-    { icon: 'palette', title: 'Ściany dekoracyjne', description: 'Tworzenie dekoracyjnych ścian' },
-    { icon: 'handyman', title: 'Suche tynki', description: 'Suche tynki kartonowo-gipsowe' },
-    { icon: 'engineering', title: 'Wylewki', description: 'Wylewki samopoziomujące i wyrównawcze' },
-    { icon: 'touch_app', title: 'Glazura i terakota', description: 'Układanie glazury i terakoty' },
-    { icon: 'construction', title: 'Łazienki kompleksowo', description: 'Kompleksowe wykończenie łazienek' },
+    { icon: 'home', title: 'Zabudowy z płyt g-k', description: 'Zabudowy z płyt g-k.' },
+    { icon: 'engineering', title: 'Gładź gipsowa', description: 'Gładź gipsowa, szpachlowanie ścian, sufitów.' },
+    { icon: 'handyman', title: 'Montaż ścian', description: 'Montaż ścian z płyt kartonowo-gipsowych.' },
+    { icon: 'construction', title: 'Układanie paneli', description: 'Układanie paneli.' },
+    { icon: 'palette', title: 'Malowanie', description: 'Malowanie ścian, pomieszczeń.' },
+    { icon: 'yard', title: 'Tapetowanie', description: 'Tapetowanie ścian.' },
+    { icon: 'light', title: 'Sufity podwieszane', description: 'Sufity podwieszane.' },
+    { icon: 'palette', title: 'Ściany dekoracyjne', description: 'Ściany dekoracyjne.' },
+    { icon: 'handyman', title: 'Suche tynki', description: 'Suche tynki kartonowo-gipsowe.' },
+    { icon: 'engineering', title: 'Wylewki', description: 'Wylewki samopoziomujące i wyrównawcze.' },
+    { icon: 'touch_app', title: 'Glazura i terakota', description: 'Układanie glazury i terakoty.' },
+    { icon: 'construction', title: 'Łazienki kompleksowo', description: 'Łazienki kompleksowo.' },
   ];
 
   return (

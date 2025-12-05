@@ -63,6 +63,22 @@
   flex: 0 0 auto;
   margin: 0;
   position: relative;
+  width: 200px;
+  height: 267px;
+}
+
+@media (min-width: 768px) {
+  .galleryItem {
+    width: 250px;
+    height: 333px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .galleryItem {
+    width: 313px;
+    height: 417px;
+  }
 }
 
 .galleryLink {

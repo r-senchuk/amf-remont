@@ -7,6 +7,9 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes';
 
+// Import Tailwind CSS (must be first)
+import './css/tailwind.css';
+
 // Import global styles
 import './css/design-system.css';
 import './css/global.css';

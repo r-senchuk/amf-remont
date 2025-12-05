@@ -141,38 +141,71 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Services Preview Section */}
-      <section className="section servicesPreviewSection">
+      {/* Services Section */}
+      <section className="section servicesSection">
         <h2 className="sectionTitle">Oferta naszej firmy remontowej</h2>
         <p className="sectionSubtitle">Specjalizujemy się w następujących usługach:</p>
-        <div className="servicesPreview">
-          <div className="servicePreviewCard">
-            <div className="servicePreviewIcon"><i className="material-icons">home</i></div>
-            <h3 className="servicePreviewTitle">Zabudowy z płyt g-k</h3>
+        <div className="servicesGrid">
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">home</i></div>
+            <h3 className="serviceTitle">Zabudowy z płyt g-k</h3>
+            <p className="serviceDescription">Zabudowy z płyt g-k.</p>
           </div>
-          <div className="servicePreviewCard">
-            <div className="servicePreviewIcon"><i className="material-icons">engineering</i></div>
-            <h3 className="servicePreviewTitle">Gładź gipsowa</h3>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">engineering</i></div>
+            <h3 className="serviceTitle">Gładź gipsowa</h3>
+            <p className="serviceDescription">Gładź gipsowa, szpachlowanie ścian, sufitów.</p>
           </div>
-          <div className="servicePreviewCard">
-            <div className="servicePreviewIcon"><i className="material-icons">handyman</i></div>
-            <h3 className="servicePreviewTitle">Montaż ścian</h3>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">handyman</i></div>
+            <h3 className="serviceTitle">Montaż ścian</h3>
+            <p className="serviceDescription">Montaż ścian z płyt kartonowo-gipsowych.</p>
           </div>
-          <div className="servicePreviewCard">
-            <div className="servicePreviewIcon"><i className="material-icons">construction</i></div>
-            <h3 className="servicePreviewTitle">Układanie paneli</h3>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">construction</i></div>
+            <h3 className="serviceTitle">Układanie paneli</h3>
+            <p className="serviceDescription">Układanie paneli.</p>
           </div>
-          <div className="servicePreviewCard">
-            <div className="servicePreviewIcon"><i className="material-icons">palette</i></div>
-            <h3 className="servicePreviewTitle">Malowanie</h3>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">palette</i></div>
+            <h3 className="serviceTitle">Malowanie</h3>
+            <p className="serviceDescription">Malowanie ścian, pomieszczeń.</p>
           </div>
-          <div className="servicePreviewCard">
-            <div className="servicePreviewIcon"><i className="material-icons">yard</i></div>
-            <h3 className="servicePreviewTitle">Tapetowanie</h3>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">yard</i></div>
+            <h3 className="serviceTitle">Tapetowanie</h3>
+            <p className="serviceDescription">Tapetowanie ścian.</p>
           </div>
-        </div>
-        <div className="servicesPreviewCTA">
-          <Link to="/services" className="sectionLink">Zobacz pełną ofertę →</Link>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">light</i></div>
+            <h3 className="serviceTitle">Sufity podwieszane</h3>
+            <p className="serviceDescription">Sufity podwieszane.</p>
+          </div>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">palette</i></div>
+            <h3 className="serviceTitle">Ściany dekoracyjne</h3>
+            <p className="serviceDescription">Ściany dekoracyjne.</p>
+          </div>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">handyman</i></div>
+            <h3 className="serviceTitle">Suche tynki</h3>
+            <p className="serviceDescription">Suche tynki kartonowo-gipsowe.</p>
+          </div>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">engineering</i></div>
+            <h3 className="serviceTitle">Wylewki</h3>
+            <p className="serviceDescription">Wylewki samopoziomujące i wyrównawcze.</p>
+          </div>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">touch_app</i></div>
+            <h3 className="serviceTitle">Glazura i terakota</h3>
+            <p className="serviceDescription">Układanie glazury i terakoty.</p>
+          </div>
+          <div className="serviceCard">
+            <div className="serviceIcon"><i className="material-icons">construction</i></div>
+            <h3 className="serviceTitle">Łazienki kompleksowo</h3>
+            <p className="serviceDescription">Łazienki kompleksowo.</p>
+          </div>
         </div>
       </section>
     </div>

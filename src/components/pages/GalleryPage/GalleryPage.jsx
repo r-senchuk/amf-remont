@@ -17,18 +17,21 @@ function GalleryPage() {
   useEffect(() => {
     async function loadGallery() {
       try {
+        console.log('GalleryPage: Loading gallery.json from /data/gallery.json');
         const response = await fetch('/data/gallery.json');
+        console.log('GalleryPage: Response status:', response.status, response.ok);
         if (!response.ok) {
-          throw new Error('Failed to load gallery.json');
+          throw new Error(`Failed to load gallery.json: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
+        console.log('GalleryPage: Loaded', data.photos?.length || 0, 'photos');
         // Sort photos by order
         const sortedPhotos = data.photos.slice().sort((a, b) => a.order - b.order);
         setPhotos(sortedPhotos);
         setLoading(false);
       } catch (err) {
         console.error('Error loading gallery:', err);
-        setError('Wystąpił błąd podczas ładowania galerii.');
+        setError(`Wystąpił błąd podczas ładowania galerii: ${err.message}`);
         setLoading(false);
       }
     }
@@ -101,25 +104,41 @@ function GalleryPage() {
           {error && (
             <p className="errorMessage">{error}</p>
           )}
-          {!loading && !error && photos.map((photo, index) => (
-            <figure className="galleryItem" key={photo.id || index}>
-              <a
-                href={'/gallery/' + photo.filename}
-                className="galleryLink"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handlePhotoClick(index);
-                }}
-              >
-                <img
-                  src={'/gallery/' + photo.thumbFilename}
-                  alt={photo.alt || photo.title || ''}
-                  loading="lazy"
-                />
-                <span className="zoomIcon">🔍</span>
-              </a>
-            </figure>
-          ))}
+          {!loading && !error && photos.length === 0 && (
+            <p className="loadingMessage">Brak zdjęć w galerii.</p>
+          )}
+          {!loading && !error && photos.length > 0 && photos.map((photo, index) => {
+            const thumbPath = `/gallery/${photo.thumbFilename}`;
+            const fullPath = `/gallery/${photo.filename}`;
+            return (
+              <figure className="galleryItem" key={photo.id || index}>
+                <a
+                  href={fullPath}
+                  className="galleryLink"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handlePhotoClick(index);
+                  }}
+                >
+                  <img
+                    src={thumbPath}
+                    alt={photo.alt || photo.title || ''}
+                    loading="lazy"
+                    onError={(e) => {
+                      console.error('GalleryPage: Image failed to load:', thumbPath, 'Photo:', photo);
+                      // Show a placeholder or error indicator
+                      e.target.style.opacity = '0.3';
+                      e.target.alt = `Błąd ładowania: ${photo.title || photo.alt}`;
+                    }}
+                    onLoad={() => {
+                      console.log('GalleryPage: Image loaded successfully:', thumbPath);
+                    }}
+                  />
+                  <span className="zoomIcon">🔍</span>
+                </a>
+              </figure>
+            );
+          })}
         </div>
       </section>
     </div>
