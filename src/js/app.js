@@ -22,6 +22,9 @@ class App {
       });
     }
 
+    // Remove loading class from body
+    document.body.classList.remove('loading');
+
     // Register routes BEFORE initializing router
     // Router.init() immediately handles the initial route, so routes must be registered first
     this.registerRoutes();
@@ -77,7 +80,7 @@ class App {
       description: 'Profesjonalne wykończenie wnętrz we Wrocławiu. Remonty pod klucz, 24-miesięczna gwarancja. Setki zrealizowanych projektów. Zadzwoń już dziś!',
       ogTitle: 'AMF GROUP - Wykończenie wnętrz we Wrocławiu',
       ogDescription: 'Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu z 24-miesięczną gwarancją.',
-      ogImage: 'https://www.amfgroup.pl/d/logo.svg'
+      ogImage: '/assets/logo/logo.svg'
     });
 
     // About page
@@ -89,7 +92,7 @@ class App {
       description: 'Poznaj AMF GROUP - firmę remontową z wieloletnim doświadczeniem. Setki zrealizowanych projektów, remonty pod klucz, 24-miesięczna gwarancja.',
       ogTitle: 'O Nas - AMF GROUP',
       ogDescription: 'Setki zrealizowanych projektów. Wieloletnie doświadczenie w branży remontowej. Tworzymy wnętrza, które zachwycają.',
-      ogImage: 'https://www.amfgroup.pl/d/i/key.jpg'
+      ogImage: '/assets/icons/key.jpg'
     });
 
     // Services page
@@ -101,7 +104,7 @@ class App {
       description: 'Kompleksowe usługi remontowe: zabudowy g-k, gładź gipsowa, malowanie, tapetowanie, sufity podwieszane, glazura i terakota. Remonty pod klucz.',
       ogTitle: 'Oferta - AMF GROUP | Usługi remontowe',
       ogDescription: 'Specjalizujemy się w kompleksowych remontach: od zabudów g-k po wykończenie łazienek. Remonty pod klucz we Wrocławiu.',
-      ogImage: 'https://www.amfgroup.pl/d/logo.svg'
+      ogImage: '/assets/logo/logo.svg'
     });
 
     // Gallery page
@@ -113,7 +116,7 @@ class App {
       description: 'Zobacz nasze zrealizowane projekty remontowe. Galeria zdjęć z remontów mieszkań, domów i lokali użytkowych we Wrocławiu.',
       ogTitle: 'Galeria - AMF GROUP | Zrealizowane projekty',
       ogDescription: 'Zobacz efekty naszej pracy. Setki zrealizowanych projektów remontowych we Wrocławiu.',
-      ogImage: 'https://www.amfgroup.pl/d/logo.svg'
+      ogImage: '/assets/logo/logo.svg'
     });
 
     // Contact page
@@ -125,7 +128,7 @@ class App {
       description: 'Skontaktuj się z AMF GROUP. Zadzwoń: +48 (796) 019-986 lub +48 (795) 621-905. Email: amfgroupremont@gmail.com',
       ogTitle: 'Kontakt - AMF GROUP',
       ogDescription: 'Gotowy na zmianę? Dzwonisz, a my zajmiemy się resztą. Kontakt z AMF GROUP - wykończenie wnętrz we Wrocławiu.',
-      ogImage: 'https://www.amfgroup.pl/d/logo.svg'
+      ogImage: '/assets/logo/logo.svg'
     });
   }
 

@@ -192,8 +192,8 @@ class GalleryPage extends BaseComponent {
     figure.className = 'tag_by_width';
 
     // Build image paths (both absolute for consistency)
-    const fullImagePath = '/i/' + photo.folder + '/' + photo.filename;
-    const thumbImagePath = '/i/' + photo.folder + '/' + photo.thumbFilename;
+    const fullImagePath = '/gallery/' + photo.filename;
+    const thumbImagePath = '/gallery/' + photo.thumbFilename;
 
     // Create link wrapper for lightbox
     const link = document.createElement('a');

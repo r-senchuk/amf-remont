@@ -44,8 +44,7 @@ amf-remont/
 │   │   ├── app.js                # Main application entry point
 │   │   ├── router.js             # Client-side router
 │   │   ├── base-component.js     # Base class for Web Components
-│   │   ├── design-system-loader.js # Design system CSS loader
-│   │   └── gallery.js            # Legacy gallery (not used)
+│   │   └── design-system-loader.js # Design system CSS loader
 │   └── components/               # Web Components
 │       ├── shared/               # Shared components
 │       │   ├── Header/           # Site header component

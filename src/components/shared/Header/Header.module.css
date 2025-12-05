@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  background: url(/d/i/hbg.png) center bottom repeat-x var(--color-bg-dark);
+  background: url(/assets/backgrounds/hbg.png) center bottom repeat-x var(--color-bg-dark);
   box-shadow: var(--shadow-md);
   z-index: 100;
   width: 100%;

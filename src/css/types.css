@@ -181,7 +181,7 @@ div[otype="callback"] .cvu_feed .success-text {
 }
 body > * > div[otype="welcome"] {
   background-color: #012001;
-  background-image: url(../d/i/backgr.jpg);
+  background-image: url(../assets/backgrounds/backgr.jpg);
   height: 600px;
   background-position: center;
   background-repeat: no-repeat;
@@ -354,14 +354,10 @@ body > * > div[otype="welcome"] > div > div[otype] {
 [otype="welcome"] #w_text_bottom ul li {
   min-width: 200px;
   padding: 2px 0 2px 36px;
-  background: url(../d/i/li_b.png) no-repeat 0px -7px transparent;
+  background: transparent;
   color: rgba(255, 255, 255, 0.8);
   text-shadow: #000 0px 0px 1px, #000 0px 0px 3px, #000 0px 0px 5px,
     #000 0px 0px 7px, #000 0px 0px 9px;
-}
-[otype="welcome"] #w_text_bottom ul li:nth-child(2),
-[otype="welcome"] #w_text_bottom ul li:nth-child(3) {
-  background-image: url(../d/i/li_b.png);
 }
 [otype="welcome"] #w_bus {
   position: absolute;

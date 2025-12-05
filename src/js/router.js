@@ -314,6 +314,22 @@ export class Router {
   }
 
   /**
+   * Convert relative path to absolute URL
+   * @param {string} url - URL or path to convert
+   * @returns {string} Absolute URL
+   */
+  toAbsoluteUrl(url) {
+    if (!url) return url;
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url; // Already absolute
+    }
+    if (url.startsWith('/')) {
+      return window.location.origin + url; // Relative path
+    }
+    return url; // Fallback
+  }
+
+  /**
    * Update SEO meta tags for current route
    * @param {Object} route - Route object
    * @param {string} path - Route path
@@ -352,9 +368,9 @@ export class Router {
 
     updateOGTag('og:title', options.ogTitle || options.title);
     updateOGTag('og:description', options.ogDescription || options.description);
-    updateOGTag('og:url', `${baseUrl}${path}`);
+    updateOGTag('og:url', this.toAbsoluteUrl(`${baseUrl}${path}`));
     if (options.ogImage) {
-      updateOGTag('og:image', options.ogImage);
+      updateOGTag('og:image', this.toAbsoluteUrl(options.ogImage));
     }
 
     // Update canonical URL
@@ -364,7 +380,7 @@ export class Router {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', `${baseUrl}${path}`);
+    canonical.setAttribute('href', this.toAbsoluteUrl(`${baseUrl}${path}`));
 
     // Update structured data (JSON-LD)
     this.updateStructuredData(route, path);

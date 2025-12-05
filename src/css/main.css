@@ -999,7 +999,7 @@ div.cvu-input__focused:after {
 }
 header {
   position: relative;
-  background: url(../d/i/hbg.png) center bottom repeat-x var(--color-bg-dark);
+  background: url(../assets/backgrounds/hbg.png) center bottom repeat-x var(--color-bg-dark);
   box-shadow: var(--shadow-md);
   z-index: 100;
 }
@@ -1697,7 +1697,7 @@ footer #footer_copyright p strong {
 }
 .sidenav li#sidenav_head {
   height: 133px;
-  background: url(../d/i/hr2.png) repeat-x bottom left #486e71;
+  background: #486e71;
   display: flex;
   margin: 0 0 12px 0;
 }

@@ -19,12 +19,6 @@ export default defineConfig({
     // Generate source maps for debugging
     sourcemap: false,
     
-    // Rollup options for multi-page or specific entry points
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/index.html')
-      }
-    },
     
     // Enable CSS code splitting for better performance
     cssCodeSplit: true
@@ -64,4 +58,3 @@ export default defineConfig({
     port: 8080
   }
 });
-

@@ -75,7 +75,7 @@ class HomePage extends BaseComponent {
       }
       .hero {
         background-color: #012001;
-        background-image: url(/d/i/backgr.jpg);
+        background-image: url(/assets/backgrounds/backgr.jpg);
         min-height: 600px;
         background-position: center;
         background-repeat: no-repeat;

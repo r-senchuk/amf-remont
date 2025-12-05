@@ -7,7 +7,7 @@
     </title>
    
     
-    <link rel="mask-icon" href="/d/logo.svg" color="#5bbad5" />
+    <link rel="mask-icon" href="/assets/logo/logo.svg" color="#5bbad5" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="msapplication-TileColor" content="#ffc40d" />
     <meta name="theme-color" content="#ffffff" />
@@ -16,8 +16,7 @@
       name="description"
       content="AMF GROUP - Profesjonalne wykończenie wnętrz we Wrocławiu. Remonty pod klucz, 24-miesięczna gwarancja. Setki zrealizowanych projektów. Zadzwoń już dziś!"
     />
-    <link rel="canonical" href="https://www.amfgroup.pl/index.html" />
-    <link rel="shortcut icon" href="/d/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta http-equiv="Content-Language" content="PL" />
     <meta name="format-detection" content="telephone=no" />
     <meta
@@ -38,14 +37,12 @@
       property="og:description"
       content="Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu z 24-miesięczną gwarancją. Setki zrealizowanych projektów."
     />
-    <meta property="og:image" content="https://www.amfgroup.pl/d/logo.svg" />
-    <meta property="og:url" content="https://www.amfgroup.pl/" /> 
+    <meta property="og:image" content="/assets/logo/logo.svg" />
+    <meta property="og:url" content="/" /> 
 
    
-    <!-- Utility functions (replaces jQuery) -->
-    <script src="/js/utils.js"></script>
-    <script src="/include/materialize.min.js"></script>
-    <script src="/js/main.start.js"></script>
+    <!-- Materialize CSS Framework -->
+    <script src="/libs/materialize.min.js"></script>
     <!-- Web Components -->
     <!-- Web Components - Shared Components -->
     <script type="module">
@@ -57,43 +54,10 @@
     <!-- GLightbox - Modern lightbox library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-       <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js" />
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-
-    <script
-      async
-      custom-element="amp-date-picker"
-      src="https://cdn.ampproject.org/v0/amp-date-picker-0.1.js"
-    ></script>
-    <script
-      async
-      custom-element="amp-bind"
-      src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
-    ></script>
-    <script
-      async
-      custom-template="amp-mustache"
-      src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"
-    ></script>
-    <script
-      async
-      custom-element="amp-lightbox"
-      src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"
-    ></script>
-    <script
-      async
-      custom-element="amp-lightbox-gallery"
-      src="https://cdn.ampproject.org/v0/amp-lightbox-gallery-1.0.js"
-    ></script>
-    <script
-      async
-      custom-element="amp-carousel"
-      src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"
-    ></script>
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,latin-ext"
       rel="stylesheet"
@@ -229,25 +193,19 @@
       crossorigin
     />
     <link
-      href="include/fonts/Geometria/stylesheet.css"
+      href="libs/fonts/Geometria/stylesheet.css"
       rel="stylesheet"
       type="text/css"
       media="screen"
     />
     <link
-      href="/include/cvu-form.css"
+      href="/libs/cvu-form.css"
       rel="stylesheet"
       type="text/css"
       media="screen"
     />
     <link
-      href="css/cvu_olymp.css"
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-    />
-    <link
-      href="/include/materialize_cvu.css"
+      href="/libs/materialize_cvu.css"
       rel="stylesheet"
       type="text/css"
       media="screen"
@@ -285,11 +243,11 @@
           <div otype>
             <div id="logo">
               <a
-                href="index.html"
+                href="/"
                 title="AMF GROUP – wykończenie wnętrz pod klucz na terenie Wrocławia i okolic | Główna"
               >
                 <img
-                  src="d/logo.svg"
+                  src="/assets/logo/logo.svg"
                   alt="AMF GROUP – wykończenie wnętrz pod klucz na terenie Wrocławia i okolic."
                 />
               </a>
@@ -297,27 +255,27 @@
 
             <div id="phone_uk" class="phone">
               <p>
-                <img src="d/i/hummer.svg" alt="ремонт квартир" />
+                <img src="/assets/icons/hummer.svg" alt="ремонт квартир" />
               </p>
               <a href="tel:+48796019986"> +48 (796) 019 986 </a>
             </div>
             <div id="phone_de" class="phone">
               <p>
-                <img src="d/i/painting.svg" alt="wykończenie wnętrz malowania"/>
+                <img src="/assets/icons/painting.svg" alt="wykończenie wnętrz malowania"/>
               </p>
               <span></span>
               <a href="tel:+48795621905"> +48 (795) 621 905 </a>
             </div>
 
             <div id="h_nav_left" class="h_nav">
-              <a href="index.html#s2cid90">O NAS</a>
-              <p><img src="d/i/h_nav.png" /></p>
-              <a href="index.html#s2cid42">OFERTA</a>
+              <a href="/#s2cid90">O NAS</a>
+              <p><img src="/assets/images/h_nav.png" /></p>
+              <a href="/#s2cid42">OFERTA</a>
             </div>
             <div id="h_nav_right" class="h_nav">
-              <a href="index.html#s2cid57">GALERIA</a>
-              <p><img src="d/i/h_nav.png" /></p>
-              <a href="index.html#s2cid48" id="contacts_link">KONTAKT</a>
+              <a href="/#s2cid57">GALERIA</a>
+              <p><img src="/assets/images/h_nav.png" /></p>
+              <a href="/#s2cid48" id="contacts_link">KONTAKT</a>
             </div>
           </div>
         </div>
@@ -360,28 +318,28 @@
       <ul id="slide-out" class="sidenav">
         <li id="sidenav_head">
           <div id="sn_logo">
-            <a href="index.html">
-              <img src="d/logo.svg" />
+            <a href="/">
+              <img src="/assets/logo/logo.svg" />
             </a>
           </div>
         </li>
         <li>
-          <a class="waves-effect waves-light" href="index.html#s2cid90"
+          <a class="waves-effect waves-light" href="/#s2cid90"
             ><i>person</i>O NAS</a
           >
         </li>
         <li>
-          <a class="waves-effect waves-light" href="index.html#s2cid42"
+          <a class="waves-effect waves-light" href="/#s2cid42"
             ><i>list</i>OFERTA</a
           >
         </li>
         <li>
-          <a class="waves-effect waves-light" href="index.html#s2cid57"
+          <a class="waves-effect waves-light" href="/#s2cid57"
             ><i>image</i> GALERIA
           </a>
         </li>
         <li>
-          <a class="waves-effect waves-light" href="index.html#s2cid49"
+          <a class="waves-effect waves-light" href="/#s2cid49"
             ><i>phone_in_talk</i>KONTAKT</a
           >
         </li>
@@ -403,7 +361,5 @@
         </li>
       </ul>
     </footer>
-    <script src="/js/main.end.js"></script>
-    <script src="/js/type.end.js"></script>
   </body>
 </html>
