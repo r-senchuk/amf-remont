@@ -1,499 +1,211 @@
-# AMF Group Website Redesign
+# AMF Group Website
 
 ## Project Overview
 
 This is the source code for the AMF Group website (https://www.amfgroup.pl) - a renovation and interior finishing company based in Wrocław, Poland. The site is hosted on AWS S3 and served via CloudFront.
 
-## Current Issues
+## Architecture
 
-1. **Design Problems:**
-   - Outdated color scheme and typography
-   - Inconsistent spacing and layout
-   - Complex nested div structure with custom attributes
-   - Poor mobile responsiveness
-   - Mixed styling approaches (inline styles, multiple CSS files)
+### Web Components Single Page Application (SPA)
 
-2. **Content Structure Issues:**
-   - Poor semantic HTML structure
-   - Content not optimized for SEO
-   - Hardcoded content mixed with structure
-   - No clear content hierarchy
+The website is built as a modern **Single Page Application (SPA)** using **Web Components** with the following architecture:
 
-3. **Photo Gallery Issues:**
-   - ~~Photos hardcoded in HTML (20+ manual entries)~~ ✅ Fixed
-   - ~~Inconsistent naming (some with `_313` suffix, some without)~~ ✅ Standardized
-   - ~~No easy way to add/remove/replace photos~~ ✅ JSON-based system
-   - ~~Poor user experience for browsing~~ ✅ GLightbox implementation
+- **Web Components**: Custom elements using Shadow DOM for style encapsulation
+- **Client-Side Routing**: Custom router using History API for navigation
+- **Component-Based**: Modular architecture with shared and page-specific components
+- **Design System**: Centralized CSS variables for consistent styling
+- **Lazy Loading**: Components loaded on-demand for optimal performance
+- **SEO Optimized**: Dynamic meta tags, structured data, and proper URL handling
 
-## Implementation Plan: Progressive Enhancement
+### Technology Stack
 
-### Architecture Decision: Option B - Progressive Enhancement
+- **Build Tool**: Vite 7.2.6 (fast HMR, optimized builds)
+- **JavaScript**: ES6+ modules, vanilla JavaScript (no jQuery)
+- **Styling**: CSS Custom Properties, CSS Modules support
+- **Components**: Native Web Components (Custom Elements API)
+- **Routing**: Custom client-side router
+- **Lightbox**: GLightbox for gallery functionality
 
-We will keep the existing HTML structure and progressively enhance it with:
-- Modern CSS refactoring
-- JavaScript improvements for gallery and interactions
-- Simple folder-based photo management
-- Better content organization
-- Improved SEO and accessibility
-
-**Benefits:**
-- Less disruptive to existing deployment
-- Faster initial delivery
-- Maintains current AWS S3/CloudFront setup
-- Gradual migration approach
-- No need for build tools initially
-
-### Phase 1: Design System & Styling
-
-#### 1.1 Color Palette
-- **Primary:** Professional blue (#1a49a7, #19326b)
-- **Accent:** Creative orange (#ff942a, #f89f47)
-- **Neutral:** Modern grays (#37474f, #546e7a, #eceff1)
-- **Background:** Clean whites and light grays
-
-#### 1.2 Typography
-- Keep Geometria font family (already loaded)
-- Improve font hierarchy and sizing
-- Better line-height and spacing
-- Responsive font sizes
-
-#### 1.3 Layout System
-- Refactor CSS grid system
-- Consistent spacing scale (8px base)
-- Better responsive breakpoints
-- Clean component-based styling
-
-#### 1.4 Files to Modify
-- `css/main.css` - Refactor and modernize
-- `css/project.css` - Update component styles
-- `css/types.css` - Improve gallery and content styles
-- Remove inline styles from `index.html`
-
-### Phase 2: Content Structure & SEO
-
-#### 2.1 Semantic HTML
-- Replace custom `otype` attributes with semantic HTML5 elements
-- Use proper `<section>`, `<article>`, `<header>`, `<nav>`, `<footer>`
-- Improve heading hierarchy (h1, h2, h3)
-- Add proper ARIA labels for accessibility
-
-#### 2.2 SEO Optimization
-- Improve meta tags in `<head>`
-- Add structured data (JSON-LD)
-- Optimize image alt texts
-- Better internal linking
-- Improve page titles and descriptions
-
-#### 2.3 Content Organization
-- Extract hardcoded content to data structure (optional JSON)
-- Separate content from presentation
-- Create reusable content blocks
-
-#### 2.4 Files to Modify
-- `index.html` - Restructure with semantic HTML
-- Add `data/content.json` (optional) for content management
-
-### Phase 3: Photo Gallery System
-
-#### 3.1 Folder Structure
-```
-images/
-  gallery/
-    full/          # Full-size images
-      01_bathroom.jpg
-      02_kitchen.jpg
-      03_living_room.jpg
-      ...
-    thumbs/        # Thumbnails (auto-generated or manual)
-      01_bathroom_thumb.jpg
-      02_kitchen_thumb.jpg
-      ...
-```
-
-#### 3.2 Gallery Configuration
-Create `data/gallery.json`:
-```json
-{
-  "photos": [
-    {
-      "id": "01",
-      "filename": "01_bathroom.jpg",
-      "title": "Modern Bathroom",
-      "category": "bathroom",
-      "order": 1
-    },
-    {
-      "id": "02",
-      "filename": "02_kitchen.jpg",
-      "title": "Kitchen Renovation",
-      "category": "kitchen",
-      "order": 2
-    }
-  ]
-}
-```
-
-#### 3.3 Gallery Features
-- Auto-generate gallery from JSON config
-- **GLightbox** library for lightbox/modal view (modern, lightweight, works with dynamic content)
-- Responsive grid layout
-- Lazy loading for performance
-- Touch navigation and keyboard controls
-- Easy to add/remove photos (just update JSON and add files)
-
-#### 3.4 Files to Create/Modify
-- `data/gallery.json` - Gallery configuration
-- `js/gallery.js` - Gallery functionality (new file)
-- `index.html` - Replace hardcoded gallery with dynamic generation, add GLightbox library
-- `css/types.css` - Update gallery styles (if needed)
-
-### Phase 4: JavaScript Enhancements
-
-#### 4.1 Gallery Module
-- Load gallery from JSON
-- Generate gallery HTML dynamically
-- Implement lightbox functionality
-- Handle image lazy loading
-
-#### 4.2 Form Improvements
-- Better form validation
-- Improved UX for contact forms
-- Loading states and feedback
-
-#### 4.3 Interactive Elements
-- Smooth scrolling
-- Mobile menu improvements
-- Scroll animations (optional)
-
-#### 4.4 Files to Create/Modify
-- `js/gallery.js` - New gallery module
-- `js/main.end.js` - Enhance existing functionality
-- `js/main.start.js` - Keep minimal, move logic to modules
-
-### Phase 5: Image Optimization
-
-#### 5.1 Image Processing
-- Optimize existing images
-- Generate thumbnails automatically (or provide script)
-- Use WebP format where possible (with fallbacks)
-- Implement proper lazy loading
-
-#### 5.2 Files to Create
-- `scripts/generate-thumbnails.js` - Optional script for thumbnail generation
-- Update image paths in gallery config
-
-### Phase 6: Mobile Responsiveness
-
-#### 6.1 Mobile-First Approach
-- Improve mobile navigation
-- Better touch targets
-- Optimize images for mobile
-- Improve form usability on mobile
-
-#### 6.2 Files to Modify
-- All CSS files - Add/improve mobile breakpoints
-- `index.html` - Improve mobile structure
-
-## Implementation Steps
-
-### Step 1: Setup & Preparation
-1. Create backup of current site
-2. Set up new folder structure for images
-3. Create `data/gallery.json` with current photos
-4. Document current photo locations
-
-### Step 2: Design System
-1. Define color palette and typography
-2. Create spacing system
-3. Refactor `css/main.css` with new design system
-4. Update component styles in `css/project.css`
-
-### Step 3: Content Restructure
-1. Update `index.html` with semantic HTML
-2. Improve SEO meta tags
-3. Extract hardcoded content (optional JSON)
-4. Add structured data
-
-### Step 4: Gallery Implementation ✅ COMPLETED
-1. Create `data/gallery.json` ✅
-2. Implement `js/gallery.js` with GLightbox integration ✅
-3. Update gallery HTML generation ✅
-4. Add GLightbox library to `index.html` ✅
-5. Test lightbox functionality ✅
-6. Implement lazy loading ✅
-
-**Library Used:** GLightbox (https://github.com/biati-digital/glightbox)
-- Modern, lightweight lightbox library
-- Works perfectly with dynamically created content
-- Touch navigation, keyboard controls, smooth animations
-
-### Step 5: Image Migration
-1. Move images to new folder structure
-2. Optimize images
-3. Generate thumbnails
-4. Update gallery.json with new paths
-
-### Step 6: Testing & Refinement
-1. Test on multiple devices
-2. Check browser compatibility
-3. Performance optimization
-4. Accessibility audit
-5. SEO validation
-
-### Step 7: Deployment
-1. Test on staging (if available)
-2. Deploy to S3 using Makefile
-3. Invalidate CloudFront cache
-4. Monitor for issues
-
-## File Structure
+## Project Structure
 
 ```
 amf-remont/
-├── src/                      # Source files (processed by Vite)
-│   ├── index.html            # Main HTML entry point
-│   └── css/                  # CSS files (processed, can use CSS Modules)
-│       ├── design-system.css # CSS variables and design tokens
-│       ├── main.css          # Main styles
-│       ├── project.css       # Component styles
-│       ├── types.css         # Gallery & content styles
-│       ├── ol-article.css    # Article styles
-│       └── cvu_olymp.css     # Form styles
-├── public/                   # Static assets (copied as-is)
-│   ├── js/                   # JavaScript files
-│   │   ├── utils.js          # Utility functions module
-│   │   ├── main.start.js     # Initialization
-│   │   ├── main.end.js       # Main functionality
-│   │   ├── type.end.js       # Type-specific JS
-│   │   ├── gallery.js        # Gallery module (GLightbox)
-│   │   └── reserve.js        # Form handling
-│   ├── i/                    # Gallery images
-│   ├── d/                    # Design assets (logo, icons)
-│   ├── include/              # External libraries (Materialize, fonts)
-│   ├── data/                 # JSON data files
-│   │   └── gallery.json      # Gallery configuration
+├── src/                          # Source files (processed by Vite)
+│   ├── index.html                # Main HTML entry point (SPA shell)
+│   ├── css/                      # Global CSS files
+│   │   ├── design-system.css     # CSS variables and design tokens
+│   │   ├── global.css            # Global styles
+│   │   ├── main.css              # Main styles
+│   │   ├── project.css           # Component styles
+│   │   ├── types.css             # Gallery & content styles
+│   │   ├── ol-article.css        # Article styles
+│   │   └── cvu_olymp.css         # Form styles
+│   ├── js/                       # Application JavaScript (ES modules)
+│   │   ├── app.js                # Main application entry point
+│   │   ├── router.js             # Client-side router
+│   │   ├── base-component.js     # Base class for Web Components
+│   │   ├── design-system-loader.js # Design system CSS loader
+│   │   └── gallery.js            # Legacy gallery (not used)
+│   └── components/               # Web Components
+│       ├── shared/               # Shared components
+│       │   ├── Header/           # Site header component
+│       │   ├── Footer/           # Site footer component
+│       │   └── Navigation/      # Navigation component
+│       └── pages/                # Page components
+│           ├── HomePage/         # Home page
+│           ├── AboutPage/        # About page
+│           ├── ServicesPage/      # Services page
+│           ├── GalleryPage/      # Gallery page
+│           └── ContactPage/     # Contact page
+├── public/                       # Static assets (copied as-is)
+│   ├── js/                       # Legacy JavaScript (non-module)
+│   │   ├── utils.js              # Utility functions
+│   │   ├── main.start.js         # Initialization
+│   │   ├── main.end.js           # Main functionality
+│   │   ├── type.end.js           # Form handling
+│   │   ├── gallery.js            # Gallery module (GLightbox)
+│   │   └── reserve.js            # Form handling
+│   ├── i/                        # Gallery images
+│   ├── d/                        # Design assets (logo, icons)
+│   ├── include/                 # External libraries (Materialize, fonts)
+│   ├── data/                     # JSON data files
+│   │   └── gallery.json          # Gallery configuration
 │   ├── favicon.ico
 │   └── sitemap.xml
-├── dist/                     # Build output (gitignored)
-├── package.json              # Node.js dependencies
-├── vite.config.js            # Vite configuration
-├── Makefile                  # Build and deployment scripts
-└── README.md                 # This file
+├── dist/                         # Build output (gitignored)
+├── package.json                  # Node.js dependencies
+├── vite.config.js                # Vite configuration
+├── Makefile                      # Build and deployment scripts
+└── README.md                     # This file
 ```
 
-## Development Guidelines
+## Web Components Architecture
 
-### CSS
-- Use consistent spacing scale (8px base)
-- Mobile-first responsive design
-- Use CSS variables for colors
-- Keep specificity low
-- Comment complex sections
+### Component Structure
 
-### JavaScript
-- Modern vanilla JavaScript (ES6+) - no jQuery dependency
-- Modular approach with utility functions
-- Use native browser APIs for DOM manipulation
-- Comment code clearly
-- Handle errors gracefully
+Each component follows this structure:
 
-### HTML
-- Semantic HTML5 elements
-- Proper heading hierarchy
-- ARIA labels for accessibility
-- Clean, readable structure
-
-### Images
-- Optimize all images
-- Use descriptive filenames
-- Provide alt text
-- Implement lazy loading
-
-## Build System
-
-### Vite Configuration
-
-The project uses **Vite** as a build tool for:
-- Fast development server with hot module replacement (HMR)
-- Production builds with optimized assets
-- CSS Modules support (`.module.css` files)
-- Modern JavaScript bundling
-
-### Commands
-
-```bash
-# Install dependencies (first time setup)
-make install
-
-# Start development server (http://localhost:3000)
-make dev
-
-# Build for production
-make build
-
-# Preview production build locally
-make preview
-
-# Deploy to S3 (builds first)
-make deploy
-
-# Clean build artifacts
-make clean
+```
+ComponentName/
+├── ComponentName.js      # Component class (extends BaseComponent)
+├── ComponentName.html    # HTML template
+└── ComponentName.module.css  # Scoped styles (CSS Module)
 ```
 
-### CSS Modules
+### Base Component
 
-CSS Modules are supported for scoped component styles:
+All components extend `BaseComponent` which provides:
 
-```css
-/* src/css/components/Gallery.module.css */
-.galleryItem {
-  display: block;
-  /* Scoped - won't conflict with other .galleryItem classes */
-}
-```
+- **Shadow DOM**: Automatic style encapsulation
+- **Lifecycle Methods**: `render()`, `init()`, `cleanup()`
+- **Event Management**: Automatic event listener cleanup
+- **Design System**: Automatic design system CSS injection
+- **Utilities**: `$q()`, `$qa()`, `getAttr()`, `emit()`
+
+### Example Component
 
 ```javascript
-// In JavaScript
-import styles from './Gallery.module.css';
-element.className = styles.galleryItem; // Becomes: Gallery__galleryItem___abc12
+import { BaseComponent } from '../../../js/base-component.js';
+import { loadDesignSystem } from '../../../js/design-system-loader.js';
+import template from './MyComponent.html?raw';
+
+class MyComponent extends BaseComponent {
+  constructor() {
+    super();
+  }
+
+  async render() {
+    // Load design system CSS variables
+    const designSystemStyles = await loadDesignSystem();
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        ${designSystemStyles}
+        ${this.getComponentStyles()}
+      </style>
+      ${template}
+    `;
+  }
+
+  getComponentStyles() {
+    return `
+      :host {
+        display: block;
+      }
+      .myClass {
+        color: var(--color-primary);
+      }
+    `;
+  }
+
+  init() {
+    // Component initialization
+    const button = this.$q('.myButton');
+    if (button) {
+      this.addEventListener(button, 'click', () => {
+        // Handle click
+      });
+    }
+  }
+
+  cleanup() {
+    // Cleanup is automatic via BaseComponent
+    // Override if needed
+  }
+}
+
+customElements.define('my-component', MyComponent);
+export default MyComponent;
 ```
 
-**Migration strategy:**
-- Existing `.css` files continue to work as global styles
-- New components can use `.module.css` for scoped styles
-- Migrate gradually, file by file
+## Routing
 
-## Deployment
+### Client-Side Router
 
-### Current Setup
-- AWS S3 bucket: `amfgroup.pl`
-- CloudFront distribution
-- Build tool: Vite
-- Deploy using: `make deploy`
+The application uses a custom router (`src/js/router.js`) that:
 
-### Deployment Process
-1. Test changes locally with `make dev`
-2. Build production version with `make build`
-3. Run `make deploy` to upload `dist/` to S3
-4. Invalidate CloudFront cache if needed
-5. Verify on live site
+- **Handles Navigation**: Client-side routing without page reloads
+- **History API**: Uses browser History API for proper back/forward support
+- **Lazy Loading**: Components loaded on-demand
+- **SEO Support**: Dynamic meta tags and structured data
+- **Scroll Management**: Saves/restores scroll positions
+- **Loading States**: Shows loading indicator during navigation
+- **Error Handling**: Graceful error handling with user feedback
 
-## Implementation Status
+### Route Registration
 
-### ✅ Completed
-- **STEP 1: Photo Gallery System** - JSON-based gallery with GLightbox
-  - Dynamic gallery generation from `data/gallery.json`
-  - GLightbox integration for lightbox functionality
-  - Easy photo management (add/remove/reorder via JSON)
-  - Touch and keyboard navigation support
+Routes are registered in `src/js/app.js`:
 
-- **STEP 2: Design System Foundation** - Modern CSS design system
-  - CSS custom properties (variables) for colors, spacing, typography
-  - Centralized color palette and design tokens
-  - Utility classes for common styling needs
-  - Removed all inline styles from HTML
-  - Consistent typography scale and spacing system
-  - Improved maintainability and consistency
+```javascript
+router.register('/', async () => {
+  await import('../components/pages/HomePage/HomePage.js');
+  return document.createElement('amf-home-page');
+}, {
+  title: 'Page Title',
+  description: 'Page description',
+  ogTitle: 'OG Title',
+  ogDescription: 'OG Description',
+  ogImage: 'https://example.com/image.jpg'
+});
+```
 
-- **STEP 3: jQuery to Modern JavaScript Refactoring** - Vanilla JavaScript migration
-  - Removed jQuery dependency (~30KB reduction)
-  - Created utility module (`js/utils.js`) for common DOM operations
-  - Refactored `js/main.end.js` to use vanilla JavaScript
-  - Refactored `js/type.end.js` to use vanilla JavaScript
-  - Updated Materialize CSS integration to use vanilla JS API
-  - Modern event handling and smooth scrolling
-  - Better performance with native browser APIs
+### Navigation
 
-- **STEP 4: Vite Build System** - Modern build tooling
-  - Vite configuration for static site building
-  - CSS Modules support for scoped component styles
-  - Project restructured: `src/` for source, `public/` for static assets
-  - Development server with hot module replacement (HMR)
-  - Production builds with asset optimization
-  - Updated Makefile with build commands
-  - Foundation for Web Components integration
-
-### 🚧 In Progress
-- STEP 5: Content Structure & SEO
-- STEP 6: Mobile Responsiveness
-- STEP 7: Image Optimization
-- STEP 8: Deployment Optimization
-
-## Future Enhancements (Post-MVP)
-
-1. **React Integration (Optional)**
-   - Convert gallery to React component
-   - Add React for interactive sections
-   - Keep HTML structure, enhance with React
-
-2. **Build Tools**
-   - Add Webpack/Vite for bundling
-   - CSS preprocessing (SASS/PostCSS)
-   - Image optimization pipeline
-
-3. **Content Management**
-   - Simple CMS integration
-   - Admin panel for content updates
-   - Photo upload interface
-
-4. **Performance**
-   - Service worker for offline support
-   - Advanced caching strategies
-   - CDN optimization
-
-## Dependencies
-
-### Build Tools (npm)
-- **Vite** - Fast build tool with HMR and CSS Modules support
-
-### External Libraries (CDN)
-- **Materialize CSS** - UI component library (uses cash internally, not jQuery)
-- **GLightbox** - Modern lightbox library (added in STEP 1)
-  - CSS: `https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css`
-  - JS: `https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js`
-- **AMP Runtime** - Still included for other components (forms, etc.)
-
-### JavaScript Architecture
-
-The project uses modern vanilla JavaScript (ES6+) with no jQuery dependency:
-
-- **`js/utils.js`** - Utility functions module providing:
-  - DOM query helpers (`$q`, `$qa`)
-  - Event delegation (`on`)
-  - Smooth scrolling (`smoothScrollTo`)
-  - DOM ready handler (`ready`)
-  - Element offset calculation (`getOffset`)
-
-- **`js/main.end.js`** - Main application logic:
-  - Smooth scrolling to sections
-  - Sidenav management
-  - Scroll-to-top button
-  - Anchor link handling
-  - Form error display
-
-- **`js/type.end.js`** - Form handling and component initialization:
-  - Materialize component initialization (FormSelect, Collapsible)
-  - Form submission handling
-  - Input masking
-  - PhotoSwipe integration (legacy)
-
-- **`js/gallery.js`** - Photo gallery module (already modern JS)
-
-- **`js/reserve.js`** - Reservation form handling (already modern JS)
+Internal links automatically use the router. External links, mailto, tel, and hash links are ignored.
 
 ## Design System
 
 ### CSS Variables
 
-The design system uses CSS custom properties (variables) defined in `css/design-system.css`. All colors, spacing, typography, shadows, and transitions are centralized here.
+All design tokens are defined in `src/css/design-system.css` and automatically injected into Web Components via `design-system-loader.js`.
 
 #### Color Palette
-- **Primary Colors**: `--color-primary` (#1a49a7), `--color-primary-dark` (#19326b), `--color-primary-light` (#95b7fb)
-- **Accent Colors**: `--color-accent-orange` (#ff942a), `--color-accent-purple` (#a70da9), `--color-accent-green` (#4caf50)
-- **Neutral Colors**: `--color-text-primary` (#37474f), `--color-text-secondary` (#546e7a), `--color-bg-light` (#eceff1), `--color-bg-lighter` (#f4f7f9), `--color-bg-dark` (#486e71)
+- **Primary**: `--color-primary` (#1a49a7), `--color-primary-dark` (#19326b)
+- **Accent**: `--color-accent-orange` (#ff942a), `--color-accent-purple` (#a70da9)
+- **Text**: `--color-text-primary` (#37474f), `--color-text-secondary` (#546e7a)
+- **Background**: `--color-bg-light` (#eceff1), `--color-bg-dark` (#486e71)
 
-#### Spacing Scale (8px base unit)
+#### Spacing Scale (8px base)
 - `--spacing-xs`: 4px
 - `--spacing-sm`: 8px
 - `--spacing-md`: 16px
@@ -501,38 +213,198 @@ The design system uses CSS custom properties (variables) defined in `css/design-
 - `--spacing-xl`: 32px
 - `--spacing-2xl`: 48px
 - `--spacing-3xl`: 64px
+- `--spacing-4xl`: 96px
 
 #### Typography
-- Font families: `--font-family-primary` (Geometria, Open Sans), `--font-family-secondary` (Open Sans)
-- Font sizes: `--font-size-xs` (12px) through `--font-size-3xl` (32px)
-- Line heights: `--line-height-tight` (1.2), `--line-height-normal` (1.5), `--line-height-relaxed` (1.75)
+- Font families: `--font-family-primary`, `--font-family-secondary`
+- Font sizes: `--font-size-xs` through `--font-size-3xl`
+- Line heights: `--line-height-tight`, `--line-height-normal`, `--line-height-body`
 
-#### Utility Classes
+## Development
 
-Common utility classes available:
-- **Background**: `.bg-light`, `.bg-lighter`, `.bg-primary`, `.bg-accent-light`
-- **Text Colors**: `.text-primary`, `.text-accent-orange`, `.text-accent-green`, `.text-accent-purple`
-- **Spacing**: `.mt-*`, `.mb-*`, `.pt-*`, `.pb-*` (xs, sm, md, lg, xl)
+### Prerequisites
 
-### Usage Guidelines
+- Node.js 18+ and npm
+- Make (for build commands)
 
-1. **Always use CSS variables** instead of hardcoded colors or spacing values
-2. **Use utility classes** for common styling needs (backgrounds, text colors)
-3. **Maintain consistency** by using the design system tokens
-4. **No inline styles** - use utility classes or add styles to appropriate CSS files
+### Setup
 
-## Notes
+```bash
+# Install dependencies
+make install
 
-- **jQuery removed**: All JavaScript has been refactored to use modern vanilla JavaScript (ES6+)
-- **GLightbox** is used for gallery lightbox functionality (replaces AMP lightbox-gallery for dynamic content)
-- **AMP components** still used for other features (forms, etc.)
-- **Materialize CSS** uses cash (jQuery-like) internally but doesn't require jQuery - components initialized via vanilla JS API
-- **Design system variables** are defined in `css/design-system.css` and used throughout all CSS files
-- **Utility functions** in `js/utils.js` provide jQuery-like helpers for common DOM operations
-- Maintain backward compatibility during migration
-- Test thoroughly before each deployment
-- Document any breaking changes
+# Start development server (http://localhost:3000)
+make dev
+```
+
+### Development Workflow
+
+1. **Edit Components**: Modify files in `src/components/`
+2. **Edit Styles**: Modify CSS in `src/css/`
+3. **Hot Reload**: Changes are reflected immediately (HMR)
+4. **Test**: Navigate between pages to test routing
+
+### Build Commands
+
+```bash
+# Install dependencies
+make install
+
+# Start development server (http://localhost:3000)
+# - Hot module replacement (HMR)
+# - Fast refresh on changes
+make dev
+
+# Build for production
+# - Optimizes and minifies assets
+# - Outputs to dist/ directory
+make build
+
+# Preview production build (http://localhost:8080)
+make preview
+
+# Deploy to S3 (builds first, then deploys)
+make deploy
+
+# Clean build artifacts
+make clean
+```
+
+## Features
+
+### ✅ Implemented
+
+- **Web Components Architecture**: Modular, reusable components
+- **Client-Side Routing**: SPA navigation with History API
+- **Design System**: Centralized CSS variables
+- **SEO Optimization**: Dynamic meta tags, structured data
+- **Loading States**: Visual feedback during navigation
+- **Scroll Restoration**: Saves/restores scroll positions
+- **Error Handling**: User-friendly error messages
+- **Accessibility**: Focus management, keyboard navigation
+- **Performance**: Lazy loading, code splitting
+- **Photo Gallery**: JSON-based gallery with GLightbox
+- **Modern JavaScript**: ES6+ modules, no jQuery
+
+### 🚧 Future Enhancements
+
+- **PWA Support**: Service worker, offline support
+- **Analytics Integration**: Google Analytics, custom events
+- **Prefetching**: Preload next page on hover
+- **State Management**: Global state management (if needed)
+- **Image Optimization**: WebP format, responsive images
+- **Testing**: Unit tests, E2E tests
+
+## Performance Optimizations
+
+### Implemented
+
+1. **Lazy Loading**: Components loaded on-demand
+2. **Code Splitting**: CSS code splitting enabled
+3. **Design System Caching**: CSS variables cached after first load
+4. **Race Condition Prevention**: Router prevents duplicate navigations
+5. **Event Listener Cleanup**: Automatic cleanup prevents memory leaks
+6. **Optimized Builds**: Vite optimizes and minifies production builds
+
+### Best Practices
+
+- **Use Design System Variables**: Always use CSS variables, never hardcode values
+- **Cleanup Event Listeners**: Use `this.addEventListener()` for automatic cleanup
+- **Async Rendering**: Components can use async `render()` methods
+- **Error Handling**: Always handle errors gracefully
+- **SEO**: Provide proper meta tags for each route
+
+## Browser Support
+
+- **Modern Browsers**: Chrome, Firefox, Safari, Edge (latest 2 versions)
+- **Web Components**: Native support (no polyfills needed for modern browsers)
+- **ES6 Modules**: Native support
+- **History API**: Native support
+
+## Deployment
+
+### Current Setup
+
+- **Hosting**: AWS S3 bucket `amfgroup.pl`
+- **CDN**: CloudFront distribution
+- **Build Tool**: Vite
+- **Deploy Command**: `make deploy`
+
+### Deployment Process
+
+1. Test changes locally: `make dev`
+2. Build production version: `make build`
+3. Deploy to S3: `make deploy`
+4. Invalidate CloudFront cache (if needed)
+5. Verify on live site
+
+## SEO Features
+
+### Dynamic Meta Tags
+
+Each route can define:
+- `title`: Page title
+- `description`: Meta description
+- `ogTitle`: Open Graph title
+- `ogDescription`: Open Graph description
+- `ogImage`: Open Graph image
+
+### Structured Data
+
+JSON-LD structured data is automatically generated for each page:
+- WebPage schema
+- Organization schema
+- Page-specific schemas (ContactPage, Service, etc.)
+
+### URL Management
+
+- Clean URLs (no hash routing)
+- Proper canonical URLs
+- Browser history support
+- Shareable URLs
+
+## Troubleshooting
+
+### Component Not Rendering
+
+1. Check browser console for errors
+2. Verify component is registered: `customElements.define()`
+3. Check if `render()` method is async and awaited
+4. Verify design system is loading correctly
+
+### Routing Issues
+
+1. Check route registration in `app.js`
+2. Verify component import path
+3. Check browser console for navigation errors
+4. Verify link handling in `setupLinkHandling()`
+
+### Styling Issues
+
+1. Check if design system CSS is loaded
+2. Verify CSS variables are used correctly
+3. Check Shadow DOM styles (use `:host` selector)
+4. Verify component styles are injected
+
+## Dependencies
+
+### Build Tools
+- **Vite 7.2.6**: Build tool with HMR
+
+### External Libraries (CDN)
+- **Materialize CSS**: UI component library
+- **GLightbox**: Modern lightbox library
+- **AMP Components**: Form components (legacy)
+
+### No Runtime Dependencies
+- Pure Web Components (no framework)
+- Vanilla JavaScript (no jQuery)
+- Native browser APIs
+
+## License
+
+Copyright © AMF GROUP. All rights reserved.
 
 ## Contact
 
-For questions about this project, refer to the implementation plan above or contact the development team.
+For questions about this project, refer to this README or contact the development team.

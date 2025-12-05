@@ -36,8 +36,24 @@ h6 {
   outline: none;
 }
 a,
-a * {
+a *,
+button,
+button * {
   transition: var(--transition-base);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
 }
 i {
   font-family: "Material Icons";
@@ -79,7 +95,7 @@ footer {
 }
 body > * > div[otype] {
   width: calc(100% - 40px);
-  padding: 50px 20px 40px 20px;
+  padding: var(--section-padding-mobile) 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -87,9 +103,21 @@ body > * > div[otype] {
   align-items: stretch;
   margin: 0;
 }
+
+@media (min-width: 768px) {
+  body > * > div[otype] {
+    padding: var(--section-padding-tablet) 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  body > * > div[otype] {
+    padding: var(--section-padding-desktop) 20px;
+  }
+}
 body > * > div[otype] > div {
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--content-width-max);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -97,7 +125,8 @@ body > * > div[otype] > div {
   align-items: stretch;
   align-content: flex-start;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  gap: var(--spacing-md);
 }
 body > * > div[otype] > div.gw1,
 body > * > div[otype].gw1 > div {
@@ -211,10 +240,13 @@ body > * > div[otype].w_fix_bgi {
   background-attachment: fixed;
 }
 body > * > div[otype].w_shadow {
-  -webkit-box-shadow: 0 6px 12px 0px rgba(38, 50, 56, 0.15);
-  -moz-box-shadow: 0 6px 12px 0px rgba(38, 50, 56, 0.15);
-  box-shadow: 0 6px 12px 0px rgba(38, 50, 56, 0.15);
+  box-shadow: var(--shadow-md);
   z-index: 1;
+  transition: box-shadow var(--transition-base);
+}
+
+body > * > div[otype].w_shadow:hover {
+  box-shadow: var(--shadow-lg);
 }
 body > * > div[otype] > div > div[otype] {
   width: calc(100% - 24px);
@@ -784,6 +816,28 @@ div.cvu-input__focused:after {
   }
 }
 @media only screen and (max-width: 767px) {
+  /* Improved mobile typography */
+  h1, .h1 {
+    font-size: 24px;
+  }
+  
+  h2, .h2 {
+    font-size: 20px;
+  }
+  
+  h3, .h3 {
+    font-size: 18px;
+  }
+  
+  /* Better touch targets */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   body > * > div[otype] > div.gw1,
   body > * > div[otype].gw1 > div,
   body > * > div[otype] > div.gw2,
@@ -946,6 +1000,16 @@ div.cvu-input__focused:after {
 header {
   position: relative;
   background: url(../d/i/hbg.png) center bottom repeat-x var(--color-bg-dark);
+  box-shadow: var(--shadow-md);
+  z-index: 100;
+}
+
+/* Sticky header on scroll */
+@media (min-width: 1024px) {
+  header {
+    position: sticky;
+    top: 0;
+  }
 }
 body > header > div[otype] {
   padding: 0 12px;
@@ -984,7 +1048,7 @@ header a p {
 header a:hover p {
   color: var(--color-accent-purple);
   border-bottom: 1px solid transparent;
-  transition: var(--transition-base);
+  transform: translateY(-1px);
 }
 header #logo {
   position: absolute;
@@ -1425,6 +1489,15 @@ body > nav > div[otype] > div > div[otype] {
   nav {
     display: flex;
   }
+  
+  /* Improved mobile spacing */
+  body > * > div[otype] {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+  
+  body > * > div[otype] > div {
+    gap: var(--spacing-sm);
+  }
 }
 #breadcrumbs #breadcrumbs_path {
   order: 1;
@@ -1439,6 +1512,15 @@ main {
   margin-bottom: auto;
   min-height: 400px;
   justify-content: flex-start;
+}
+
+/* Improved section spacing */
+main > div[otype="article"] {
+  margin-bottom: 0;
+}
+
+main > div[otype="article"] + div[otype="article"] {
+  margin-top: 0;
 }
 body.prefixed-header main {
   margin-top: 64px;
@@ -1550,9 +1632,17 @@ footer #footer_copyright p strong {
 .kontakt_pad {
   text-align: center;
   align-self: center;
-  font-size: var(--font-size-xl);
-  padding-left: 20px;
-  padding-right: 7px;
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
+  max-width: var(--content-width-narrow);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .kontakt_pad {
+    font-size: var(--font-size-xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
 }
 
 #olymp-up {
@@ -1560,7 +1650,7 @@ footer #footer_copyright p strong {
   height: 3rem;
   border-radius: 50%;
   background-color: #fff;
-  box-shadow: 0 0.625rem 1.25rem rgba(38, 50, 56, 0.15);
+  box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1570,8 +1660,7 @@ footer #footer_copyright p strong {
   bottom: -4rem;
   right: 1.8rem;
   cursor: pointer;
-  transition: 0.3s;
-  transition: all 0.15s 0s ease-out;
+  transition: all var(--transition-base);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -1579,14 +1668,17 @@ footer #footer_copyright p strong {
   -ms-user-select: none;
   user-select: none;
 }
+
 #olymp-up.show {
   bottom: 2rem;
-  opacity: 0.55;
+  opacity: 0.7;
 }
+
 #olymp-up:hover {
   opacity: 1;
   background: var(--color-primary-light);
-  transition: all 0.3s 0.15s ease-in;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
 }
 #olymp-up i {
   color: var(--color-primary-light);

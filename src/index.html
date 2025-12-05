@@ -14,7 +14,7 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="remont mieszkania, wykończenie wnętrz we Wrocławiu"
+      content="AMF GROUP - Profesjonalne wykończenie wnętrz we Wrocławiu. Remonty pod klucz, 24-miesięczna gwarancja. Setki zrealizowanych projektów. Zadzwoń już dziś!"
     />
     <link rel="canonical" href="https://www.amfgroup.pl/index.html" />
     <link rel="shortcut icon" href="/d/favicon.png" type="image/x-icon" />
@@ -36,7 +36,7 @@
     <meta name="keywords" content="remont mieszkania, we Wrocławiu, wykończenie wnętrz, mieszkanie pod klucz"/>
     <meta
       property="og:description"
-      content="Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. – AMF GROUP - Wykończenie wnętrz we Wrocławiu"
+      content="Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu z 24-miesięczną gwarancją. Setki zrealizowanych projektów."
     />
     <meta property="og:image" content="https://www.amfgroup.pl/d/logo.svg" />
     <meta property="og:url" content="https://www.amfgroup.pl/" /> 
@@ -46,6 +46,14 @@
     <script src="/js/utils.js"></script>
     <script src="/include/materialize.min.js"></script>
     <script src="/js/main.start.js"></script>
+    <!-- Web Components -->
+    <!-- Web Components - Shared Components -->
+    <script type="module">
+      import './components/shared/Header/Header.js';
+      import './components/shared/Footer/Footer.js';
+    </script>
+    <!-- Web Components App -->
+    <script type="module" src="/js/app.js"></script>
     <!-- GLightbox - Modern lightbox library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
@@ -246,6 +254,7 @@
     />
     <!-- Design System - CSS Variables and Design Tokens -->
     <link href="css/design-system.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="css/global.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="css/main.css" rel="stylesheet" type="text/css" media="screen" />
     <link
       href="css/types.css"
@@ -268,7 +277,9 @@
   </head>
 
   <body data-mid="1" mid_1 class="loading">
-    <header>
+    <amf-header></amf-header>
+    <!-- Legacy header kept for reference, will be removed after migration -->
+    <header style="display: none;">
       <div otype>
         <div>
           <div otype>
@@ -327,8 +338,9 @@
         </div>
       </div>
     </nav>
-    <main>
-      <div id="cid16" otype="welcome">
+    <main id="app-main">
+      <!-- Legacy content - will be replaced by router -->
+      <div id="cid16" otype="welcome" style="display: none;">
         <div>
           <div otype>
             <div id="w_text_left" class="w_form">
@@ -385,21 +397,17 @@
                 </div>
                 
                 <p class="pad-rt-20">
-                  Czy marzysz o nowym, świeżym wnętrzu? My to dla Ciebie zrealizujemy! Zadzwoń już teraz, a razem zespolimy Twoje pomysły z naszą ekspertyzą.</p>
+                  <strong>Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza.</strong> Czy marzysz o nowym, świeżym wnętrzu? My to dla Ciebie zrealizujemy! Zadzwoń już teraz, a razem zespolimy Twoje pomysły z naszą ekspertyzą.</p>
                   <p>
-                  Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Jeśli
-                  chcesz mieć niebanalnie wykończone mieszkanie oraz kontrolę
-                  nad budżetem i nie masz czasu na pilnowanie ekipy budowlanej
-                  to dobrze trafiłeś! Zrobimy wszystko za Ciebie oraz zapewnimy
-                  24 miesięczny serwis gwarancyjny.
+                  <strong>Setki zrealizowanych projektów</strong> - wieloletnie doświadczenie w branży pozwoliło nam zdobyć kwalifikacje niezbędne do świadczenia usług na najwyższym poziomie. Jesteśmy firmą remontowo-budowlaną świadczącą kompleksowe usługi w zakresie remontów mieszkań, domów oraz lokali użytkowych.
                 </p>
                 
                 <p>
-                  Zajmujemy się projektowaniem, aranżacją i kompleksowym
-                  wykończeniem wnętrz. Przygotujemy profesjonalny projekt,
-                  doradzimy w wyborze materiałów oraz wykończymy całościowo
-                  Twoje mieszkanie. Wszystkie prace będą stale nadzorowane przez
-                  kierownika projektu. Wykończemy pod klucz na terenie Wrocławia i okolic.</p>
+                  <strong>Remonty pod klucz z pełną obsługą.</strong> Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Jeśli chcesz mieć niebanalnie wykończone mieszkanie oraz kontrolę nad budżetem i nie masz czasu na pilnowanie ekipy budowlanej to dobrze trafiłeś! Zrobimy wszystko za Ciebie - od profesjonalnego projektu, przez doradztwo w wyborze materiałów, aż po kompleksowe wykończenie. Wszystkie prace będą stale nadzorowane przez kierownika projektu.
+                </p>
+                
+                <p>
+                  <strong>24-miesięczna gwarancja</strong> - zapewniamy pełny serwis gwarancyjny przez 24 miesiące. Dzięki bogatemu doświadczeniu możemy zagwarantować, że realizowane przez nas inwestycje trzymają się założonego jeszcze przed podpisaniem umowy budżetu oraz harmonogramu prac. Wykończymy pod klucz na terenie Wrocławia i okolic.</p>
               </div>
             </div>
           </div>
@@ -417,25 +425,12 @@
               <div id="cid83" otype="text">
                 <div class="ol-article">
                   <p>
-                    Wieloletnia działalność w branży pozwoliła nam zdobyć
-                    kwalifikacje niezbędne do świadczenia usług na najwyższym
-                    poziomie. Jesteśmy firmą remontowo-budowlaną świadczącą
-                    kompleksowe usługi w zakresie remontów mieszkań, domów oraz
-                    lokali użytkowych.
-                  </p>
-                  <p>
-                    Dzięki bogatemu doświadczeniu możemy zagwarantować, że
-                    realizowane przez nas inwestycje trzymają się założonego
-                    jeszcze przed podpisaniem umowy budżetu oraz harmonogramu
-                    prac. Oznacza to spokój i pewność terminowego ukończenia
-                    prac dla każdego inwestora, który zdecyduje się podjąć z
-                    nami współpracę.
-                  </p>
-                  <p>
                     Jeśli poszukują Państwo firmy zajmującej się wykończeniem
                     wnętrz we Wrocławiu, która stawia na jakość, estetykę oraz
                     ścisłą współpracę z Klientem, zapraszamy do zapoznania się z
-                    naszą ofertą.
+                    naszą ofertą. Oznacza to spokój i pewność terminowego ukończenia
+                    prac dla każdego inwestora, który zdecyduje się podjąć z
+                    nami współpracę.
                   </p>
                   
                 </div>
@@ -489,8 +484,8 @@
               </div>
               <div id="cid43" otype="header" class="ol-h3 ol-center">
                 <div>
-                  <h3>Oferta naszej firmy remontowej</h3>
-                  <p>Specjalizujemy się w następujących usługach:</p>
+                  <h3>Nasza Oferta</h3>
+                  <p>Kompleksowe usługi remontowe - od projektu po ostatnią pędzelkę. Specjalizujemy się w:</p>
                 </div>
               </div>
             </div>
@@ -614,9 +609,8 @@
       
         <div class="ol-article kontakt_pad ">
          
-            <p> <em>Gotowy na zmianę? Dzwonisz, a my zajmiemy się resztą.</em>
-            </p>
-            <p> <em>Skontaktuj się teraz: </em></p> 
+            <p> <strong>Gotowy na zmianę? Dzwonisz, a my zajmiemy się resztą.</strong></p>
+            <p> <em>Skontaktuj się teraz - odpowiadamy szybko i profesjonalnie:</em></p> 
         </div>
       
       <div>
@@ -728,7 +722,9 @@
         </div>
       </div>
     </main>
-    <footer>
+    <amf-footer></amf-footer>
+    <!-- Legacy footer kept for reference, will be removed after migration -->
+    <footer style="display: none;">
       <div otype class="gw13">
         <div>
           <div otype>

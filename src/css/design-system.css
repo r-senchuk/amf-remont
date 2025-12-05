@@ -42,6 +42,16 @@
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+  
+  /* Section Padding */
+  --section-padding-mobile: 48px;
+  --section-padding-tablet: 64px;
+  --section-padding-desktop: 96px;
+  
+  /* Content Width */
+  --content-width-max: 1200px;
+  --content-width-narrow: 800px;
   
   /* ============================================
      TYPOGRAPHY
@@ -56,10 +66,30 @@
   --font-size-xl: 20px;
   --font-size-2xl: 24px;
   --font-size-3xl: 32px;
+  --font-size-4xl: 40px;
+  --font-size-5xl: 48px;
+  
+  /* Responsive Typography Scale */
+  --font-size-h1-mobile: 28px;
+  --font-size-h1-desktop: 40px;
+  --font-size-h2-mobile: 24px;
+  --font-size-h2-desktop: 32px;
+  --font-size-h3-mobile: 20px;
+  --font-size-h3-desktop: 24px;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
   
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+  
+  /* Body Text Line Height */
+  --line-height-body: 1.6;
   
   --font-weight-light: 300;
   --font-weight-normal: 400;
@@ -88,7 +118,51 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
+  
+  /* ============================================
+     GRADIENTS
+     ============================================ */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-accent-orange) 0%, var(--color-accent-orange-light) 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  
+  /* ============================================
+     SEMANTIC COLORS
+     ============================================ */
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+  --color-info: var(--color-primary-light);
+  
+  /* ============================================
+     OPACITY VARIATIONS
+     ============================================ */
+  --opacity-disabled: 0.5;
+  --opacity-hover: 0.8;
+  --opacity-overlay: 0.6;
+  
+  /* ============================================
+     COMPONENT TOKENS
+     ============================================ */
+  /* Card Styles */
+  --card-padding: var(--spacing-lg);
+  --card-border-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-md);
+  --card-shadow-hover: var(--shadow-lg);
+  
+  /* Button Styles */
+  --button-padding-y: 12px;
+  --button-padding-x: 24px;
+  --button-border-radius: var(--radius-md);
+  --button-font-weight: var(--font-weight-medium);
+  
+  /* Form Input Styles */
+  --input-padding-y: 12px;
+  --input-padding-x: 16px;
+  --input-border-radius: var(--radius-sm);
+  --input-border-width: 1px;
 }
 
 /* ============================================
@@ -153,6 +227,51 @@
   color: var(--color-text-secondary);
 }
 
+/* Heading Styles */
+h1, .h1 {
+  font-size: var(--font-size-h1-mobile);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+h2, .h2 {
+  font-size: var(--font-size-h2-mobile);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+h3, .h3 {
+  font-size: var(--font-size-h3-mobile);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 768px) {
+  h1, .h1 {
+    font-size: var(--font-size-h1-desktop);
+  }
+  h2, .h2 {
+    font-size: var(--font-size-h2-desktop);
+  }
+  h3, .h3 {
+    font-size: var(--font-size-h3-desktop);
+  }
+}
+
+/* Body Text Improvements */
+body {
+  line-height: var(--line-height-body);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+}
+
 /* Spacing Utilities (for margins and padding) */
 .mt-xs { margin-top: var(--spacing-xs); }
 .mt-sm { margin-top: var(--spacing-sm); }
@@ -177,4 +296,43 @@
 .pb-md { padding-bottom: var(--spacing-md); }
 .pb-lg { padding-bottom: var(--spacing-lg); }
 .pb-xl { padding-bottom: var(--spacing-xl); }
+.pb-2xl { padding-bottom: var(--spacing-2xl); }
+.pb-3xl { padding-bottom: var(--spacing-3xl); }
+
+.pt-2xl { padding-top: var(--spacing-2xl); }
+.pt-3xl { padding-top: var(--spacing-3xl); }
+
+.mt-2xl { margin-top: var(--spacing-2xl); }
+.mt-3xl { margin-top: var(--spacing-3xl); }
+
+.mb-2xl { margin-bottom: var(--spacing-2xl); }
+.mb-3xl { margin-bottom: var(--spacing-3xl); }
+
+/* Gap Utilities */
+.gap-xs { gap: var(--spacing-xs); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+.gap-xl { gap: var(--spacing-xl); }
+.gap-2xl { gap: var(--spacing-2xl); }
+
+/* Section Padding Utilities */
+.section-padding {
+  padding-top: var(--section-padding-mobile);
+  padding-bottom: var(--section-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--section-padding-tablet);
+    padding-bottom: var(--section-padding-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: var(--section-padding-desktop);
+    padding-bottom: var(--section-padding-desktop);
+  }
+}
 

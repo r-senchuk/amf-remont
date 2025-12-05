@@ -373,9 +373,26 @@ body > * > div[otype="welcome"] > div > div[otype] {
   align-items: center;
 }
 .leftimg {
-  float: left; /* Вирівнювання по лівому краю */
-  margin: 0px 15px 7px 0; /* Відступи навколо картинки */
+  float: left;
+  margin: 0px 20px 20px 0;
   line-height: normal;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base);
+}
+
+.leftimg:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 767px) {
+  .leftimg {
+    float: none;
+    display: block;
+    margin: 0 auto var(--spacing-md) auto;
+    max-width: 100%;
+    height: auto;
+  }
 }
 [otype="welcome"] #w_bus > img {
   width: 605px;
@@ -1269,6 +1286,13 @@ div[otype="photo_gallery"].same_rectangles > figure {
   padding: 0 !important;
   margin: 0 1px 1px 0;
   cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+div[otype="photo_gallery"].same_rectangles > figure:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 div[otype="photo_gallery"].same_rectangles.w9 > figure {
   max-width: calc(33% - 1px);
@@ -1286,12 +1310,13 @@ div[otype="photo_gallery"].same_rectangles > figure > amp-img {
   transition: all 0.15s 0.1s ease-in;
 }
 div[otype="photo_gallery"].same_rectangles > figure:hover > amp-img {
-  transform: scale(1.2);
+  transform: scale(1.15);
   transform-origin: center center;
-  -moz-transform: scale(1.2);
+  -moz-transform: scale(1.15);
   -moz-transform-origin: center center;
-  -webkit-transform: scale(1.2);
+  -webkit-transform: scale(1.15);
   -webkit-transform-origin: center center;
+  transition: transform 0.4s ease-out;
 }
 div[otype="photo_gallery"].same_rectangles > figure > amp-img > img {
   display: none !important;
@@ -2166,22 +2191,45 @@ div[otype="header"] > div > p {
 }
 div[otype="header"] > div > h1,
 div[otype="header"].ol-h1 > div > *:first-child {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-h1-mobile);
   line-height: var(--line-height-tight);
   border-bottom: none;
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  div[otype="header"] > div > h1,
+  div[otype="header"].ol-h1 > div > *:first-child {
+    font-size: var(--font-size-h1-desktop);
+  }
 }
 div[otype="header"] > div > h2,
 div[otype="header"].ol-h2 > div > *:first-child {
-  font-size: 27px;
+  font-size: var(--font-size-h2-mobile);
   line-height: var(--line-height-tight);
   border-bottom: none;
+  margin-bottom: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  div[otype="header"] > div > h2,
+  div[otype="header"].ol-h2 > div > *:first-child {
+    font-size: var(--font-size-h2-desktop);
+  }
 }
 div[otype="header"] > div > h3,
 div[otype="header"].ol-h3 > div > *:first-child {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-h3-mobile);
   line-height: var(--line-height-tight);
-
   border-bottom: none;
+  margin-bottom: var(--spacing-sm);
+}
+
+@media (min-width: 768px) {
+  div[otype="header"] > div > h3,
+  div[otype="header"].ol-h3 > div > *:first-child {
+    font-size: var(--font-size-h3-desktop);
+  }
 }
 div[otype="header"] > div > h4,
 div[otype="header"].ol-h4 > div > *:first-child {
@@ -2717,6 +2765,17 @@ div[otype="contacts_and_feedback"] button.ldData:active {
 div[otype="contacts_and_feedback"] table {
   margin: 15px auto;
   border: thin #120a11;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+div[otype="contacts_and_feedback"] table tr {
+  transition: background-color var(--transition-fast);
+}
+
+div[otype="contacts_and_feedback"] table tr:hover {
+  background-color: var(--color-bg-light);
 }
 
 div[otype="contacts_and_feedback"] table tr {
@@ -2788,7 +2847,17 @@ a.cf_messenger > img {
   filter: grayscale(70%) opacity(70%);
   -webkit-filter: grayscale(70%) opacity(70%);
   -moz-filter: grayscale(70%) opacity(70%);
+  transition: all var(--transition-base);
 }
+
+div[otype="contacts_and_feedback"] #cf_messengers a.cf_messenger {
+  transition: transform var(--transition-base);
+}
+
+div[otype="contacts_and_feedback"] #cf_messengers a.cf_messenger:hover {
+  transform: scale(1.1);
+}
+
 div[otype="contacts_and_feedback"] #cf_messengers a.cf_messenger:hover > img {
   filter: grayscale(0%) opacity(100%);
   -webkit-filter: grayscale(0%) opacity(100%);

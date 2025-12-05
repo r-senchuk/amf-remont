@@ -24,7 +24,10 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'src/index.html')
       }
-    }
+    },
+    
+    // Enable CSS code splitting for better performance
+    cssCodeSplit: true
   },
   
   // CSS configuration
@@ -35,6 +38,18 @@ export default defineConfig({
       localsConvention: 'camelCase',
       // Generate scoped class names
       generateScopedName: '[name]__[local]___[hash:base64:5]'
+    },
+    // PostCSS configuration (if needed in future)
+    postcss: {}
+  },
+  
+  // Resolve configuration for imports
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '@components': resolve(__dirname, 'src/components'),
+      '@js': resolve(__dirname, 'src/js'),
+      '@css': resolve(__dirname, 'src/css')
     }
   },
   

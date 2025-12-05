@@ -6,33 +6,47 @@ body.ol-table#tinymce {
   margin: 12px;
 }
 .ol-article {
-  font-family: "Open Sans", sans-serif;
-  font-size: 19px;
-  font-weight: 400;
-  color: #37474f;
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-primary);
   display: block;
-  line-height: 28px;
+  line-height: var(--line-height-body);
+  max-width: var(--content-width-narrow);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .ol-article {
+    font-size: var(--font-size-lg);
+  }
 }
 .ol-article b,
 .ol-article strong {
   font-weight: 700;
 }
 .ol-article a {
-  color: #1c3f92;
-  border-bottom-color: #1c3f92;
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
   display: inline !important;
   text-decoration: none;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  transition: 0.3s;
+  transition: var(--transition-base);
+  font-weight: var(--font-weight-medium);
 }
+
 .ol-article a:hover {
-  color: #333333;
+  color: var(--color-primary-dark);
   border-bottom-color: transparent;
   cursor: pointer;
 }
 .ol-article p {
-  margin: 1em 0 1em 0;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.ol-article p:last-child {
+  margin-bottom: 0;
 }
 .ol-article ul {
   display: block;
