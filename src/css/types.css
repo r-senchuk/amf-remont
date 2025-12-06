@@ -181,7 +181,7 @@ div[otype="callback"] .cvu_feed .success-text {
 }
 body > * > div[otype="welcome"] {
   background-color: #012001;
-  background-image: url(../assets/backgrounds/backgr.jpg);
+  background-image: url(/assets/backgrounds/backgr.jpg);
   height: 600px;
   background-position: center;
   background-repeat: no-repeat;

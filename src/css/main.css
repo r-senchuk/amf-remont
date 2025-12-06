@@ -999,7 +999,7 @@ div.cvu-input__focused:after {
 }
 header {
   position: relative;
-  background: url(../assets/backgrounds/hbg.png) center bottom repeat-x var(--color-bg-dark);
+  background: url(/assets/backgrounds/hbg.png) center bottom repeat-x var(--color-bg-dark);
   box-shadow: var(--shadow-md);
   z-index: 100;
 }

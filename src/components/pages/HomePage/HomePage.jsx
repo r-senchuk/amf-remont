@@ -5,6 +5,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ContactSection from './ContactSection';
+import Gallery from '../../shared/Gallery/Gallery';
 import './HomePage.css';
 
 function HomePage() {
@@ -17,7 +18,7 @@ function HomePage() {
         const response = await fetch('/data/gallery.json');
         if (response.ok) {
           const data = await response.json();
-          // Sort by order and take first 12 images for preview
+          // Sort by order and take first 12 images for preview (max needed for large screens)
           const sortedPhotos = data.photos.slice().sort((a, b) => a.order - b.order);
           setGalleryPhotos(sortedPhotos.slice(0, 12));
         }
@@ -134,55 +135,18 @@ function HomePage() {
       </section>
 
       {/* Gallery Section */}
-      <section className="section galleryPreviewSection">
-        <h2 className="sectionTitle">GALERIA</h2>
-        <div className="galleryPreview">
-          <div className="galleryPreviewGrid">
-            {galleryPhotos.length > 0 ? (
-              galleryPhotos.map((photo, index) => (
-                <div key={photo.id || index} className="galleryPreviewItem">
-                  <Link to="/gallery">
-                    <img 
-                      src={`/gallery/${photo.thumbFilename}`} 
-                      alt={photo.alt || photo.title || ''} 
-                      loading="lazy"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block'
-                      }}
-                    />
-                  </Link>
-                </div>
-              ))
-            ) : (
-              // Fallback: show first 6 images while loading
-              <>
-                <div className="galleryPreviewItem">
-                  <img src="/gallery/korytarz_313.jpg" alt="korytarz" loading="lazy" />
-                </div>
-                <div className="galleryPreviewItem">
-                  <img src="/gallery/szara_łazienka2_313.jpg" alt="szara_łazienka2" loading="lazy" />
-                </div>
-                <div className="galleryPreviewItem">
-                  <img src="/gallery/wanna_wolnostojąca_313.jpg" alt="wanna_wolnostojąca" loading="lazy" />
-                </div>
-                <div className="galleryPreviewItem">
-                  <img src="/gallery/jasna_łazienka_313.jpg" alt="jasna_łazienka" loading="lazy" />
-                </div>
-                <div className="galleryPreviewItem">
-                  <img src="/gallery/łazienka313.jpg" alt="łazienka" loading="lazy" />
-                </div>
-                <div className="galleryPreviewItem">
-                  <img src="/gallery/kuchnia313.jpg" alt="kuchnia" loading="lazy" />
-                </div>
-              </>
-            )}
-          </div>
-          <div className="galleryPreviewCTA">
-            <Link to="/gallery" className="sectionLink">Zobacz pełną galerię →</Link>
-          </div>
+      <section className="section galleryPreviewSection bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600 py-16 relative overflow-hidden">
+        {/* Decorative gradient overlay for olive tint */}
+        <div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-10">GALERIA</h2>
+          
+          <Gallery 
+            photos={galleryPhotos} 
+            variant="small" 
+            showLink={true} 
+          />
         </div>
       </section>
 

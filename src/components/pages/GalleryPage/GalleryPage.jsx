@@ -1,30 +1,21 @@
-/**
- * Gallery Page Component (React)
- * Project showcase and portfolio
- * Dynamically generates photo gallery from JSON configuration
- * Uses GLightbox for lightbox functionality
- */
-import { useState, useEffect, useRef, useCallback } from 'react';
-import './GalleryPage.css';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Gallery from '../../shared/Gallery/Gallery';
 
 function GalleryPage() {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const lightboxRef = useRef(null);
 
   // Load gallery data
   useEffect(() => {
     async function loadGallery() {
       try {
-        console.log('GalleryPage: Loading gallery.json from /data/gallery.json');
         const response = await fetch('/data/gallery.json');
-        console.log('GalleryPage: Response status:', response.status, response.ok);
         if (!response.ok) {
           throw new Error(`Failed to load gallery.json: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
-        console.log('GalleryPage: Loaded', data.photos?.length || 0, 'photos');
         // Sort photos by order
         const sortedPhotos = data.photos.slice().sort((a, b) => a.order - b.order);
         setPhotos(sortedPhotos);
@@ -38,112 +29,56 @@ function GalleryPage() {
     loadGallery();
   }, []);
 
-  // Initialize GLightbox after photos are loaded
-  useEffect(() => {
-    if (photos.length === 0 || loading) return;
-
-    const initLightbox = () => {
-      if (typeof window.GLightbox !== 'undefined') {
-        // Build lightbox items array
-        const lightboxItems = photos.map(photo => ({
-          href: '/gallery/' + photo.filename,
-          type: 'image',
-          title: photo.title || photo.alt || ''
-        }));
-
-        // Initialize GLightbox
-        lightboxRef.current = window.GLightbox({
-          elements: lightboxItems,
-          touchNavigation: true,
-          loop: true,
-          autoplayVideos: false,
-          openEffect: 'fade',
-          closeEffect: 'fade'
-        });
-      }
-    };
-
-    // Wait a bit for GLightbox script to be available
-    if (typeof window.GLightbox !== 'undefined') {
-      initLightbox();
-    } else {
-      const timer = setTimeout(initLightbox, 100);
-      return () => clearTimeout(timer);
-    }
-
-    return () => {
-      if (lightboxRef.current) {
-        try {
-          lightboxRef.current.destroy();
-        } catch (e) {
-          // Ignore errors
-        }
-      }
-    };
-  }, [photos, loading]);
-
-  const handlePhotoClick = useCallback((index) => {
-    if (lightboxRef.current) {
-      lightboxRef.current.openAt(index);
-    }
-  }, []);
-
   return (
-    <div className="galleryPage">
-      {/* Page Header */}
-      <header className="pageHeader">
-        <h1 className="pageTitle">Galeria</h1>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600 relative">
+      {/* Decorative gradient overlay */}
+      <div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay"></div>
 
-      {/* Gallery Section */}
-      <section className="gallerySection">
-        <div className="galleryContainer">
-          {loading && (
-            <p className="loadingMessage">Ładowanie galerii...</p>
-          )}
-          {error && (
-            <p className="errorMessage">{error}</p>
-          )}
-          {!loading && !error && photos.length === 0 && (
-            <p className="loadingMessage">Brak zdjęć w galerii.</p>
-          )}
-          {!loading && !error && photos.length > 0 && photos.map((photo, index) => {
-            const thumbPath = `/gallery/${photo.thumbFilename}`;
-            const fullPath = `/gallery/${photo.filename}`;
-            return (
-              <figure className="galleryItem" key={photo.id || index}>
-                <a
-                  href={fullPath}
-                  className="galleryLink"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handlePhotoClick(index);
-                  }}
-                >
-                  <img
-                    src={thumbPath}
-                    alt={photo.alt || photo.title || ''}
-                    loading="lazy"
-                    onError={(e) => {
-                      console.error('GalleryPage: Image failed to load:', thumbPath, 'Photo:', photo);
-                      // Show a placeholder or error indicator
-                      e.target.style.opacity = '0.3';
-                      e.target.alt = `Błąd ładowania: ${photo.title || photo.alt}`;
-                    }}
-                    onLoad={() => {
-                      console.log('GalleryPage: Image loaded successfully:', thumbPath);
-                    }}
-                  />
-                  <span className="zoomIcon">🔍</span>
-                </a>
-              </figure>
-            );
-          })}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
+        {/* Top Navigation / Back Button */}
+        <div className="mb-8 flex items-center">
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors group"
+          >
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 group-hover:bg-white/20 transition-all">
+              <i className="material-icons text-xl">arrow_back</i>
+            </span>
+            <span className="text-lg font-medium">Wróć</span>
+          </Link>
         </div>
-      </section>
+
+        {/* Main Content */}
+        <div className="space-y-8">
+          {loading && (
+            <div className="flex justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+            </div>
+          )}
+          
+          {error && (
+            <div className="text-center py-20 text-red-200 bg-red-900/20 rounded-xl border border-red-500/30">
+              <p>{error}</p>
+            </div>
+          )}
+          
+          {!loading && !error && photos.length === 0 && (
+            <p className="text-center text-white/70 py-20">Brak zdjęć w galerii.</p>
+          )}
+
+          {!loading && !error && photos.length > 0 && (
+            <Gallery 
+              photos={photos} 
+              variant="full" 
+              showLink={false} 
+            />
+          )}
+        </div>
+
+        {/* Footer placeholder/spacer if needed, though main App footer should be visible */}
+      </div>
     </div>
   );
 }
 
 export default GalleryPage;
-
