@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is the source code for the AMF Group website (https://www.amfgroup.pl) - a renovation and interior finishing company based in Wrocław, Poland. The site is hosted on AWS S3 and served via CloudFront.
+This is the source code for the [AMF Group website](https://www.amfgroup.pl), a renovation and interior finishing company based in Wrocław, Poland. The site is hosted on AWS S3 and served via CloudFront.
 
 ## Architecture
 
@@ -22,12 +22,12 @@ The website is built as a modern **Single Page Application (SPA)** using **React
 - **Build Tool**: Vite 7.2.6 with @vitejs/plugin-react (fast HMR, optimized builds)
 - **UI Framework**: React 19.2
 - **Routing**: React Router DOM 7.10
-- **Styling**: CSS Custom Properties, CSS Modules
-- **Lightbox**: GLightbox for gallery functionality
+- **Styling**: CSS Custom Properties, CSS Modules, Tailwind utility classes
+- **UI Libraries**: Materialize CSS (sidenav) & GLightbox bundled via npm
 
 ## Project Structure
 
-```
+```text
 amf-remont/
 ├── src/                          # Source files (processed by Vite)
 │   ├── index.html                # Main HTML entry point (SPA shell)
@@ -61,7 +61,7 @@ amf-remont/
 │   ├── assets/                   # Images, icons, backgrounds
 │   ├── gallery/                  # Gallery images
 │   ├── i/                        # Gallery images (organized by ID)
-│   ├── libs/                     # External libraries (Materialize, fonts)
+│   ├── libs/                     # Legacy CSS/font assets (Materialize theme, custom fonts)
 │   ├── data/                     # JSON data files
 │   │   └── gallery.json          # Gallery configuration
 │   ├── favicon.ico
@@ -79,7 +79,7 @@ amf-remont/
 
 Each component follows this structure:
 
-```
+```text
 ComponentName/
 ├── ComponentName.jsx     # React component
 ├── ComponentName.css     # Component styles
@@ -141,10 +141,10 @@ SEO metadata is defined per route in `routesMeta`:
 ```jsx
 const routesMeta = {
   '/': {
-  title: 'Page Title',
-  description: 'Page description',
-  ogTitle: 'OG Title',
-  ogDescription: 'OG Description',
+    title: 'Page Title',
+    description: 'Page description',
+    ogTitle: 'OG Title',
+    ogDescription: 'OG Description',
     ogImage: '/assets/logo/logo.svg'
   }
 };
@@ -158,7 +158,8 @@ const routesMeta = {
 
 ## Key Behaviors
 
-- **Contact CTA**: All links point to `/contact`. The route renders `HomePage` and programmatically scrolls to the embedded contact section (`ContactSection`), so there is no standalone contact screen to maintain.
+- **Contact CTA**: All links point to `/contact`. The route renders `HomePage` and programmatically scrolls to `ContactSection`, so there is a single canonical contact entry point.
+- **Bundled UI Libraries**: Materialize JS and GLightbox are imported via npm and initialized inside React components, avoiding render-blocking `<script>`/`<link>` tags in `index.html`.
 - **Gallery Data Flow**: `useGalleryData` fetches and caches the gallery JSON exactly once, so the homepage preview and the gallery page reuse the same sorted data without duplicate network requests.
 - **Global SEO & Scroll State**: `App.jsx` wires `useSEO` and `useScrollRestoration` to ensure route-level metadata stays in sync with navigation while keeping back/forward scroll behavior predictable.
 
@@ -169,12 +170,14 @@ const routesMeta = {
 All design tokens are defined in `src/css/design-system.css`.
 
 #### Color Palette
+
 - **Primary**: `--color-primary` (#1a49a7), `--color-primary-dark` (#19326b)
 - **Accent**: `--color-accent-orange` (#ff942a), `--color-accent-purple` (#a70da9)
 - **Text**: `--color-text-primary` (#37474f), `--color-text-secondary` (#546e7a)
 - **Background**: `--color-bg-light` (#eceff1), `--color-bg-dark` (#486e71)
 
 #### Spacing Scale (8px base)
+
 - `--spacing-xs`: 4px
 - `--spacing-sm`: 8px
 - `--spacing-md`: 16px
@@ -185,6 +188,7 @@ All design tokens are defined in `src/css/design-system.css`.
 - `--spacing-4xl`: 96px
 
 #### Typography
+
 - Font families: `--font-family-primary`, `--font-family-secondary`
 - Font sizes: `--font-size-xs` through `--font-size-3xl`
 - Line heights: `--line-height-tight`, `--line-height-normal`, `--line-height-body`
@@ -248,6 +252,7 @@ make clean
 - **Material Icons**: Google Material Icons integration
 - **Mobile Navigation**: Materialize sidenav for mobile
 - **Scroll to Top**: Button to scroll to top of page
+- **Contact Section Blocks**: Reusable intro, channels, and footer components styled with Tailwind classes inside `HomePage`
 
 ### Future Enhancements
 
@@ -288,21 +293,11 @@ make clean
 4. Invalidate CloudFront cache (if needed)
 5. Verify on live site
 
-## Dependencies
+## Dependencies & Assets
 
-### Runtime Dependencies
-- **react**: ^19.2.1
-- **react-dom**: ^19.2.1
-- **react-router-dom**: ^7.10.1
-
-### Dev Dependencies
-- **vite**: ^7.2.6
-- **@vitejs/plugin-react**: ^5.1.1
-
-### External Libraries (CDN)
-- **Materialize CSS**: UI component library (sidenav)
-- **GLightbox**: Modern lightbox library
-- **Material Icons**: Google Material Icons
+- **Runtime**: `react`, `react-dom`, `react-router-dom`, `materialize-css`, `glightbox`
+- **Tooling**: `vite`, `@vitejs/plugin-react`, `tailwindcss`, `typescript`
+- **Static assets**: Materialize theme overrides (`public/libs/materialize_cvu.css`), custom fonts (`public/libs/fonts/**`), Google Fonts / Material Icons via `<link>` tags
 
 ## License
 
