@@ -4,6 +4,7 @@
  */
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import M from 'materialize-css/dist/js/materialize';
 import styles from './Header.module.css';
 
 function Header() {
@@ -15,17 +16,17 @@ function Header() {
     // Setup mobile menu toggle - connect to Navigation sidenav
     const handleMenuClick = () => {
       const sidenav = document.querySelector('#slide-out');
-      if (sidenav && window.M && window.M.Sidenav) {
-        const sidenavInstance = window.M.Sidenav.getInstance(sidenav);
-        if (sidenavInstance) {
-          sidenavInstance.open();
-        } else {
-          const instance = window.M.Sidenav.init(sidenav, {
-            edge: 'left',
-            draggable: true
-          });
-          instance.open();
+      if (sidenav) {
+        const existingInstance = M.Sidenav.getInstance(sidenav);
+        if (existingInstance) {
+          existingInstance.open();
+          return;
         }
+        const instance = M.Sidenav.init(sidenav, {
+          edge: 'left',
+          draggable: true
+        });
+        instance.open();
       }
     };
 

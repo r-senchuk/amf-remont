@@ -4,6 +4,7 @@
  */
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import M from 'materialize-css/dist/js/materialize';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -13,8 +14,8 @@ function Navigation() {
 
   useEffect(() => {
     // Initialize Materialize sidenav
-    if (sidenavRef.current && window.M && window.M.Sidenav) {
-      instanceRef.current = window.M.Sidenav.init(sidenavRef.current, {
+    if (sidenavRef.current) {
+      instanceRef.current = M.Sidenav.init(sidenavRef.current, {
         edge: 'left',
         draggable: true
       });

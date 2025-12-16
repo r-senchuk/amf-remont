@@ -11,28 +11,13 @@ function ContactSection() {
   return (
     <section 
       id="contact" 
-      style={{
-        position: 'relative',
-        padding: '4rem 0',
-        background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)'
-      }}
+      className="relative py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white"
     >
       {/* Decorative Top Border */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '4px',
-        background: 'linear-gradient(90deg, #1a49a7 0%, #ff942a 50%, #4caf50 100%)'
-      }}></div>
+      <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary via-accent-orange to-accent-green"></div>
       
       {/* Container */}
-      <div style={{
-        maxWidth: '72rem',
-        margin: '0 auto',
-        padding: '0 1rem'
-      }}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <ContactIntro />
         <ContactChannels />
         <ContactFooterNote />

@@ -6,53 +6,22 @@ import React from 'react';
 
 function ContactIntro() {
   return (
-    <div style={{ maxWidth: '48rem', margin: '0 auto', textAlign: 'center', marginBottom: '2.5rem' }}>
+    <div className="max-w-3xl mx-auto text-center mb-10">
       {/* Badge */}
-      <span style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        borderRadius: '9999px',
-        backgroundColor: 'rgba(26, 73, 167, 0.1)',
-        color: '#1a49a7',
-        padding: '0.375rem 0.75rem',
-        fontSize: '0.75rem',
-        fontWeight: '600',
-        textTransform: 'uppercase',
-        letterSpacing: '0.05em',
-        marginBottom: '1rem'
-      }}>
-        <span style={{
-          width: '0.375rem',
-          height: '0.375rem',
-          backgroundColor: '#ff942a',
-          borderRadius: '50%',
-          marginRight: '0.5rem',
-          animation: 'pulse 2s infinite'
-        }}></span>
+      <span className="inline-flex items-center rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold uppercase tracking-widest mb-4">
+        <span className="w-1.5 h-1.5 rounded-full bg-accent-orange animate-pulse mr-2"></span>
         Wycena gratis
       </span>
       
       {/* Heading */}
-      <h2 style={{
-        fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
-        fontWeight: '700',
-        letterSpacing: '-0.025em',
-        color: '#1e293b',
-        marginBottom: '0.75rem',
-        lineHeight: '1.2'
-      }}>
-        Kontakt i <span style={{ color: '#1a49a7' }}>wycena remontu</span>
+      <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3 leading-tight">
+        Kontakt i <span className="text-primary">wycena remontu</span>
       </h2>
       
       {/* Lead paragraph */}
-      <p style={{
-        fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
-        color: '#475569',
-        lineHeight: '1.7',
-        margin: 0
-      }}>
+      <p className="text-base md:text-lg text-slate-600 leading-relaxed">
         Planujesz wykończenie mieszkania od dewelopera albo remont generalny we Wrocławiu lub okolicach?{' '}
-        <span style={{ fontWeight: '600', color: '#1e293b' }}>Zadzwoń lub napisz e-mail</span> – przygotujemy wstępną wycenę i możliwy termin rozpoczęcia prac.
+        <span className="font-semibold text-slate-800">Zadzwoń lub napisz e-mail</span> – przygotujemy wstępną wycenę i możliwy termin rozpoczęcia prac.
       </p>
     </div>
   );

@@ -6,97 +6,32 @@ import React from 'react';
 
 function ContactFooterNote() {
   return (
-    <div style={{ 
-      marginTop: '2.5rem', 
-      maxWidth: '48rem', 
-      margin: '2.5rem auto 0',
-      textAlign: 'center'
-    }}>
+    <div className="mt-10 max-w-3xl mx-auto text-center">
       {/* Privacy Note */}
-      <p style={{ 
-        fontSize: '0.8125rem', 
-        color: '#94a3b8',
-        marginBottom: '1rem'
-      }}>
+      <p className="text-xs text-slate-400 mb-4">
         Twoje dane wykorzystamy wyłącznie do kontaktu w sprawie wyceny i realizacji prac wykończeniowych.
       </p>
       
       {/* Closing Message */}
-      <p style={{ 
-        fontSize: '0.9375rem', 
-        color: '#475569', 
-        lineHeight: '1.7',
-        marginBottom: '1.5rem'
-      }}>
-        W <span style={{ fontWeight: '600', color: '#1a49a7' }}>AMF GROUP Remont</span> dbamy, żeby remont mieszkania był <span style={{ fontWeight: '500' }}>przewidywalny</span>, a nie stresujący.{' '}
+      <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-6">
+        W <span className="font-semibold text-primary">AMF GROUP Remont</span> dbamy, żeby remont mieszkania był <span className="font-medium">przewidywalny</span>, a nie stresujący.{' '}
         Daj nam znać, czego potrzebuje Twoje mieszkanie we Wrocławiu – resztą zajmiemy się my. 🏡
       </p>
       
       {/* CTA Buttons */}
-      <div style={{ 
-        display: 'flex', 
-        flexWrap: 'wrap', 
-        justifyContent: 'center', 
-        gap: '0.75rem',
-        paddingTop: '0.5rem'
-      }}>
+      <div className="flex flex-wrap justify-center gap-3 pt-2">
         <a 
           href="tel:+48796019986" 
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.625rem 1.25rem',
-            background: 'linear-gradient(135deg, #ff942a 0%, #f89f47 100%)',
-            color: 'white',
-            fontWeight: '600',
-            fontSize: '0.9375rem',
-            borderRadius: '9999px',
-            boxShadow: '0 4px 12px rgba(255,148,42,0.35)',
-            textDecoration: 'none',
-            transition: 'all 0.2s ease'
-          }}
-          onMouseOver={(e) => {
-            e.target.style.transform = 'translateY(-2px)';
-            e.target.style.boxShadow = '0 6px 16px rgba(255,148,42,0.45)';
-          }}
-          onMouseOut={(e) => {
-            e.target.style.transform = 'translateY(0)';
-            e.target.style.boxShadow = '0 4px 12px rgba(255,148,42,0.35)';
-          }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-white font-semibold text-sm bg-gradient-to-r from-accent-orange to-accent-orange-light shadow-lg transition-transform duration-200 hover:-translate-y-0.5"
         >
-          <i className="material-icons" style={{ fontSize: '1.125rem' }}>call</i>
+          <i className="material-icons text-base">call</i>
           <span>Zadzwoń teraz</span>
         </a>
         <a 
           href="mailto:amfgroupremont@gmail.com" 
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.625rem 1.25rem',
-            backgroundColor: 'white',
-            border: '2px solid #1a49a7',
-            color: '#1a49a7',
-            fontWeight: '600',
-            fontSize: '0.9375rem',
-            borderRadius: '9999px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-            textDecoration: 'none',
-            transition: 'all 0.2s ease'
-          }}
-          onMouseOver={(e) => {
-            e.target.style.backgroundColor = '#1a49a7';
-            e.target.style.color = 'white';
-            e.target.style.transform = 'translateY(-2px)';
-          }}
-          onMouseOut={(e) => {
-            e.target.style.backgroundColor = 'white';
-            e.target.style.color = '#1a49a7';
-            e.target.style.transform = 'translateY(0)';
-          }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-primary text-primary font-semibold text-sm bg-white shadow-sm transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5"
         >
-          <i className="material-icons" style={{ fontSize: '1.125rem' }}>email</i>
+          <i className="material-icons text-base">email</i>
           <span>Napisz e-mail</span>
         </a>
       </div>

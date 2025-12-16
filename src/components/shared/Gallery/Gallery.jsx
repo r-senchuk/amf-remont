@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import GLightbox from 'glightbox';
+import 'glightbox/dist/css/glightbox.css';
 
 /**
  * Reusable Gallery Component
@@ -40,45 +42,31 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
   useEffect(() => {
     if (displayPhotos.length === 0) return;
 
-    const initLightbox = () => {
-      if (typeof window.GLightbox !== 'undefined') {
-        // Destroy previous instance if exists
-        if (lightboxRef.current) {
-          try {
-            lightboxRef.current.destroy();
-          } catch (e) {
-            // Ignore errors during destroy
-          }
-        }
-
-        // Build lightbox items for ALL photos (so even in small view, lightbox shows everything if desired? 
-        // User said "link to see more referencing to the full view", so maybe lightbox in small view should only show preview images? 
-        // Usually lightbox should show what's clicked + siblings. Let's stick to displayed photos for now to be safe, 
-        // or all photos if we want "click one, scroll through all".
-        // Let's use displayPhotos to match the DOM elements.
-        
-        const lightboxItems = displayPhotos.map(photo => ({
-          href: '/gallery/' + photo.filename,
-          type: 'image',
-          title: photo.title || photo.alt || ''
-        }));
-
-        lightboxRef.current = window.GLightbox({
-          elements: lightboxItems,
-          touchNavigation: true,
-          loop: true,
-          autoplayVideos: false,
-          openEffect: 'fade',
-          closeEffect: 'fade'
-        });
+    // Destroy existing instance before creating a new one
+    if (lightboxRef.current) {
+      try {
+        lightboxRef.current.destroy();
+      } catch (e) {
+        // Ignore destroy errors
       }
-    };
+    }
 
-    // Small delay to ensure DOM is ready
-    const timer = setTimeout(initLightbox, 100);
+    const lightboxItems = displayPhotos.map(photo => ({
+      href: '/gallery/' + photo.filename,
+      type: 'image',
+      title: photo.title || photo.alt || ''
+    }));
+
+    lightboxRef.current = GLightbox({
+      elements: lightboxItems,
+      touchNavigation: true,
+      loop: true,
+      autoplayVideos: false,
+      openEffect: 'fade',
+      closeEffect: 'fade'
+    });
 
     return () => {
-      clearTimeout(timer);
       if (lightboxRef.current) {
         try {
           lightboxRef.current.destroy();
@@ -156,4 +144,3 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
 }
 
 export default Gallery;
-
