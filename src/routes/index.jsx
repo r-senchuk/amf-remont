@@ -2,7 +2,7 @@
  * React Router Configuration
  * Defines all application routes
  */
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import App from '../App.jsx';
 import HomePage from '../components/pages/HomePage/HomePage.jsx';
 import AboutPage from '../components/pages/AboutPage/AboutPage.jsx';
@@ -38,6 +38,13 @@ const routesMeta = {
     ogTitle: 'Galeria - AMF GROUP | Zrealizowane projekty',
     ogDescription: 'Zobacz efekty naszej pracy. Setki zrealizowanych projektów remontowych we Wrocławiu.',
     ogImage: '/assets/logo/logo.svg'
+  },
+  '/contact': {
+    title: 'Kontakt - AMF GROUP | Wycena wykończenia wnętrz',
+    description: 'Skontaktuj się z AMF GROUP, aby otrzymać darmową wycenę remontu pod klucz we Wrocławiu i okolicach.',
+    ogTitle: 'Kontakt - AMF GROUP',
+    ogDescription: 'Zadzwoń lub napisz do nas i rozpocznij współpracę nad Twoim remontem pod klucz.',
+    ogImage: '/assets/logo/logo.svg'
   }
 };
 
@@ -66,9 +73,9 @@ const router = createBrowserRouter([
         element: <GalleryPage />
       },
       {
-        // Redirect /contact to home page (contact section is part of HomePage)
+        // Dedicated route that renders the home page and scrolls to the contact section
         path: 'contact',
-        element: <Navigate to="/#contact" replace />
+        element: <HomePage scrollToContact />
       },
       {
         path: '*',

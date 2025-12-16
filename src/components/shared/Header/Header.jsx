@@ -38,23 +38,15 @@ function Header() {
 
   const handleContactClick = (e) => {
     e.preventDefault();
-    
-    // If not on home page, navigate there first
-    if (location.pathname !== '/') {
-      navigate('/');
-      // Wait for navigation then scroll
-      setTimeout(() => {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      // Already on home page, just scroll
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-      }
+
+    if (location.pathname !== '/contact') {
+      navigate('/contact');
+      return;
+    }
+
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -101,7 +93,7 @@ function Header() {
             <img src="/assets/images/h_nav.png" alt="" />
           </div>
           <a 
-            href="/#contact" 
+            href="/contact" 
             className={styles.navLink}
             onClick={handleContactClick}
           >

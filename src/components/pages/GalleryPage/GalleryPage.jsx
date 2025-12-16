@@ -1,33 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Gallery from '../../shared/Gallery/Gallery';
+import useGalleryData from '../../../hooks/useGalleryData';
 
 function GalleryPage() {
-  const [photos, setPhotos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Load gallery data
-  useEffect(() => {
-    async function loadGallery() {
-      try {
-        const response = await fetch('/data/gallery.json');
-        if (!response.ok) {
-          throw new Error(`Failed to load gallery.json: ${response.status} ${response.statusText}`);
-        }
-        const data = await response.json();
-        // Sort photos by order
-        const sortedPhotos = data.photos.slice().sort((a, b) => a.order - b.order);
-        setPhotos(sortedPhotos);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error loading gallery:', err);
-        setError(`Wystąpił błąd podczas ładowania galerii: ${err.message}`);
-        setLoading(false);
-      }
-    }
-    loadGallery();
-  }, []);
+  const { photos, loading, error } = useGalleryData();
+  const errorMessage = error ? `Wystąpił błąd podczas ładowania galerii: ${error.message}` : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600 relative">
@@ -56,9 +33,9 @@ function GalleryPage() {
             </div>
           )}
           
-          {error && (
+          {errorMessage && (
             <div className="text-center py-20 text-red-200 bg-red-900/20 rounded-xl border border-red-500/30">
-              <p>{error}</p>
+              <p>{errorMessage}</p>
             </div>
           )}
           

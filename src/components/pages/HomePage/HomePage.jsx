@@ -2,32 +2,30 @@
  * Home Page Component (React)
  * Main landing page with hero section and overview
  */
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ContactSection from './ContactSection';
 import Gallery from '../../shared/Gallery/Gallery';
+import useGalleryData from '../../../hooks/useGalleryData';
 import './HomePage.css';
 
-function HomePage() {
-  const [galleryPhotos, setGalleryPhotos] = useState([]);
+function HomePage({ scrollToContact = false }) {
+  const { photos } = useGalleryData();
+  const galleryPhotos = photos.slice(0, 12);
 
-  // Load gallery images for homepage
+  // Scroll to contact section when the route is /contact
   useEffect(() => {
-    async function loadGallery() {
-      try {
-        const response = await fetch('/data/gallery.json');
-        if (response.ok) {
-          const data = await response.json();
-          // Sort by order and take first 12 images for preview (max needed for large screens)
-          const sortedPhotos = data.photos.slice().sort((a, b) => a.order - b.order);
-          setGalleryPhotos(sortedPhotos.slice(0, 12));
-        }
-      } catch (err) {
-        console.error('Error loading gallery for homepage:', err);
+    if (!scrollToContact) return;
+
+    const timer = setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
       }
-    }
-    loadGallery();
-  }, []);
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [scrollToContact]);
 
   return (
     <div className="homePage">
@@ -142,10 +140,10 @@ function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-10">GALERIA</h2>
           
-          <Gallery 
-            photos={galleryPhotos} 
-            variant="small" 
-            showLink={true} 
+          <Gallery
+            photos={galleryPhotos}
+            variant="small"
+            showLink={true}
           />
         </div>
       </section>
@@ -225,4 +223,3 @@ function HomePage() {
 }
 
 export default HomePage;
-

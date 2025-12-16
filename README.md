@@ -43,8 +43,9 @@ amf-remont/
 │   ├── routes/                   # React Router configuration
 │   │   └── index.jsx             # Route definitions and SEO metadata
 │   ├── hooks/                    # Custom React hooks
-│   │   ├── useSEO.js             # SEO meta tag management
-│   │   └── useScrollRestoration.js # Scroll position restoration
+│   │   ├── useSEO.js             # SEO meta tag management (hooked into App)
+│   │   ├── useScrollRestoration.js # Scroll position restoration across routes
+│   │   └── useGalleryData.js     # Shared gallery data loader with caching
 │   └── components/               # React Components
 │       ├── shared/               # Shared components
 │       │   ├── Header/           # Site header component
@@ -55,7 +56,7 @@ amf-remont/
 │           ├── AboutPage/        # About page
 │           ├── ServicesPage/     # Services page
 │           ├── GalleryPage/      # Gallery page
-│           └── ContactPage/      # Contact page
+│           └── ContactPage/      # Contact section building blocks (used within HomePage)
 ├── public/                       # Static assets (copied as-is)
 │   ├── assets/                   # Images, icons, backgrounds
 │   ├── gallery/                  # Gallery images
@@ -126,7 +127,8 @@ const router = createBrowserRouter([
       { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'gallery', element: <GalleryPage /> },
-      { path: 'contact', element: <ContactPage /> }
+      // /contact renders HomePage and scrolls to the embedded contact section
+      { path: 'contact', element: <HomePage scrollToContact /> }
     ]
   }
 ]);
@@ -152,6 +154,13 @@ const routesMeta = {
 
 - **useSEO**: Updates document meta tags based on current route
 - **useScrollRestoration**: Saves and restores scroll positions
+- **useGalleryData**: Loads and caches `/data/gallery.json` once, shared by Home and Gallery pages
+
+## Key Behaviors
+
+- **Contact CTA**: All links point to `/contact`. The route renders `HomePage` and programmatically scrolls to the embedded contact section (`ContactSection`), so there is no standalone contact screen to maintain.
+- **Gallery Data Flow**: `useGalleryData` fetches and caches the gallery JSON exactly once, so the homepage preview and the gallery page reuse the same sorted data without duplicate network requests.
+- **Global SEO & Scroll State**: `App.jsx` wires `useSEO` and `useScrollRestoration` to ensure route-level metadata stays in sync with navigation while keeping back/forward scroll behavior predictable.
 
 ## Design System
 
