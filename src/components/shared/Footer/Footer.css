@@ -1,0 +1,70 @@
+/* Footer Component Styles */
+.footer {
+  background: var(--color-bg-dark);
+  width: 100%;
+  padding: var(--spacing-lg) 0;
+  margin-top: auto;
+}
+
+.footerContainer {
+  width: calc(100% - 48px);
+  padding: 0 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.copyright {
+  width: 100%;
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  margin: 0;
+}
+
+.copyright strong {
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.scrollTop {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+  opacity: 0;
+  bottom: -4rem;
+  right: 1.8rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  color: var(--color-primary-light);
+}
+
+.scrollTop .material-icons {
+  font-size: 24px;
+  transform: rotate(-90deg);
+}
+
+.scrollTop.show {
+  bottom: 2rem;
+  opacity: 0.7;
+}
+
+.scrollTop:hover {
+  opacity: 1;
+  background: var(--color-primary-light);
+  color: #fff;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+

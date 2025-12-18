@@ -1,7 +1,15 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  // Use React and Tailwind plugins
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+  
   // Source files are in src/ directory
   root: 'src',
   
@@ -19,12 +27,8 @@ export default defineConfig({
     // Generate source maps for debugging
     sourcemap: false,
     
-    // Rollup options for multi-page or specific entry points
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/index.html')
-      }
-    }
+    // Enable CSS code splitting for better performance
+    cssCodeSplit: true
   },
   
   // CSS configuration
@@ -35,6 +39,16 @@ export default defineConfig({
       localsConvention: 'camelCase',
       // Generate scoped class names
       generateScopedName: '[name]__[local]___[hash:base64:5]'
+    }
+  },
+  
+  // Resolve configuration for imports
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '@components': resolve(__dirname, 'src/components'),
+      '@hooks': resolve(__dirname, 'src/hooks'),
+      '@css': resolve(__dirname, 'src/css')
     }
   },
   
@@ -49,4 +63,3 @@ export default defineConfig({
     port: 8080
   }
 });
-
