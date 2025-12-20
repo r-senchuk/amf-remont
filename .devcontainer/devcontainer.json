@@ -1,0 +1,42 @@
+{
+  "name": "amf-remont",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "files.insertFinalNewline": true,
+        "files.eol": "\n",
+        "javascript.preferences.importModuleSpecifier": "non-relative",
+        "typescript.preferences.importModuleSpecifier": "non-relative",
+        "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+        "tailwindCSS.emmetCompletions": true
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": [
+    3000,
+    8080
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Vite dev server",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "Vite preview",
+      "onAutoForward": "notify"
+    }
+  },
+  "features": {},
+  "init": true
+}

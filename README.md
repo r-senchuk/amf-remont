@@ -158,7 +158,7 @@ const routesMeta = {
 ## Key Behaviors
 
 - **Contact CTA**: All links point to `/contact`. The route renders `HomePage` and programmatically scrolls to `ContactSection`, so there is a single canonical contact entry point.
-- **Bundled UI Libraries**: Materialize JS and GLightbox are imported via npm and initialized inside React components, avoiding render-blocking `<script>`/`<link>` tags in `index.html`.
+- **Bundled UI Libraries**: GLightbox is lazy-loaded in the gallery component to avoid render-blocking assets.
 - **Gallery Data Flow**: `useGalleryData` fetches and caches the gallery JSON exactly once, so the homepage preview and the gallery page reuse the same sorted data without duplicate network requests.
 - **Global SEO & Scroll State**: `App.jsx` wires `useSEO` and `useScrollRestoration` to ensure route-level metadata stays in sync with navigation while keeping back/forward scroll behavior predictable.
 
@@ -198,6 +198,15 @@ All design tokens are defined in `src/css/design-system.css`.
 
 - Node.js 18+ and npm
 - Make (for build commands)
+
+### Dev Container
+
+- Ready-to-use VS Code Dev Container config in `.devcontainer/devcontainer.json`.
+- Base image: `mcr.microsoft.com/devcontainers/javascript-node:18` (matches `engines.node >=18`).
+- Post-create: runs `npm install`.
+- Forwarded ports: `3000` (Vite dev), `8080` (Vite preview) with auto-forward notifications.
+- Recommended extensions baked in: ESLint, Prettier, Tailwind CSS IntelliSense.
+- Usage: open the repo in VS Code with the Dev Containers extension (or Codespaces) and “Reopen in Container”. Then run `npm run dev -- --host --port 3000` or `npm run preview -- --host --port 8080` inside the container.
 
 ### Setup
 
