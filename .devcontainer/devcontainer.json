@@ -1,6 +1,6 @@
 {
   "name": "amf-remont",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
   "remoteUser": "node",
   "updateRemoteUserUID": true,
   "customizations": {
@@ -18,11 +18,12 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "bradlc.vscode-tailwindcss"
+        "bradlc.vscode-tailwindcss",
+        "OpenAI.codex"
       ]
     }
   },
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "npm ci",
   "forwardPorts": [
     3000,
     8080

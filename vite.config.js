@@ -54,12 +54,14 @@ export default defineConfig({
   
   // Development server configuration
   server: {
+    host: true,
     port: 3000,
     open: true
   },
   
   // Preview server configuration (for testing production builds)
   preview: {
+    host: true,
     port: 8080
   }
 });

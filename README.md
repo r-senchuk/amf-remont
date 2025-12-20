@@ -196,17 +196,30 @@ All design tokens are defined in `src/css/design-system.css`.
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 20.19+ (or 22.12+) and npm
 - Make (for build commands)
 
 ### Dev Container
 
 - Ready-to-use VS Code Dev Container config in `.devcontainer/devcontainer.json`.
-- Base image: `mcr.microsoft.com/devcontainers/javascript-node:18` (matches `engines.node >=18`).
-- Post-create: runs `npm install`.
-- Forwarded ports: `3000` (Vite dev), `8080` (Vite preview) with auto-forward notifications.
-- Recommended extensions baked in: ESLint, Prettier, Tailwind CSS IntelliSense.
-- Usage: open the repo in VS Code with the Dev Containers extension (or Codespaces) and “Reopen in Container”. Then run `npm run dev -- --host --port 3000` or `npm run preview -- --host --port 8080` inside the container.
+- Base image: `mcr.microsoft.com/devcontainers/javascript-node:18` with non-root `node` user and UID sync enabled.
+- Post-create installs dependencies with `npm install`.
+- Forwarded ports: `3000` (Vite dev) and `8080` (Vite preview) with auto-forward set to notify.
+- VS Code extensions baked in: ESLint, Prettier, Tailwind CSS IntelliSense, Codex.
+- Usage: open with the Dev Containers extension (or Codespaces), “Reopen in Container”, then `npm run dev -- --host --port 3000` (or `npm run preview -- --host --port 8080`) or use the Makefile equivalents.
+
+#### Best practices inside the dev container
+
+- Prefer `npm ci` (already the default post-create) to keep installs reproducible.
+- Use `make` targets (`dev`, `build`, `preview`, `deploy`) instead of raw npm commands for consistency.
+- Keep terminals inside the container to ensure file ownership stays with the `node` user.
+- If you need to expose a different port, pass `--port` to Vite or edit `vite.config.js` (ports will auto-forward).
+- Run `make clean` sparingly; keeping `node_modules` cached in the workspace speeds up rebuilds.
+
+#### Suggested dev container upgrades
+
+1. Add an npm cache mount for faster reinstalls: `"mounts": ["source=${localEnv:HOME}/.npm,target=/home/node/.npm,type=bind,consistency=cached"]`.
+2. Include features for tooling used in deployment (e.g., `ghcr.io/devcontainers/features/aws-cli`) if you plan to run `make deploy` from inside the container.
 
 ### Setup
 
