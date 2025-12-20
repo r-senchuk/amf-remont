@@ -6,6 +6,10 @@
 
 /* Custom Theme Extensions for AMF Brand Colors */
 @theme {
+  /* Typography */
+  --font-sans: "Geometria", "Open Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Open Sans", system-ui, sans-serif;
+
   /* Primary Colors */
   --color-primary: #1a49a7;
   --color-primary-dark: #19326b;
@@ -28,4 +32,10 @@
   --shadow-card: 0 4px 8px rgba(38, 50, 56, 0.15);
   --shadow-card-hover: 0 8px 16px rgba(38, 50, 56, 0.2);
   --shadow-card-xl: 0 12px 24px rgba(38, 50, 56, 0.25);
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-800 font-sans antialiased;
+  }
 }

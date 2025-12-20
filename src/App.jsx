@@ -1,11 +1,10 @@
 /**
  * Root Application Component
- * Provides the main layout with Header, Navigation, Footer
+ * Provides the main layout with Header and Footer
  */
 import { Outlet } from 'react-router-dom';
 import Header from './components/shared/Header/Header.jsx';
 import Footer from './components/shared/Footer/Footer.jsx';
-import Navigation from './components/shared/Navigation/Navigation.jsx';
 import useSEO from './hooks/useSEO.js';
 import useScrollRestoration from './hooks/useScrollRestoration.js';
 
@@ -16,7 +15,6 @@ function App() {
   return (
     <>
       <Header />
-      <Navigation />
       <main id="app-main">
         <Outlet />
       </main>

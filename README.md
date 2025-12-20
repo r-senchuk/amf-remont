@@ -13,8 +13,8 @@ The website is built as a modern **Single Page Application (SPA)** using **React
 - **React 19**: Latest React with functional components and hooks
 - **React Router v7**: Client-side routing with React Router DOM
 - **Component-Based**: Modular architecture with shared and page-specific components
-- **Design System**: Centralized CSS variables for consistent styling
-- **CSS Modules**: Scoped CSS for Header component
+- **Design System**: Centralized CSS variables and Tailwind theme tokens for consistent styling
+- **Tailwind-first**: Utility classes for layout and spacing
 - **SEO Optimized**: Dynamic meta tags and proper URL handling
 
 ### Technology Stack
@@ -22,8 +22,8 @@ The website is built as a modern **Single Page Application (SPA)** using **React
 - **Build Tool**: Vite 7.2.6 with @vitejs/plugin-react (fast HMR, optimized builds)
 - **UI Framework**: React 19.2
 - **Routing**: React Router DOM 7.10
-- **Styling**: CSS Custom Properties, CSS Modules, Tailwind utility classes
-- **UI Libraries**: Materialize CSS (sidenav) & GLightbox bundled via npm
+- **Styling**: CSS Custom Properties plus Tailwind utility classes
+- **UI Libraries**: GLightbox bundled via npm
 
 ## Project Structure
 
@@ -50,7 +50,6 @@ amf-remont/
 │       ├── shared/               # Shared components
 │       │   ├── Header/           # Site header component
 │       │   ├── Footer/           # Site footer component
-│       │   └── Navigation/       # Mobile navigation component
 │       └── pages/                # Page components
 │           ├── HomePage/         # Home page
 │           ├── AboutPage/        # About page
@@ -61,7 +60,7 @@ amf-remont/
 │   ├── assets/                   # Images, icons, backgrounds
 │   ├── gallery/                  # Gallery images
 │   ├── i/                        # Gallery images (organized by ID)
-│   ├── libs/                     # Legacy CSS/font assets (Materialize theme, custom fonts)
+│   ├── libs/                     # Legacy font assets (Geometria), kept for compatibility
 │   ├── data/                     # JSON data files
 │   │   └── gallery.json          # Gallery configuration
 │   ├── favicon.ico

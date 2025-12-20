@@ -1,102 +1,86 @@
 /**
  * About Page Component (React)
- * Company story, experience, and values
+ * Tailwind-first layout for story, offering, and value props
  */
-import './AboutPage.css';
+import services from '../../../data/services';
+
+const strengths = [
+  { icon: 'grade', title: 'Setki realizacji', copy: 'Doświadczenie, które przekłada się na sprawdzony proces i przewidywalne rezultaty.' },
+  { icon: 'rule', title: 'Kontrola budżetu', copy: 'Pracujemy w ustalonym budżecie i harmonogramie – bez zaskoczeń.' },
+  { icon: 'verified', title: 'Gwarancja 24 miesiące', copy: 'Pełny serwis gwarancyjny na wykonane prace.' }
+];
 
 function AboutPage() {
   return (
-    <div className="aboutPage">
-      {/* Page Header */}
-      <header className="pageHeader">
-        <h1 className="pageTitle">O Nas</h1>
+    <div className="bg-white">
+      {/* Hero */}
+      <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-14 text-white sm:py-16">
+        <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 text-center sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">O nas</p>
+          <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">Tworzymy Twoje wymarzone wnętrze</h1>
+          <p className="text-base text-white/80 sm:text-lg">
+            Od pomysłu do klucza – projektujemy, nadzorujemy i wykańczamy wnętrza we Wrocławiu i okolicach.
+          </p>
+        </div>
       </header>
 
-      {/* Company Story Section */}
-      <section className="section">
-        <div className="content">
-          <div className="imageSection">
-            <img src="/assets/icons/key.jpg" alt="Klucz - remont pod klucz" />
-            <div>
-              <h2 className="sectionTitle">Tworzymy Twoje wymarzone wnętrze</h2>
-              <p>
-                <strong>Od pomysłu do klucza.</strong> Czy marzysz o nowym, świeżym wnętrzu? 
-                My to dla Ciebie zrealizujemy! Zadzwoń już teraz, a razem zespolimy Twoje pomysły z naszą ekspertyzą.
-              </p>
-              <p>
-                <strong>Setki zrealizowanych projektów</strong> - wieloletnie doświadczenie w branży pozwoliło nam 
-                zdobyć kwalifikacje niezbędne do świadczenia usług na najwyższym poziomie. Jesteśmy firmą 
-                remontowo-budowlaną świadczącą kompleksowe usługi w zakresie remontów mieszkań, domów oraz lokali użytkowych.
-              </p>
-            </div>
+      {/* Story */}
+      <section className="bg-gradient-to-b from-white to-slate-50 py-16 sm:py-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr,0.9fr] lg:px-8">
+          <div className="space-y-4 text-slate-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Kim jesteśmy</p>
+            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Remonty pod klucz z pełną obsługą</h2>
+            <p className="text-base leading-relaxed">
+              Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Zapewniamy kontrolę nad budżetem oraz stały nadzór kierownika projektu.
+            </p>
+            <p className="text-base leading-relaxed">
+              Setki zrealizowanych projektów pozwoliły nam dopracować proces, dzięki czemu możemy zagwarantować terminowość i wysoką jakość prac.
+            </p>
+            <p className="text-base leading-relaxed">
+              Pracujemy na terenie Wrocławia i okolic, a na całość prac udzielamy 24-miesięcznej gwarancji.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            {strengths.map((item) => (
+              <div key={item.title} className="rounded-2xl bg-white p-5 shadow-card">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <i className="material-icons text-xl">{item.icon}</i>
+                  </span>
+                  <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.copy}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="section">
-        <div className="content">
-          <h2 className="sectionTitle">Remonty pod klucz z pełną obsługą</h2>
-          <p>
-            Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Jeśli chcesz mieć niebanalnie wykończone 
-            mieszkanie oraz kontrolę nad budżetem i nie masz czasu na pilnowanie ekipy budowlanej to dobrze trafiłeś! 
-            Zrobimy wszystko za Ciebie - od profesjonalnego projektu, przez doradztwo w wyborze materiałów, 
-            aż po kompleksowe wykończenie. Wszystkie prace będą stale nadzorowane przez kierownika projektu.
-          </p>
-          <p>
-            <strong>24-miesięczna gwarancja</strong> - zapewniamy pełny serwis gwarancyjny przez 24 miesiące. 
-            Dzięki bogatemu doświadczeniu możemy zagwarantować, że realizowane przez nas inwestycje trzymają się 
-            założonego jeszcze przed podpisaniem umowy budżetu oraz harmonogramu prac. Wykończymy pod klucz na terenie 
-            Wrocławia i okolic.
-          </p>
-        </div>
-      </section>
+      {/* Services overview */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Zakres prac</p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Co możemy zrobić dla Ciebie</h2>
+            <p className="mt-2 text-base text-slate-600 sm:text-lg">
+              Kompleksowe remonty mieszkań, domów i lokali użytkowych.
+            </p>
+          </div>
 
-      {/* Our Values */}
-      <section className="section">
-        <h2 className="sectionTitle">Nasze Atuty</h2>
-        <div className="features">
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">grade</i></div>
-            <h3 className="featureTitle">Doświadczenie</h3>
-            <p className="featureDescription">
-              Setki zrealizowanych projektów - tworzymy wnętrza, które zachwycają.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">house</i></div>
-            <h3 className="featureTitle">Remonty Pod Klucz</h3>
-            <p className="featureDescription">
-              Od planu po ostatnią pędzelkę, wszystko załatwimy, a Ty tylko cieszysz się efektem.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">emoji_objects</i></div>
-            <h3 className="featureTitle">Kreatywne Rozwiązania</h3>
-            <p className="featureDescription">
-              Innowacyjne podejście do remontów - Twoje mieszkanie będzie unikatowe.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">handshake</i></div>
-            <h3 className="featureTitle">Osobiste Podejście</h3>
-            <p className="featureDescription">
-              Dla Ciebie, a nie dla projektu - dopasowujemy się do Twoich potrzeb.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">alarm</i></div>
-            <h3 className="featureTitle">Terminowość</h3>
-            <p className="featureDescription">
-              Liczy się każdy dzień. U nas termin to nie puste słowo.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">location_on</i></div>
-            <h3 className="featureTitle">Lokalizacja</h3>
-            <p className="featureDescription">
-              Jesteśmy tu, gdzie Ty. Działamy na terenie Wrocławia.
-            </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <article
+                key={service.title}
+                className={`flex h-full flex-col gap-3 rounded-2xl border border-slate-100 p-6 shadow-card ${service.muted ? 'bg-slate-50' : 'bg-white'}`}
+              >
+                <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 ${service.accent ? 'text-accent-green' : 'text-primary'}`}>
+                  <i className="material-icons text-xl">{service.icon}</i>
+                </span>
+                <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-600">{service.description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -105,4 +89,3 @@ function AboutPage() {
 }
 
 export default AboutPage;
-

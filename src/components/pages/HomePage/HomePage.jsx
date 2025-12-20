@@ -1,13 +1,22 @@
 /**
  * Home Page Component (React)
- * Main landing page with hero section and overview
+ * Tailwind-first landing page with hero, highlights, gallery, and services
  */
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ContactSection from './ContactSection';
 import Gallery from '../../shared/Gallery/Gallery';
 import useGalleryData from '../../../hooks/useGalleryData';
-import './HomePage.css';
+import services from '../../../data/services';
+
+const featureList = [
+  { icon: 'grade', title: 'Doświadczenie', copy: 'Setki zrealizowanych projektów – tworzymy wnętrza, które zachwycają.' },
+  { icon: 'house', title: 'Remonty pod klucz', copy: 'Od planu po ostatnią pędzelkę, a Ty tylko cieszysz się efektem.' },
+  { icon: 'emoji_objects', title: 'Kreatywne rozwiązania', copy: 'Innowacyjne podejście do remontów – Twoje mieszkanie będzie unikatowe.' },
+  { icon: 'handshake', title: 'Osobiste podejście', copy: 'Dopasowujemy się do Twoich potrzeb, nie odwrotnie.' },
+  { icon: 'alarm', title: 'Terminowość', copy: 'Harmonogram to dla nas zobowiązanie, nie sugestia.' },
+  { icon: 'location_on', title: 'Lokalizacja', copy: 'Działamy na terenie Wrocławia i okolic.' }
+];
 
 function HomePage({ scrollToContact = false }) {
   const { photos } = useGalleryData();
@@ -28,190 +37,175 @@ function HomePage({ scrollToContact = false }) {
   }, [scrollToContact]);
 
   return (
-    <div className="homePage">
+    <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="hero">
-        <div className="heroContent">
-          <h1 className="heroTitle">Wykończenie wnętrz we Wrocławiu</h1>
-          <p className="heroTagline">AMF GROUP Remont - Zmiana, Którą Chcesz Dziś Rozpocząć!</p>
-          <div className="heroDecorative">
-            <div className="heroDecorativeImage">
-              <img src="/assets/images/kut2.png" alt="city1" />
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+        <div
+          className="absolute inset-0 opacity-35"
+          style={{ backgroundImage: 'url(/assets/backgrounds/backgr.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-slate-900/70" />
+
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-16 text-center sm:px-6 md:py-24 lg:px-8">
+          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/80 shadow-card">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-orange animate-pulse" />
+            Wrocław i okolice
+          </p>
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+            Wykończenie wnętrz we <span className="text-primary">Wrocławiu</span>
+          </h1>
+          <p className="max-w-3xl text-lg text-white/80 sm:text-xl">
+            AMF GROUP Remont – zmiana, którą możesz rozpocząć już dziś. Kompleksowe projekty, nadzór i 24-miesięczna gwarancja.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="tel:+48796019986"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              <i className="material-icons text-base">call</i>
+              Zadzwoń do nas
+            </a>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
+            >
+              Dowiedz się więcej
+              <i className="material-icons text-base">arrow_forward</i>
+            </Link>
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+              <img src="/assets/icons/kitchen.svg" alt="" className="h-10 w-10 opacity-80" />
+              <div className="text-left text-sm font-semibold leading-tight text-white/80">Kuchnie i łazienki pod klucz</div>
             </div>
-            <div className="heroDecorativeImage">
-              <img src="/assets/images/kut1.png" alt="city2" />
+            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+              <img src="/assets/icons/painting.svg" alt="" className="h-10 w-10 opacity-80" />
+              <div className="text-left text-sm font-semibold leading-tight text-white/80">Malowanie i dekoracje</div>
+            </div>
+            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+              <img src="/assets/icons/hummer.svg" alt="" className="h-10 w-10 opacity-80" />
+              <div className="text-left text-sm font-semibold leading-tight text-white/80">Nadzór kierownika projektu</div>
+            </div>
+            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+              <img src="/assets/icons/key.jpg" alt="" className="h-10 w-10 rounded-md object-cover opacity-80" />
+              <div className="text-left text-sm font-semibold leading-tight text-white/80">24-miesięczna gwarancja</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* O NAS Section */}
-      <section className="section aboutSection">
-        <div className="aboutContent">
-          <div className="aboutImage">
-            <img src="/assets/icons/key.jpg" alt="Klucz - remont pod klucz" />
+      {/* About Section */}
+      <section className="bg-gradient-to-b from-slate-50 to-white py-16 sm:py-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[320px,1fr] lg:px-8">
+          <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+            <img src="/assets/icons/key.jpg" alt="Klucz - remont pod klucz" className="h-full w-full object-cover" />
           </div>
-          <div className="aboutText">
-            <h2 className="sectionTitle">O NAS</h2>
-            <p>
-              Czy marzysz o nowym, świeżym wnętrzu? My to dla Ciebie zrealizujemy! Zadzwoń już teraz, a razem zespolimy Twoje pomysły z naszą ekspertyzą.
+          <div className="space-y-4 text-slate-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">O nas</p>
+            <h2 className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl">
+              Kompleksowe <span className="text-primary">wykończenie wnętrz</span> od pomysłu do klucza
+            </h2>
+            <p className="text-base leading-relaxed">
+              Czy marzysz o nowym, świeżym wnętrzu? Zadzwoń już teraz, a razem zespolimy Twoje pomysły z naszą ekspertyzą.
             </p>
-            <p>
-              Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Jeśli chcesz mieć niebanalnie wykończone mieszkanie oraz kontrolę nad budżetem i nie masz czasu na pilnowanie ekipy budowlanej to dobrze trafiłeś! Zrobimy wszystko za Ciebie oraz zapewnimy 24 miesięczny serwis gwarancyjny.
+            <p className="text-base leading-relaxed">
+              Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Jeśli chcesz mieć niebanalnie wykończone mieszkanie oraz kontrolę nad budżetem
+              i nie masz czasu na pilnowanie ekipy budowlanej to dobrze trafiłeś! Zrobimy wszystko za Ciebie oraz zapewnimy 24-miesięczny serwis gwarancyjny.
             </p>
-            <p>
-              Zajmujemy się projektowaniem, aranżacją i kompleksowym wykończeniem wnętrz. Przygotujemy profesjonalny projekt, doradzimy w wyborze materiałów oraz wykończymy całościowo Twoje mieszkanie. Wszystkie prace będą stale nadzorowane przez kierownika projektu. Wykończymy pod klucz na terenie Wrocławia i okolic.
+            <p className="text-base leading-relaxed">
+              Wszystkie prace nadzoruje kierownik projektu. Wykończymy pod klucz na terenie Wrocławia i okolic.
             </p>
-            <Link to="/about" className="sectionLink">Dowiedz się więcej →</Link>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary-dark"
+            >
+              Dowiedz się więcej
+              <i className="material-icons text-base">arrow_forward</i>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Wykończenie wnętrz we Wrocławiu Section */}
-      <section className="section">
-        <h2 className="sectionTitle">Wykończenie wnętrz we Wrocławiu</h2>
-        <div className="content">
-          <p>
-            Wieloletnia działalność w branży pozwoliła nam zdobyć kwalifikacje niezbędne do świadczenia usług na najwyższym poziomie. Jesteśmy firmą remontowo-budowlaną świadczącą kompleksowe usługi w zakresie remontów mieszkań, domów oraz lokali użytkowych.
+      {/* Intro Copy */}
+      <section className="bg-white py-14 sm:py-16">
+        <div className="mx-auto max-w-3xl space-y-4 px-4 text-center text-slate-700 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Wykończenie wnętrz we Wrocławiu</h2>
+          <p className="text-base leading-relaxed sm:text-lg">
+            Wieloletnia działalność w branży pozwoliła nam zdobyć kwalifikacje niezbędne do świadczenia usług na najwyższym poziomie.
+            Realizujemy kompleksowe remonty mieszkań, domów oraz lokali użytkowych.
           </p>
-          <p>
-            Dzięki bogatemu doświadczeniu możemy zagwarantować, że realizowane przez nas inwestycje trzymają się założonego jeszcze przed podpisaniem umowy budżetu oraz harmonogramu prac. Oznacza to spokój i pewność terminowego ukończenia prac dla każdego inwestora, który zdecyduje się podjąć z nami współpracę.
+          <p className="text-base leading-relaxed sm:text-lg">
+            Zapewniamy trzymanie budżetu i harmonogramu prac ustalonego przed podpisaniem umowy. Oznacza to spokój i pewność terminowego ukończenia prac.
           </p>
-          <p>
-            Jeśli poszukują Państwo firmy zajmującej się wykończeniem wnętrz we Wrocławiu, która stawia na jakość, estetykę oraz ścisłą współpracę z Klientem, zapraszamy do zapoznania się z naszą ofertą.
+          <p className="text-base leading-relaxed sm:text-lg">
+            Jeśli szukasz firmy, która stawia na jakość, estetykę oraz ścisłą współpracę z Klientem, zapraszamy do kontaktu.
           </p>
         </div>
       </section>
 
-      {/* Nasze Atuty Section */}
-      <section className="section featuresSection">
-        <h2 className="sectionTitle">Nasze Atuty</h2>
-        <div className="features">
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">grade</i></div>
-            <h3 className="featureTitle">Doświadczenie</h3>
-            <p className="featureDescription">
-              Setki zrealizowanych projektów - tworzymy wnętrza, które zachwycają.
-            </p>
+      {/* Features */}
+      <section className="bg-slate-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Dlaczego my</p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Nasze atuty</h2>
           </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">house</i></div>
-            <h3 className="featureTitle">Remonty Pod Klucz</h3>
-            <p className="featureDescription">
-              Od planu po ostatnią pędzelkę, wszystko załatwimy, a Ty tylko cieszysz się efektem.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">emoji_objects</i></div>
-            <h3 className="featureTitle">Kreatywne Rozwiązania</h3>
-            <p className="featureDescription">
-              Innowacyjne podejście do remontów - Twoje mieszkanie będzie unikatowe.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">handshake</i></div>
-            <h3 className="featureTitle">Osobiste Podejście</h3>
-            <p className="featureDescription">
-              Dla Ciebie, a nie dla projektu - dopasowujemy się do Twoich potrzeb.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">alarm</i></div>
-            <h3 className="featureTitle">Terminowość</h3>
-            <p className="featureDescription">
-              Liczy się każdy dzień. U nas termin to nie puste słowo.
-            </p>
-          </div>
-          <div className="featureCard">
-            <div className="featureIcon"><i className="material-icons">location_on</i></div>
-            <h3 className="featureTitle">Lokalizacja</h3>
-            <p className="featureDescription">
-              Jesteśmy tu, gdzie Ty. Działamy na terenie Wrocławia.
-            </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featureList.map((feature) => (
+              <div
+                key={feature.title}
+                className="flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <i className="material-icons text-xl">{feature.icon}</i>
+                </span>
+                <h3 className="text-lg font-semibold text-slate-900">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-600">{feature.copy}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Gallery Section */}
-      <section className="section galleryPreviewSection bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600 py-16 relative overflow-hidden">
-        {/* Decorative gradient overlay for olive tint */}
-        <div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-10">GALERIA</h2>
-          
-          <Gallery
-            photos={galleryPhotos}
-            variant="small"
-            showLink={true}
-          />
+      <section className="relative overflow-hidden bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600 py-16">
+        <div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">Galeria</h2>
+          <p className="mt-3 text-center text-sm text-white/80 sm:text-base">
+            Zobacz wybrane realizacje – od konceptu po finalne wykończenie.
+          </p>
+          <div className="mt-10">
+            <Gallery photos={galleryPhotos} variant="small" showLink />
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="section servicesSection">
-        <h2 className="sectionTitle">Oferta naszej firmy remontowej</h2>
-        <p className="sectionSubtitle">Specjalizujemy się w następujących usługach:</p>
-        <div className="servicesGrid">
-          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
-            <div className="serviceIcon"><i className="material-icons">home</i></div>
-            <h3 className="serviceTitle">Zabudowy z płyt g-k</h3>
-            <p className="serviceDescription">Zabudowy z płyt g-k.</p>
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Oferta</p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
+            <p className="mt-2 text-base text-slate-600 sm:text-lg">
+              Kompleksowe usługi remontowe – od konstrukcji po detale wykończenia.
+            </p>
           </div>
-          <div className="serviceCard">
-            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">engineering</i></div>
-            <h3 className="serviceTitle">Gładź gipsowa</h3>
-            <p className="serviceDescription">Gładź gipsowa, szpachlowanie ścian, sufitów.</p>
-          </div>
-          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
-            <div className="serviceIcon"><i className="material-icons">handyman</i></div>
-            <h3 className="serviceTitle">Montaż ścian</h3>
-            <p className="serviceDescription">Montaż ścian z płyt kartonowo-gipsowych.</p>
-          </div>
-          <div className="serviceCard">
-            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">construction</i></div>
-            <h3 className="serviceTitle">Układanie paneli</h3>
-            <p className="serviceDescription">Układanie paneli.</p>
-          </div>
-          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
-            <div className="serviceIcon"><i className="material-icons">palette</i></div>
-            <h3 className="serviceTitle">Malowanie</h3>
-            <p className="serviceDescription">Malowanie ścian, pomieszczeń.</p>
-          </div>
-          <div className="serviceCard">
-            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">yard</i></div>
-            <h3 className="serviceTitle">Tapetowanie</h3>
-            <p className="serviceDescription">Tapetowanie ścian.</p>
-          </div>
-          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
-            <div className="serviceIcon"><i className="material-icons">light</i></div>
-            <h3 className="serviceTitle">Sufity podwieszane</h3>
-            <p className="serviceDescription">Sufity podwieszane.</p>
-          </div>
-          <div className="serviceCard">
-            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">palette</i></div>
-            <h3 className="serviceTitle">Ściany dekoracyjne</h3>
-            <p className="serviceDescription">Ściany dekoracyjne.</p>
-          </div>
-          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
-            <div className="serviceIcon"><i className="material-icons">handyman</i></div>
-            <h3 className="serviceTitle">Suche tynki</h3>
-            <p className="serviceDescription">Suche tynki kartonowo-gipsowe.</p>
-          </div>
-          <div className="serviceCard">
-            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">engineering</i></div>
-            <h3 className="serviceTitle">Wylewki</h3>
-            <p className="serviceDescription">Wylewki samopoziomujące i wyrównawcze.</p>
-          </div>
-          <div className="serviceCard" style={{ backgroundColor: '#eceff1' }}>
-            <div className="serviceIcon"><i className="material-icons">touch_app</i></div>
-            <h3 className="serviceTitle">Glazura i terakota</h3>
-            <p className="serviceDescription">Układanie glazury i terakoty.</p>
-          </div>
-          <div className="serviceCard">
-            <div className="serviceIcon" style={{ color: '#4caf50' }}><i className="material-icons">construction</i></div>
-            <h3 className="serviceTitle">Łazienki kompleksowo</h3>
-            <p className="serviceDescription">Łazienki kompleksowo.</p>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <article
+                key={service.title}
+                className={`flex h-full flex-col gap-3 rounded-2xl border border-slate-100 p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover ${service.muted ? 'bg-slate-50' : 'bg-white'}`}
+              >
+                <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 ${service.accent ? 'text-accent-green' : 'text-primary'}`}>
+                  <i className="material-icons text-xl">{service.icon}</i>
+                </span>
+                <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-slate-600">{service.description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import GLightbox from 'glightbox';
-import 'glightbox/dist/css/glightbox.css';
 
 /**
  * Reusable Gallery Component
@@ -38,35 +36,48 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
     return () => window.removeEventListener('resize', updateLimit);
   }, [photos, variant]);
 
-  // Initialize GLightbox
+  // Initialize GLightbox lazily
   useEffect(() => {
     if (displayPhotos.length === 0) return;
 
-    // Destroy existing instance before creating a new one
-    if (lightboxRef.current) {
-      try {
-        lightboxRef.current.destroy();
-      } catch (e) {
-        // Ignore destroy errors
+    let isCancelled = false;
+
+    async function setupLightbox() {
+      const [{ default: GLightbox }] = await Promise.all([
+        import('glightbox'),
+        import('glightbox/dist/css/glightbox.css')
+      ]);
+
+      const lightboxItems = displayPhotos.map((photo) => ({
+        href: '/gallery/' + photo.filename,
+        type: 'image',
+        title: photo.title || photo.alt || ''
+      }));
+
+      if (isCancelled) return;
+
+      if (lightboxRef.current) {
+        try {
+          lightboxRef.current.destroy();
+        } catch (e) {
+          // Ignore destroy errors
+        }
       }
+
+      lightboxRef.current = GLightbox({
+        elements: lightboxItems,
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: false,
+        openEffect: 'fade',
+        closeEffect: 'fade'
+      });
     }
 
-    const lightboxItems = displayPhotos.map(photo => ({
-      href: '/gallery/' + photo.filename,
-      type: 'image',
-      title: photo.title || photo.alt || ''
-    }));
-
-    lightboxRef.current = GLightbox({
-      elements: lightboxItems,
-      touchNavigation: true,
-      loop: true,
-      autoplayVideos: false,
-      openEffect: 'fade',
-      closeEffect: 'fade'
-    });
+    setupLightbox();
 
     return () => {
+      isCancelled = true;
       if (lightboxRef.current) {
         try {
           lightboxRef.current.destroy();

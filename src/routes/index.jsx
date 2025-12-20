@@ -1,13 +1,15 @@
 /**
  * React Router Configuration
- * Defines all application routes
+ * Defines all application routes with lazy loading
  */
+import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App.jsx';
-import HomePage from '../components/pages/HomePage/HomePage.jsx';
-import AboutPage from '../components/pages/AboutPage/AboutPage.jsx';
-import ServicesPage from '../components/pages/ServicesPage/ServicesPage.jsx';
-import GalleryPage from '../components/pages/GalleryPage/GalleryPage.jsx';
+
+const HomePage = lazy(() => import('../components/pages/HomePage/HomePage.jsx'));
+const AboutPage = lazy(() => import('../components/pages/AboutPage/AboutPage.jsx'));
+const ServicesPage = lazy(() => import('../components/pages/ServicesPage/ServicesPage.jsx'));
+const GalleryPage = lazy(() => import('../components/pages/GalleryPage/GalleryPage.jsx'));
 
 // Route metadata for SEO
 const routesMeta = {
@@ -51,6 +53,12 @@ const routesMeta = {
 // Export route metadata for use in useSEO hook
 export { routesMeta };
 
+const withSuspense = (element) => (
+  <Suspense fallback={<div className="p-8 text-center text-slate-600">Ładowanie...</div>}>
+    {element}
+  </Suspense>
+);
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -58,24 +66,24 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: withSuspense(<HomePage />)
       },
       {
         path: 'about',
-        element: <AboutPage />
+        element: withSuspense(<AboutPage />)
       },
       {
         path: 'services',
-        element: <ServicesPage />
+        element: withSuspense(<ServicesPage />)
       },
       {
         path: 'gallery',
-        element: <GalleryPage />
+        element: withSuspense(<GalleryPage />)
       },
       {
         // Dedicated route that renders the home page and scrolls to the contact section
         path: 'contact',
-        element: <HomePage scrollToContact />
+        element: withSuspense(<HomePage scrollToContact />)
       },
       {
         path: '*',
