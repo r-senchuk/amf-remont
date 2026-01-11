@@ -1,4 +1,4 @@
-.PHONY: install dev build preview deploy clean help check
+.PHONY: install dev build preview check clean clean-dist reinstall help
 
 # Default target
 .DEFAULT_GOAL := help
@@ -21,15 +21,16 @@ help:
 	@echo "  $(YELLOW)make dev$(RESET)        Start development server (http://localhost:3000)"
 	@echo "  $(YELLOW)make build$(RESET)      Build for production"
 	@echo "  $(YELLOW)make preview$(RESET)    Preview production build (http://localhost:8080)"
-	@echo "  $(YELLOW)make deploy$(RESET)     Build and deploy to AWS S3"
 	@echo "  $(YELLOW)make check$(RESET)      Run build to check for errors"
 	@echo "  $(YELLOW)make clean$(RESET)      Remove build artifacts and node_modules"
+	@echo "  $(YELLOW)make clean-dist$(RESET) Remove build artifacts (keep node_modules)"
+	@echo "  $(YELLOW)make reinstall$(RESET)  Clean and reinstall dependencies"
 	@echo ""
 
 # Install dependencies
 install:
 	@echo "$(CYAN)Installing dependencies...$(RESET)"
-	npm install
+	npm ci
 	@echo "$(GREEN)Dependencies installed successfully!$(RESET)"
 
 # Start Vite development server with hot reload
@@ -55,26 +56,6 @@ check:
 	@echo "$(CYAN)Checking build...$(RESET)"
 	npm run build
 	@echo "$(GREEN)Build check passed!$(RESET)"
-
-# Deploy to S3 (builds first, then deploys dist/)
-deploy: build
-	@echo "$(CYAN)Deploying to AWS S3...$(RESET)"
-	aws s3 sync dist/ s3://amfgroup.pl --delete
-	@echo "$(GREEN)Deployment complete!$(RESET)"
-	@echo ""
-	@echo "$(YELLOW)Note: You may need to invalidate CloudFront cache:$(RESET)"
-	@echo "  aws cloudfront create-invalidation --distribution-id YOUR_DIST_ID --paths '/*'"
-
-# Deploy with CloudFront cache invalidation
-deploy-invalidate: deploy
-	@echo "$(CYAN)Invalidating CloudFront cache...$(RESET)"
-	@if [ -n "$(CLOUDFRONT_DIST_ID)" ]; then \
-		aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DIST_ID) --paths "/*"; \
-		echo "$(GREEN)Cache invalidation started!$(RESET)"; \
-	else \
-		echo "$(YELLOW)CLOUDFRONT_DIST_ID not set. Skipping cache invalidation.$(RESET)"; \
-		echo "$(YELLOW)Set it with: make deploy-invalidate CLOUDFRONT_DIST_ID=your-id$(RESET)"; \
-	fi
 
 # Clean build artifacts
 clean:

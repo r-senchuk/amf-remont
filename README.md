@@ -202,16 +202,16 @@ All design tokens are defined in `src/css/design-system.css`.
 ### Dev Container
 
 - Ready-to-use VS Code Dev Container config in `.devcontainer/devcontainer.json`.
-- Base image: `mcr.microsoft.com/devcontainers/javascript-node:18` with non-root `node` user and UID sync enabled.
-- Post-create installs dependencies with `npm install`.
+- Base image: `mcr.microsoft.com/devcontainers/javascript-node:22` with non-root `node` user and UID sync enabled.
+- Post-create installs dependencies with `make install` (runs `npm install`).
 - Forwarded ports: `3000` (Vite dev) and `8080` (Vite preview) with auto-forward set to notify.
-- VS Code extensions baked in: ESLint, Prettier, Tailwind CSS IntelliSense, Codex.
-- Usage: open with the Dev Containers extension (or Codespaces), “Reopen in Container”, then `npm run dev -- --host --port 3000` (or `npm run preview -- --host --port 8080`) or use the Makefile equivalents.
+- VS Code extensions baked in: ESLint, Prettier, Tailwind CSS IntelliSense, OpenAI ChatGPT.
+- Usage: open with the Dev Containers extension (or Codespaces), “Reopen in Container”, then `make dev` for HMR or `make preview` for a production build run.
 
 #### Best practices inside the dev container
 
-- Prefer `npm ci` (already the default post-create) to keep installs reproducible.
-- Use `make` targets (`dev`, `build`, `preview`, `deploy`) instead of raw npm commands for consistency.
+- Prefer `make install` for consistent installs across local/dev container workflows.
+- Use `make` targets (`dev`, `build`, `preview`) instead of raw npm commands for consistency.
 - Keep terminals inside the container to ensure file ownership stays with the `node` user.
 - If you need to expose a different port, pass `--port` to Vite or edit `vite.config.js` (ports will auto-forward).
 - Run `make clean` sparingly; keeping `node_modules` cached in the workspace speeds up rebuilds.
@@ -219,7 +219,7 @@ All design tokens are defined in `src/css/design-system.css`.
 #### Suggested dev container upgrades
 
 1. Add an npm cache mount for faster reinstalls: `"mounts": ["source=${localEnv:HOME}/.npm,target=/home/node/.npm,type=bind,consistency=cached"]`.
-2. Include features for tooling used in deployment (e.g., `ghcr.io/devcontainers/features/aws-cli`) if you plan to run `make deploy` from inside the container.
+2. Include features for any optional tooling you need (e.g., linting or testing CLIs).
 
 ### Setup
 
@@ -252,9 +252,6 @@ make build
 
 # Preview production build (http://localhost:8080)
 make preview
-
-# Deploy to S3 (builds first, then deploys)
-make deploy
 
 # Clean build artifacts
 make clean
@@ -299,20 +296,7 @@ make clean
 
 ## Deployment
 
-### Current Setup
-
-- **Hosting**: AWS S3 bucket `amfgroup.pl`
-- **CDN**: CloudFront distribution
-- **Build Tool**: Vite
-- **Deploy Command**: `make deploy`
-
-### Deployment Process
-
-1. Test changes locally: `make dev`
-2. Build production version: `make build`
-3. Deploy to S3: `make deploy`
-4. Invalidate CloudFront cache (if needed)
-5. Verify on live site
+Deployment is handled via CI (GitHub Actions) and is no longer triggered from local `make` targets. Build locally with `make build` to verify output before pushing changes.
 
 ## Dependencies & Assets
 
