@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
  * @param {boolean} props.showLink - Whether to show "See full gallery" link
  * @param {string} props.className - Additional classes
  */
+const toGalleryPath = (filename) => `/gallery/${encodeURIComponent(filename)}`;
+
 function Gallery({ photos, variant = 'full', showLink = false, className = '' }) {
   const [displayPhotos, setDisplayPhotos] = useState([]);
   const lightboxRef = useRef(null);
@@ -49,7 +51,7 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
       ]);
 
       const lightboxItems = displayPhotos.map((photo) => ({
-        href: '/gallery/' + photo.filename,
+        href: toGalleryPath(photo.filename),
         type: 'image',
         title: photo.title || photo.alt || ''
       }));
@@ -98,8 +100,8 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
     <div className={`w-full ${className}`}>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 sm:gap-5 md:gap-6">
         {displayPhotos.map((photo, index) => {
-          const thumbPath = `/gallery/${photo.thumbFilename}`;
-          const fullPath = `/gallery/${photo.filename}`;
+          const thumbPath = toGalleryPath(photo.thumbFilename);
+          const fullPath = toGalleryPath(photo.filename);
           
           return (
             <figure

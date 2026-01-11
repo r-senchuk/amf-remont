@@ -46,50 +46,55 @@ function HomePage({ scrollToContact = false }) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-slate-900/70" />
 
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-16 text-center sm:px-6 md:py-24 lg:px-8">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/80 shadow-card">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-orange animate-pulse" />
-            Wrocław i okolice
-          </p>
-          <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-            Wykończenie wnętrz we <span className="text-primary">Wrocławiu</span>
-          </h1>
-          <p className="max-w-3xl text-lg text-white/80 sm:text-xl">
-            AMF GROUP Remont – zmiana, którą możesz rozpocząć już dziś. Kompleksowe projekty, nadzór i 24-miesięczna gwarancja.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="tel:+48796019986"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
-            >
-              <i className="material-icons text-base">call</i>
-              Zadzwoń do nas
-            </a>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
-            >
-              Dowiedz się więcej
-              <i className="material-icons text-base">arrow_forward</i>
-            </Link>
-          </div>
+        <img src="/assets/images/kut2.png" alt="" className="hero-corner hero-corner--tl" aria-hidden="true" />
+        <img src="/assets/images/kut1.png" alt="" className="hero-corner hero-corner--br" aria-hidden="true" />
 
-          <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
-            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
-              <img src="/assets/icons/kitchen.svg" alt="" className="h-10 w-10 opacity-80" />
-              <div className="text-left text-sm font-semibold leading-tight text-white/80">Kuchnie i łazienki pod klucz</div>
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-16 text-center sm:px-6 md:py-24 lg:px-8">
+          <div className="hero-card w-full max-w-4xl space-y-8">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/80 shadow-card">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-orange animate-pulse" />
+              Wrocław i okolice
+            </p>
+            <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+              Wykończenie wnętrz we <span className="text-primary">Wrocławiu</span>
+            </h1>
+            <p className="max-w-3xl text-lg text-white/85 sm:text-xl">
+              AMF GROUP Remont – zmiana, którą możesz rozpocząć już dziś. Kompleksowe projekty, nadzór i 24-miesięczna gwarancja.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="tel:+48796019986"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
+              >
+                <i className="material-icons text-base">call</i>
+                Zadzwoń do nas
+              </a>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
+              >
+                Dowiedz się więcej
+                <i className="material-icons text-base">arrow_forward</i>
+              </Link>
             </div>
-            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
-              <img src="/assets/icons/painting.svg" alt="" className="h-10 w-10 opacity-80" />
-              <div className="text-left text-sm font-semibold leading-tight text-white/80">Malowanie i dekoracje</div>
-            </div>
-            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
-              <img src="/assets/icons/hummer.svg" alt="" className="h-10 w-10 opacity-80" />
-              <div className="text-left text-sm font-semibold leading-tight text-white/80">Nadzór kierownika projektu</div>
-            </div>
-            <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
-              <img src="/assets/icons/key.jpg" alt="" className="h-10 w-10 rounded-md object-cover opacity-80" />
-              <div className="text-left text-sm font-semibold leading-tight text-white/80">24-miesięczna gwarancja</div>
+
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+                <img src="/assets/icons/kitchen.svg" alt="" className="h-10 w-10 opacity-80" />
+                <div className="text-left text-sm font-semibold leading-tight text-white/80">Kuchnie i łazienki pod klucz</div>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+                <img src="/assets/icons/painting.svg" alt="" className="h-10 w-10 opacity-80" />
+                <div className="text-left text-sm font-semibold leading-tight text-white/80">Malowanie i dekoracje</div>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+                <img src="/assets/icons/hummer.svg" alt="" className="h-10 w-10 opacity-80" />
+                <div className="text-left text-sm font-semibold leading-tight text-white/80">Nadzór kierownika projektu</div>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+                <img src="/assets/icons/key.jpg" alt="" className="h-10 w-10 rounded-md object-cover opacity-80" />
+                <div className="text-left text-sm font-semibold leading-tight text-white/80">24-miesięczna gwarancja</div>
+              </div>
             </div>
           </div>
         </div>

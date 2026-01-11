@@ -4,6 +4,83 @@ html {
   color: var(--color-text-primary);
   box-sizing: border-box;
 }
+
+.hero-card {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.55);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+@supports ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+  .hero-card {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+.hero-corner {
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  opacity: 0.65;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
+}
+
+.hero-corner--tl {
+  top: 24px;
+  left: 16px;
+}
+
+.hero-corner--br {
+  right: 16px;
+  bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .hero-card {
+    padding: 3rem 2.5rem;
+  }
+
+  .hero-corner {
+    width: 150px;
+  }
+
+  .hero-corner--tl {
+    top: 32px;
+    left: 24px;
+  }
+
+  .hero-corner--br {
+    right: 24px;
+    bottom: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-card {
+    padding: 3.5rem 3rem;
+  }
+
+  .hero-corner {
+    width: 190px;
+  }
+
+  .hero-corner--tl {
+    top: 40px;
+    left: 32px;
+  }
+
+  .hero-corner--br {
+    right: 32px;
+    bottom: 40px;
+  }
+}
 body {
   width: 100%;
   min-width: 320px;
@@ -79,19 +156,6 @@ sup {
 input,
 textarea {
   font-family: var(--font-family-secondary);
-}
-header,
-nav,
-main,
-footer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0;
-  margin: 0;
 }
 body > * > div[otype] {
   width: calc(100% - 40px);

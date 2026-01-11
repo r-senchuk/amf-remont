@@ -3,7 +3,6 @@
     src: url('Geometria-Regular.eot');
     src: local('Geometria Regular'), local('Geometria-Regular'),
         url('Geometria-Regular.eot') format('embedded-opentype'),
-        url('Geometria-Regular.woff2.html') format('woff2'),
         url('Geometria-Regular.woff') format('woff'),
         url('Geometria-Regular.ttf') format('truetype');
     font-weight: normal;
@@ -15,7 +14,6 @@
     src: url('Geometria-Italic.eot');
     src: local('Geometria Italic'), local('Geometria-Italic'),
         url('Geometria-Italic.eot') format('embedded-opentype'),
-        url('Geometria-Italic.woff2.html') format('woff2'),
         url('Geometria-Italic.woff') format('woff'),
         url('Geometria-Italic.ttf') format('truetype');
     font-weight: normal;
@@ -27,7 +25,6 @@
     src: url('Geometria-ExtraBoldItalic.eot');
     src: local('Geometria ExtraBold Italic'), local('Geometria-ExtraBoldItalic'),
         url('Geometria-ExtraBoldItalic.eot') format('embedded-opentype'),
-        url('Geometria-ExtraBoldItalic.woff2.html') format('woff2'),
         url('Geometria-ExtraBoldItalic.woff') format('woff'),
         url('Geometria-ExtraBoldItalic.ttf') format('truetype');
     font-weight: 800;
@@ -39,7 +36,6 @@
     src: url('Geometria-ExtraLightItalic.eot');
     src: local('Geometria ExtraLight Italic'), local('Geometria-ExtraLightItalic'),
         url('Geometria-ExtraLightItalic.eot') format('embedded-opentype'),
-        url('Geometria-ExtraLightItalic.woff2.html') format('woff2'),
         url('Geometria-ExtraLightItalic.woff') format('woff'),
         url('Geometria-ExtraLightItalic.ttf') format('truetype');
     font-weight: 200;
@@ -51,7 +47,6 @@
     src: url('Geometria-Medium.eot');
     src: local('Geometria Medium'), local('Geometria-Medium'),
         url('Geometria-Medium.eot') format('embedded-opentype'),
-        url('Geometria-Medium.woff2.html') format('woff2'),
         url('Geometria-Medium.woff') format('woff'),
         url('Geometria-Medium.ttf') format('truetype');
     font-weight: 500;
@@ -63,7 +58,6 @@
     src: url('Geometria-Light.eot');
     src: local('Geometria Light'), local('Geometria-Light'),
         url('Geometria-Light.eot') format('embedded-opentype'),
-        url('Geometria-Light.woff2.html') format('woff2'),
         url('Geometria-Light.woff') format('woff'),
         url('Geometria-Light.ttf') format('truetype');
     font-weight: 300;
@@ -75,7 +69,6 @@
     src: url('Geometria-HeavyItalic.eot');
     src: local('Geometria Heavy Italic'), local('Geometria-HeavyItalic'),
         url('Geometria-HeavyItalic.eot') format('embedded-opentype'),
-        url('Geometria-HeavyItalic.woff2.html') format('woff2'),
         url('Geometria-HeavyItalic.woff') format('woff'),
         url('Geometria-HeavyItalic.ttf') format('truetype');
     font-weight: 900;
@@ -86,8 +79,6 @@
     font-family: 'Geometria';
     src: url('Geometria-BoldItalic.eot');
     src: local('Geometria Bold Italic'), local('Geometria-BoldItalic'),
-        url('Geometria-BoldItalic3F') format('embedded-opentype'),
-        url('Geometria-BoldItalic.woff2.html') format('woff2'),
         url('Geometria-BoldItalic.woff') format('woff'),
         url('Geometria-BoldItalic.ttf') format('truetype');
     font-weight: bold;
@@ -99,7 +90,6 @@
     src: url('Geometria-Bold.eot');
     src: local('Geometria Bold'), local('Geometria-Bold'),
         url('Geometria-Bold.eot') format('embedded-opentype'),
-        url('Geometria-Bold.woff2.html') format('woff2'),
         url('Geometria-Bold.woff') format('woff'),
         url('Geometria-Bold.ttf') format('truetype');
     font-weight: bold;
@@ -111,7 +101,6 @@
     src: url('Geometria-LightItalic.eot');
     src: local('Geometria Light Italic'), local('Geometria-LightItalic'),
         url('Geometria-LightItalic.eot') format('embedded-opentype'),
-        url('Geometria-LightItalic.woff2.html') format('woff2'),
         url('Geometria-LightItalic.woff') format('woff'),
         url('Geometria-LightItalic.ttf') format('truetype');
     font-weight: 300;
@@ -123,7 +112,6 @@
     src: url('Geometria-ExtraBold.eot');
     src: local('Geometria ExtraBold'), local('Geometria-ExtraBold'),
         url('Geometria-ExtraBold.eot') format('embedded-opentype'),
-        url('Geometria-ExtraBold.woff2.html') format('woff2'),
         url('Geometria-ExtraBold.woff') format('woff'),
         url('Geometria-ExtraBold.ttf') format('truetype');
     font-weight: 800;
@@ -135,7 +123,6 @@
     src: url('Geometria-MediumItalic.eot');
     src: local('Geometria Medium Italic'), local('Geometria-MediumItalic'),
         url('Geometria-MediumItalic.eot') format('embedded-opentype'),
-        url('Geometria-MediumItalic.woff2.html') format('woff2'),
         url('Geometria-MediumItalic.woff') format('woff'),
         url('Geometria-MediumItalic.ttf') format('truetype');
     font-weight: 500;
@@ -147,7 +134,6 @@
     src: url('Geometria-ExtraLight.eot');
     src: local('Geometria ExtraLight'), local('Geometria-ExtraLight'),
         url('Geometria-ExtraLight.eot') format('embedded-opentype'),
-        url('Geometria-ExtraLight.woff2.html') format('woff2'),
         url('Geometria-ExtraLight.woff') format('woff'),
         url('Geometria-ExtraLight.ttf') format('truetype');
     font-weight: 200;
@@ -159,7 +145,6 @@
     src: url('Geometria-Heavy.eot');
     src: local('Geometria Heavy'), local('Geometria-Heavy'),
         url('Geometria-Heavy.eot') format('embedded-opentype'),
-        url('Geometria-Heavy.woff2.html') format('woff2'),
         url('Geometria-Heavy.woff') format('woff'),
         url('Geometria-Heavy.ttf') format('truetype');
     font-weight: 900;
@@ -171,7 +156,6 @@
     src: url('Geometria-ThinItalic.eot');
     src: local('Geometria Thin Italic'), local('Geometria-ThinItalic'),
         url('Geometria-ThinItalic.eot') format('embedded-opentype'),
-        url('Geometria-ThinItalic.woff2.html') format('woff2'),
         url('Geometria-ThinItalic.woff') format('woff'),
         url('Geometria-ThinItalic.ttf') format('truetype');
     font-weight: 100;
@@ -183,7 +167,6 @@
     src: url('Geometria-Thin.eot');
     src: local('Geometria Thin'), local('Geometria-Thin'),
         url('Geometria-Thin.eot') format('embedded-opentype'),
-        url('Geometria-Thin.woff2.html') format('woff2'),
         url('Geometria-Thin.woff') format('woff'),
         url('Geometria-Thin.ttf') format('truetype');
     font-weight: 100;

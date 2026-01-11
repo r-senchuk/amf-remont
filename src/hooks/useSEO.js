@@ -39,7 +39,7 @@ export function useSEO() {
 
     const ogUrl = document.querySelector('meta[property="og:url"]');
     if (ogUrl) {
-      ogUrl.setAttribute('content', location.pathname);
+      ogUrl.setAttribute('content', window.location.origin + location.pathname);
     }
 
     // Update canonical URL

@@ -4,6 +4,8 @@
 
 This is the source code for the [AMF Group website](https://www.amfgroup.pl), a renovation and interior finishing company based in Wrocław, Poland. The site is hosted on AWS S3 and served via CloudFront.
 
+Previous version deployed to https://www.amfgroup.pl/index.html.
+
 ## Architecture
 
 ### React Single Page Application (SPA)
