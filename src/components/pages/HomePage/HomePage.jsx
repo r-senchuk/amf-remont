@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ContactSection from './ContactSection';
 import Gallery from '../../shared/Gallery/Gallery';
+import Section from '../../shared/Section/Section';
 import useGalleryData from '../../../hooks/useGalleryData';
 import services from '../../../data/services';
 
@@ -101,8 +102,8 @@ function HomePage({ scrollToContact = false }) {
       </section>
 
       {/* About Section */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-16 sm:py-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[320px,1fr] lg:px-8">
+      <Section className="bg-gradient-to-b from-slate-50 to-white">
+        <div className="grid items-center gap-10 lg:grid-cols-[320px,1fr]">
           <div className="overflow-hidden rounded-2xl bg-white shadow-card">
             <img src="/assets/icons/key.jpg" alt="Klucz - remont pod klucz" className="h-full w-full object-cover" />
           </div>
@@ -130,11 +131,11 @@ function HomePage({ scrollToContact = false }) {
             </Link>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Intro Copy */}
-      <section className="bg-white py-14 sm:py-16">
-        <div className="mx-auto max-w-3xl space-y-4 px-4 text-center text-slate-700 sm:px-6 lg:px-8">
+      <Section className="bg-white" width="narrow" innerClassName="text-center text-slate-700">
+        <div className="space-y-4">
           <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Wykończenie wnętrz we Wrocławiu</h2>
           <p className="text-base leading-relaxed sm:text-lg">
             Wieloletnia działalność w branży pozwoliła nam zdobyć kwalifikacje niezbędne do świadczenia usług na najwyższym poziomie.
@@ -147,73 +148,70 @@ function HomePage({ scrollToContact = false }) {
             Jeśli szukasz firmy, która stawia na jakość, estetykę oraz ścisłą współpracę z Klientem, zapraszamy do kontaktu.
           </p>
         </div>
-      </section>
+      </Section>
 
       {/* Features */}
-      <section className="bg-slate-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Dlaczego my</p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Nasze atuty</h2>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featureList.map((feature) => (
-              <div
-                key={feature.title}
-                className="flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <i className="material-icons text-xl">{feature.icon}</i>
-                </span>
-                <h3 className="text-lg font-semibold text-slate-900">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-600">{feature.copy}</p>
-              </div>
-            ))}
-          </div>
+      <Section className="bg-slate-50">
+        <div className="text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Dlaczego my</p>
+          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Nasze atuty</h2>
         </div>
-      </section>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featureList.map((feature) => (
+            <div
+              key={feature.title}
+              className="flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <i className="material-icons text-xl">{feature.icon}</i>
+              </span>
+              <h3 className="text-lg font-semibold text-slate-900">{feature.title}</h3>
+              <p className="text-sm leading-relaxed text-slate-600">{feature.copy}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       {/* Gallery Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600 py-16">
-        <div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">Galeria</h2>
-          <p className="mt-3 text-center text-sm text-white/80 sm:text-base">
-            Zobacz wybrane realizacje – od konceptu po finalne wykończenie.
-          </p>
-          <div className="mt-10">
-            <Gallery photos={galleryPhotos} variant="small" showLink />
-          </div>
+      <Section
+        className="relative overflow-hidden bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600"
+        innerClassName="relative z-10"
+        before={<div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay" />}
+      >
+        <h2 className="text-center text-3xl font-bold text-white sm:text-4xl">Galeria</h2>
+        <p className="mt-3 text-center text-sm text-white/80 sm:text-base">
+          Zobacz wybrane realizacje – od konceptu po finalne wykończenie.
+        </p>
+        <div className="mt-10">
+          <Gallery photos={galleryPhotos} variant="small" showLink />
         </div>
-      </section>
+      </Section>
 
       {/* Services Section */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Oferta</p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
-            <p className="mt-2 text-base text-slate-600 sm:text-lg">
-              Kompleksowe usługi remontowe – od konstrukcji po detale wykończenia.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <article
-                key={service.title}
-                className={`flex h-full flex-col gap-3 rounded-2xl border border-slate-100 p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover ${service.muted ? 'bg-slate-50' : 'bg-white'}`}
-              >
-                <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 ${service.accent ? 'text-accent-green' : 'text-primary'}`}>
-                  <i className="material-icons text-xl">{service.icon}</i>
-                </span>
-                <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-600">{service.description}</p>
-              </article>
-            ))}
-          </div>
+      <Section className="bg-white">
+        <div className="text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Oferta</p>
+          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
+          <p className="mt-2 text-base text-slate-600 sm:text-lg">
+            Kompleksowe usługi remontowe – od konstrukcji po detale wykończenia.
+          </p>
         </div>
-      </section>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <article
+              key={service.title}
+              className={`flex h-full flex-col gap-3 rounded-2xl border border-slate-100 p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover ${service.muted ? 'bg-slate-50' : 'bg-white'}`}
+            >
+              <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 ${service.accent ? 'text-accent-green' : 'text-primary'}`}>
+                <i className="material-icons text-xl">{service.icon}</i>
+              </span>
+              <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
+              <p className="text-sm leading-relaxed text-slate-600">{service.description}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
 
       {/* Contact Section */}
       <ContactSection />

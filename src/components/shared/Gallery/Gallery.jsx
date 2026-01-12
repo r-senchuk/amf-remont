@@ -98,7 +98,7 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 sm:gap-5 md:gap-6">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 sm:gap-6">
         {displayPhotos.map((photo, index) => {
           const thumbPath = toGalleryPath(photo.thumbFilename);
           const fullPath = toGalleryPath(photo.filename);

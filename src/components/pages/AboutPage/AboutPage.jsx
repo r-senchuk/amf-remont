@@ -3,6 +3,7 @@
  * Tailwind-first layout for story, offering, and value props
  */
 import services from '../../../data/services';
+import Section from '../../shared/Section/Section';
 
 const strengths = [
   { icon: 'grade', title: 'Setki realizacji', copy: 'Doświadczenie, które przekłada się na sprawdzony proces i przewidywalne rezultaty.' },
@@ -14,7 +15,7 @@ function AboutPage() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-14 text-white sm:py-16">
+      <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 text-white sm:py-20">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 text-center sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">O nas</p>
           <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">Tworzymy Twoje wymarzone wnętrze</h1>
@@ -25,8 +26,8 @@ function AboutPage() {
       </header>
 
       {/* Story */}
-      <section className="bg-gradient-to-b from-white to-slate-50 py-16 sm:py-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr,0.9fr] lg:px-8">
+      <Section className="bg-gradient-to-b from-white to-slate-50">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr,0.9fr]">
           <div className="space-y-4 text-slate-700">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Kim jesteśmy</p>
             <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Remonty pod klucz z pełną obsługą</h2>
@@ -55,11 +56,10 @@ function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Services overview */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <Section className="bg-white">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Zakres prac</p>
             <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Co możemy zrobić dla Ciebie</h2>
@@ -82,8 +82,7 @@ function AboutPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
+      </Section>
     </div>
   );
 }

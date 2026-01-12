@@ -8,7 +8,7 @@ function ContactChannels() {
   return (
     <div className="mt-8 md:mt-10">
       {/* Grid Container */}
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 items-stretch">
+      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 items-stretch">
         {/* Phone Card */}
         <article className="bg-white rounded-2xl shadow-card hover:shadow-card-hover border border-slate-200 p-6 flex flex-col gap-4 transition-all duration-200">
           {/* Card Header */}

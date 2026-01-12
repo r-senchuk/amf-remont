@@ -112,6 +112,23 @@ function MyComponent() {
 export default MyComponent;
 ```
 
+### Section Wrapper (Layout Consistency)
+
+Use the shared `Section` component to keep spacing and widths consistent across pages:
+
+```jsx
+import Section from './components/shared/Section/Section';
+
+function ExamplePageSection() {
+  return (
+    <Section className="bg-white" width="base" padding="normal">
+      <h2 className="text-3xl font-bold text-slate-900">Tytul sekcji</h2>
+      <p className="mt-3 text-slate-600">Zawartosc sekcji z jednolitym rytmem.</p>
+    </Section>
+  );
+}
+```
+
 ## Routing
 
 ### React Router Configuration

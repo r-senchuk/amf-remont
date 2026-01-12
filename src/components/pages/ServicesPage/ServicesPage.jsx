@@ -3,11 +3,12 @@
  * Tailwind-first list of renovation services offered
  */
 import services from '../../../data/services';
+import Section from '../../shared/Section/Section';
 
 function ServicesPage() {
   return (
     <div className="bg-gradient-to-b from-white to-slate-50">
-      <header className="bg-gradient-to-r from-primary to-primary-dark py-14 text-white sm:py-16">
+      <header className="bg-gradient-to-r from-primary to-primary-dark py-16 text-white sm:py-20">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">Oferta</p>
           <h1 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">Nasza Oferta</h1>
@@ -17,8 +18,7 @@ function ServicesPage() {
         </div>
       </header>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <Section>
           <div className="text-center">
             <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
             <p className="mt-2 text-base text-slate-600 sm:text-lg">
@@ -40,8 +40,7 @@ function ServicesPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
+      </Section>
     </div>
   );
 }

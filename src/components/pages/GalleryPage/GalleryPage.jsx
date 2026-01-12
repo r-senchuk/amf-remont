@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Gallery from '../../shared/Gallery/Gallery';
+import Section from '../../shared/Section/Section';
 import useGalleryData from '../../../hooks/useGalleryData';
 
 function GalleryPage() {
@@ -11,9 +12,9 @@ function GalleryPage() {
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay"></div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
+      <Section as="div" className="relative z-10" padding="normal">
         {/* Top Navigation / Back Button */}
-        <div className="mb-8 flex items-center">
+        <div className="mb-10 flex items-center">
           <Link 
             to="/" 
             className="inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors group"
@@ -26,7 +27,7 @@ function GalleryPage() {
         </div>
 
         {/* Main Content */}
-        <div className="space-y-8">
+        <div className="space-y-10">
           {loading && (
             <div className="flex justify-center py-20">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
@@ -53,7 +54,7 @@ function GalleryPage() {
         </div>
 
         {/* Footer placeholder/spacer if needed, though main App footer should be visible */}
-      </div>
+      </Section>
     </div>
   );
 }
