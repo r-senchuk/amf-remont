@@ -40,22 +40,28 @@ function HomePage({ scrollToContact = false }) {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative isolate overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <section className="relative isolate bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div
-          className="absolute inset-0 opacity-35"
-          style={{ backgroundImage: 'url(/assets/backgrounds/backgr.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+          className="absolute inset-0"
+          style={{ backgroundImage: 'url(/assets/backgrounds/backgr.webp)', backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-slate-900/70" />
 
         <img src="/assets/images/kut2.png" alt="" className="hero-corner hero-corner--tl" aria-hidden="true" />
         <img src="/assets/images/kut1.png" alt="" className="hero-corner hero-corner--br" aria-hidden="true" />
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-16 text-center sm:px-6 md:py-24 lg:px-8">
           <div className="hero-card w-full max-w-4xl space-y-8">
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/80 shadow-card">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-orange animate-pulse" />
-              Wrocław i okolice
-            </p>
+            <div className="flex flex-col items-center gap-4 text-center">
+              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
+                <img src="/assets/logo/logo.svg" alt="AMF GROUP" className="h-12 w-auto" />
+              </span>
+              <div className="text-white">
+                <div className="text-base font-semibold uppercase tracking-[0.3em] sm:text-lg">AMF GROUP</div>
+                <div className="text-xs font-semibold uppercase tracking-[0.35em] text-white/60 sm:text-sm">
+                  Wykończenia wnętrz
+                </div>
+              </div>
+            </div>
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl">
               Wykończenie wnętrz we <span className="text-primary">Wrocławiu</span>
             </h1>

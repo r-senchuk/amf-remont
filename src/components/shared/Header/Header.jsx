@@ -46,9 +46,63 @@ function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-white/10">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+      <header
+        className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/90 backdrop-blur-md relative"
+        style={{
+          backgroundImage:
+            'linear-gradient(120deg, rgba(26,73,167,0.16), rgba(15,23,42,0)), repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 10px)'
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className="absolute -left-24 -top-24 h-52 w-52 rounded-full bg-primary/20 blur-3xl" />
+          <div className="absolute -right-16 top-10 h-48 w-48 rounded-full bg-accent-orange/20 blur-3xl" />
+        </div>
+
+        <div className="hidden border-b border-white/10 lg:block">
+          <div className="mx-auto flex max-w-6xl items-center gap-6 px-6 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.35em] text-white/60">
+            <div className="flex flex-1 items-center gap-3">
+              <span className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-orange" />
+                Remonty pod klucz
+              </span>
+              <span className="h-1 w-1 rounded-full bg-white/30" />
+              <span>Wrocław i okolice</span>
+            </div>
+
+            <nav className="flex flex-1 items-center justify-center gap-5 text-[0.62rem] font-semibold uppercase tracking-[0.35em] text-white/70">
+              {navLinks.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  to={href}
+                  className="rounded-md px-2 py-1 transition hover:text-white"
+                >
+                  {label}
+                </Link>
+              ))}
+              <a
+                href="/contact"
+                onClick={handleContactClick}
+                className="rounded-full bg-primary px-3 py-1.5 text-[0.6rem] text-white shadow-card transition hover:shadow-card-hover"
+              >
+                Kontakt
+              </a>
+            </nav>
+
+            <div className="flex flex-1 items-center justify-end gap-3 text-white/70">
+              <i className="material-icons text-sm text-accent-orange">phone_in_talk</i>
+              <a href="tel:+48796019986" className="transition hover:text-white">
+                +48 796 019 986
+              </a>
+              <span className="text-white/30">•</span>
+              <a href="tel:+48795621905" className="transition hover:text-white">
+                +48 795 621 905
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:hidden">
+          <div className="flex min-w-0 items-center gap-3 lg:flex-1 lg:justify-start">
             <button
               type="button"
               className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10 lg:hidden"
@@ -66,56 +120,16 @@ function Header() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-
-            <Link
-              to="/"
-              className="flex items-center gap-3 rounded-xl bg-white/5 px-3 py-2 text-white transition hover:bg-white/10"
-              title="AMF GROUP – wykończenie wnętrz pod klucz na terenie Wrocławia i okolic | Główna"
-            >
-              <img
-                src="/assets/logo/logo.svg"
-                alt="AMF GROUP – wykończenie wnętrz pod klucz na terenie Wrocławia i okolic."
-                className="h-12 w-auto"
-              />
-              <div className="hidden text-left text-xs font-semibold uppercase tracking-[0.18em] text-white/70 sm:block">
-                Wykończenia <br /> Wrocław
-              </div>
-            </Link>
           </div>
 
-          <nav className="hidden items-center gap-6 text-sm font-semibold uppercase tracking-wider text-white/70 lg:flex">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                to={href}
-                className="rounded-md px-2 py-1 transition hover:text-white"
-              >
-                {label}
-              </Link>
-            ))}
-            <a
-              href="/contact"
-              onClick={handleContactClick}
-              className="rounded-full bg-primary px-4 py-2 text-white shadow-card transition hover:shadow-card-hover"
-            >
-              Kontakt
-            </a>
-          </nav>
-
-          <div className="hidden items-center gap-4 text-sm font-medium text-white/80 sm:flex">
-            <div className="flex items-center gap-2 rounded-full bg-white/5 px-3 py-2">
-              <img src="/assets/icons/hummer.svg" alt="ремонт" className="h-7 w-auto opacity-70" />
-              <a href="tel:+48796019986" className="hover:text-white">
-                +48 796 019 986
-              </a>
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-white/5 px-3 py-2">
-              <img src="/assets/icons/painting.svg" alt="wykończenie" className="h-7 w-auto opacity-70" />
-              <a href="tel:+48795621905" className="hover:text-white">
-                +48 795 621 905
-              </a>
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={handleContactClick}
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-2 text-xs font-semibold uppercase tracking-wider text-white shadow-card transition hover:shadow-card-hover"
+          >
+            <i className="material-icons text-base">phone_in_talk</i>
+            Kontakt
+          </button>
         </div>
       </header>
 

@@ -26,20 +26,22 @@ html {
 .hero-corner {
   position: absolute;
   z-index: 1;
-  width: 120px;
-  opacity: 0.65;
+  width: 140px;
+  opacity: 1;
   pointer-events: none;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
 }
 
 .hero-corner--tl {
-  top: 24px;
-  left: 16px;
+  top: 0;
+  left: 0;
+  transform: translate(-8%, 12%);
 }
 
 .hero-corner--br {
-  right: 16px;
-  bottom: 24px;
+  right: 0;
+  bottom: 0;
+  transform: translate(8%, 40%);
 }
 
 @media (min-width: 640px) {
@@ -48,17 +50,15 @@ html {
   }
 
   .hero-corner {
-    width: 150px;
+    width: 170px;
   }
 
   .hero-corner--tl {
-    top: 32px;
-    left: 24px;
+    transform: translate(-6%, 8%);
   }
 
   .hero-corner--br {
-    right: 24px;
-    bottom: 32px;
+    transform: translate(6%, 35%);
   }
 }
 
@@ -68,17 +68,15 @@ html {
   }
 
   .hero-corner {
-    width: 190px;
+    width: 220px;
   }
 
   .hero-corner--tl {
-    top: 40px;
-    left: 32px;
+    transform: translate(-5%, 6%);
   }
 
   .hero-corner--br {
-    right: 32px;
-    bottom: 40px;
+    transform: translate(5%, 30%);
   }
 }
 body {
