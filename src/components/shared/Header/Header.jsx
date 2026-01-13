@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const navLinks = [
-  { href: '/about', label: 'O NAS' },
-  { href: '/services', label: 'OFERTA' },
-  { href: '/gallery', label: 'GALERIA' }
+  { id: 'about', label: 'O NAS' },
+  { id: 'services', label: 'OFERTA' },
+  { id: 'gallery', label: 'GALERIA' }
 ];
 
 function Header() {
@@ -35,6 +35,20 @@ function Header() {
     }
   };
 
+  const handleSectionNav = (sectionId) => {
+    setIsDrawerOpen(false);
+
+    if (location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      return;
+    }
+
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleNav = (href) => {
     if (href === '/contact') {
       handleContactClick();
@@ -47,7 +61,7 @@ function Header() {
   return (
     <>
       <header
-        className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/90 backdrop-blur-md relative"
+        className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-slate-950/90 backdrop-blur-md relative"
         style={{
           backgroundImage:
             'linear-gradient(120deg, rgba(26,73,167,0.16), rgba(15,23,42,0)), repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 10px)'
@@ -70,14 +84,18 @@ function Header() {
             </div>
 
             <nav className="flex flex-1 items-center justify-center gap-5 text-[0.62rem] font-semibold uppercase tracking-[0.35em] text-white/70">
-              {navLinks.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  to={href}
+              {navLinks.map(({ id, label }) => (
+                <a
+                  key={id}
+                  href={`/#${id}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleSectionNav(id);
+                  }}
                   className="rounded-md px-2 py-1 transition hover:text-white"
                 >
                   {label}
-                </Link>
+                </a>
               ))}
               <a
                 href="/contact"
@@ -135,7 +153,7 @@ function Header() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-40 transition ${isDrawerOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        className={`fixed inset-0 z-50 transition ${isDrawerOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
         aria-hidden={!isDrawerOpen}
       >
         <div
@@ -143,13 +161,10 @@ function Header() {
           onClick={() => setIsDrawerOpen(false)}
         />
         <div
-          className={`absolute left-0 top-0 h-full w-72 max-w-[80vw] bg-slate-900 text-white shadow-xl transition-transform duration-300 ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
+          className={`absolute left-0 top-16 h-[calc(100%-4rem)] w-80 max-w-[85vw] overflow-y-auto bg-slate-900 text-white shadow-xl transition-transform duration-300 ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
         >
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-            <Link to="/" onClick={() => handleNav('/')} className="flex items-center gap-3">
-              <img src="/assets/logo/logo.svg" alt="AMF GROUP" className="h-10 w-auto" />
-              <span className="text-sm font-semibold uppercase tracking-[0.14em] text-white/80">AMF Group</span>
-            </Link>
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-white/60">Menu</span>
             <button
               type="button"
               className="rounded-full border border-white/10 bg-white/5 p-2 text-white transition hover:border-white/30 hover:bg-white/10"
@@ -166,39 +181,44 @@ function Header() {
             </button>
           </div>
 
-          <nav className="flex flex-col gap-1 px-3 py-4">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                to={href}
-                className="flex items-center justify-between rounded-lg px-3 py-3 text-sm font-semibold uppercase tracking-wider hover:bg-white/5"
-                onClick={() => handleNav(href)}
+          <div className="flex h-full flex-col gap-6 px-4 py-5">
+            <div className="flex flex-col gap-2" role="navigation" aria-label="Menu">
+              {navLinks.map(({ id, label }) => (
+                <a
+                  key={id}
+                  href={`/#${id}`}
+                  className="flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/90 hover:bg-white/10"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleSectionNav(id);
+                  }}
+                >
+                  {label}
+                  <i className="material-icons text-base opacity-60">arrow_forward</i>
+                </a>
+              ))}
+              <a
+                href="/contact"
+                onClick={handleContactClick}
+                className="mt-2 inline-flex items-center justify-between rounded-xl bg-primary px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] shadow-card transition hover:shadow-card-hover"
               >
-                {label}
-                <i className="material-icons text-base opacity-60">arrow_forward</i>
-              </Link>
-            ))}
-            <button
-              type="button"
-              onClick={handleContactClick}
-              className="mt-2 inline-flex items-center justify-between rounded-lg bg-primary px-3 py-3 text-sm font-semibold uppercase tracking-wider shadow-card transition hover:shadow-card-hover"
-            >
-              Kontakt
-              <i className="material-icons text-base">phone_in_talk</i>
-            </button>
-          </nav>
+                Kontakt
+                <i className="material-icons text-base">phone_in_talk</i>
+              </a>
+            </div>
 
-          <div className="mt-auto border-t border-white/10 px-4 py-4 text-sm text-white/80">
-            <p className="mb-2 font-semibold uppercase tracking-wide text-white">Zadzwoń:</p>
-            <div className="flex flex-col gap-2">
-              <a href="tel:+48796019986" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:bg-white/10">
-                <i className="material-icons text-base opacity-70">phone</i>
-                +48 796 019 986
-              </a>
-              <a href="tel:+48795621905" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:bg-white/10">
-                <i className="material-icons text-base opacity-70">phone</i>
-                +48 795 621 905
-              </a>
+            <div className="border-t border-white/10 pt-4 text-sm text-white/80">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">Zadzwoń</p>
+              <div className="flex flex-col gap-3">
+                <a href="tel:+48796019986" className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 hover:bg-white/10">
+                  <i className="material-icons text-base text-accent-orange">phone</i>
+                  <span className="text-sm font-semibold text-white">+48 796 019 986</span>
+                </a>
+                <a href="tel:+48795621905" className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 hover:bg-white/10">
+                  <i className="material-icons text-base text-accent-orange">phone</i>
+                  <span className="text-sm font-semibold text-white">+48 795 621 905</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

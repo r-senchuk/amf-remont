@@ -4,7 +4,7 @@
 
 This is the source code for the [AMF Group website](https://www.amfgroup.pl), a renovation and interior finishing company based in Wrocław, Poland. The site is hosted on AWS S3 and served via CloudFront.
 
-Previous version deployed to https://www.amfgroup.pl/index.html.
+Previous version deployed to [https://www.amfgroup.pl/index.html](https://www.amfgroup.pl/index.html).
 
 ## Architecture
 
@@ -300,7 +300,7 @@ make clean
 
 ## Performance Optimizations
 
-### Implemented
+### Implemented optimizations
 
 1. **Code Splitting**: CSS code splitting enabled
 2. **Lazy Loading**: Images use `loading="lazy"`

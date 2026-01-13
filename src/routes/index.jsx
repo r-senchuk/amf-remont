@@ -7,7 +7,6 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App.jsx';
 
 const HomePage = lazy(() => import('../components/pages/HomePage/HomePage.jsx'));
-const AboutPage = lazy(() => import('../components/pages/AboutPage/AboutPage.jsx'));
 const ServicesPage = lazy(() => import('../components/pages/ServicesPage/ServicesPage.jsx'));
 const GalleryPage = lazy(() => import('../components/pages/GalleryPage/GalleryPage.jsx'));
 
@@ -19,13 +18,6 @@ const routesMeta = {
     ogTitle: 'AMF GROUP - Wykończenie wnętrz we Wrocławiu',
     ogDescription: 'Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu z 24-miesięczną gwarancją.',
     ogImage: '/assets/logo/logo.svg'
-  },
-  '/about': {
-    title: 'O Nas - AMF GROUP | Wykończenie wnętrz we Wrocławiu',
-    description: 'Poznaj AMF GROUP - firmę remontową z wieloletnim doświadczeniem. Setki zrealizowanych projektów, remonty pod klucz, 24-miesięczna gwarancja.',
-    ogTitle: 'O Nas - AMF GROUP',
-    ogDescription: 'Setki zrealizowanych projektów. Wieloletnie doświadczenie w branży remontowej. Tworzymy wnętrza, które zachwycają.',
-    ogImage: '/assets/icons/key.jpg'
   },
   '/services': {
     title: 'Oferta - AMF GROUP | Usługi remontowe we Wrocławiu',
@@ -67,10 +59,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: withSuspense(<HomePage />)
-      },
-      {
-        path: 'about',
-        element: withSuspense(<AboutPage />)
       },
       {
         path: 'services',

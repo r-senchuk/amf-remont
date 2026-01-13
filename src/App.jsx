@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Header />
-      <main id="app-main">
+      <main id="app-main" className="pt-16 lg:pt-12">
         <Outlet />
       </main>
       <Footer />

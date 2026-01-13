@@ -3,7 +3,7 @@
  * Tailwind-first landing page with hero, highlights, gallery, and services
  */
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ContactSection from './ContactSection';
 import Gallery from '../../shared/Gallery/Gallery';
 import Section from '../../shared/Section/Section';
@@ -19,9 +19,16 @@ const featureList = [
   { icon: 'location_on', title: 'Lokalizacja', copy: 'Działamy na terenie Wrocławia i okolic.' }
 ];
 
+const aboutHighlights = [
+  { icon: 'grade', title: 'Setki realizacji', copy: 'Doświadczenie, które przekłada się na sprawdzony proces i przewidywalne rezultaty.' },
+  { icon: 'rule', title: 'Kontrola budżetu', copy: 'Pracujemy w ustalonym budżecie i harmonogramie – bez zaskoczeń.' },
+  { icon: 'verified', title: 'Opieka i gwarancja', copy: 'Stały nadzór kierownika projektu i pełny serwis gwarancyjny.' }
+];
+
 function HomePage({ scrollToContact = false }) {
   const { photos } = useGalleryData();
   const galleryPhotos = photos.slice(0, 12);
+  const location = useLocation();
 
   // Scroll to contact section when the route is /contact
   useEffect(() => {
@@ -36,6 +43,20 @@ function HomePage({ scrollToContact = false }) {
 
     return () => clearTimeout(timer);
   }, [scrollToContact]);
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const sectionId = location.hash.replace('#', '');
+    const timer = setTimeout(() => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [location.hash]);
 
   return (
     <div className="flex flex-col">
@@ -77,7 +98,7 @@ function HomePage({ scrollToContact = false }) {
                 Zadzwoń do nas
               </a>
               <Link
-                to="/about"
+                to="/#about"
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
               >
                 Dowiedz się więcej
@@ -108,33 +129,90 @@ function HomePage({ scrollToContact = false }) {
       </section>
 
       {/* About Section */}
-      <Section className="bg-gradient-to-b from-slate-50 to-white">
-        <div className="grid items-center gap-10 lg:grid-cols-[320px,1fr]">
-          <div className="overflow-hidden rounded-2xl bg-white shadow-card">
-            <img src="/assets/icons/key.jpg" alt="Klucz - remont pod klucz" className="h-full w-full object-cover" />
-          </div>
+      <Section id="about" className="bg-gradient-to-b from-white to-slate-50">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr,0.95fr]">
           <div className="space-y-4 text-slate-700">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">O nas</p>
             <h2 className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl">
-              Kompleksowe <span className="text-primary">wykończenie wnętrz</span> od pomysłu do klucza
+              Remonty pod klucz z <span className="text-primary">pełną obsługą</span>
             </h2>
             <p className="text-base leading-relaxed">
-              Czy marzysz o nowym, świeżym wnętrzu? Zadzwoń już teraz, a razem zespolimy Twoje pomysły z naszą ekspertyzą.
+              Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Zapewniamy kontrolę nad budżetem oraz stały nadzór kierownika projektu.
             </p>
+            <div className="overflow-hidden rounded-2xl shadow-card sm:hidden">
+              <img
+                src="/assets/images/image.A.webp"
+                alt="Nowoczesne wykończenie wnętrza"
+                className="h-full w-full object-cover"
+              />
+              <p className="bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
+                Styl i jakość wykończenia
+              </p>
+            </div>
             <p className="text-base leading-relaxed">
-              Zaprojektujemy i wykończymy Twoje mieszkanie pod klucz. Jeśli chcesz mieć niebanalnie wykończone mieszkanie oraz kontrolę nad budżetem
-              i nie masz czasu na pilnowanie ekipy budowlanej to dobrze trafiłeś! Zrobimy wszystko za Ciebie oraz zapewnimy 24-miesięczny serwis gwarancyjny.
+              Setki zrealizowanych projektów pozwoliły nam dopracować proces, dzięki czemu gwarantujemy terminowość i wysoką jakość prac.
             </p>
+            <div className="overflow-hidden rounded-2xl shadow-card sm:hidden">
+              <img
+                src="/assets/icons/key.jpg"
+                alt="Wykończenie pod klucz"
+                className="h-full w-full object-cover"
+              />
+              <p className="bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
+                Wykończenie pod klucz
+              </p>
+            </div>
             <p className="text-base leading-relaxed">
-              Wszystkie prace nadzoruje kierownik projektu. Wykończymy pod klucz na terenie Wrocławia i okolic.
+              Działamy na terenie Wrocławia i okolic, a na całość prac zapewniamy pełny serwis gwarancyjny.
             </p>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary-dark"
-            >
-              Dowiedz się więcej
-              <i className="material-icons text-base">arrow_forward</i>
-            </Link>
+            <div className="overflow-hidden rounded-2xl shadow-card sm:hidden">
+              <img
+                src="/assets/images/image.C.webp"
+                alt="Prace wykończeniowe w toku"
+                className="h-full w-full object-cover"
+              />
+              <p className="bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
+                Nadzór i realizacja
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {aboutHighlights.map((item) => (
+                <div key={item.title} className="rounded-2xl bg-white p-4 shadow-card">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <i className="material-icons text-lg">{item.icon}</i>
+                    </span>
+                    <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
+                  </div>
+                  <p className="mt-3 text-xs leading-relaxed text-slate-600">{item.copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-5">
+            <div className="overflow-hidden rounded-2xl shadow-card sm:row-span-2">
+              <img
+                src="/assets/images/image.A.webp"
+                alt="Nowoczesne wykończenie wnętrza"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+              <img
+                src="/assets/icons/key.jpg"
+                alt="Wykończenie pod klucz"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="overflow-hidden rounded-2xl shadow-card">
+              <img
+                src="/assets/images/image.C.webp"
+                alt="Prace wykończeniowe w toku"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </Section>
@@ -180,6 +258,7 @@ function HomePage({ scrollToContact = false }) {
 
       {/* Gallery Section */}
       <Section
+        id="gallery"
         className="relative overflow-hidden bg-gradient-to-br from-stone-800 via-stone-700 to-stone-600"
         innerClassName="relative z-10"
         before={<div className="absolute inset-0 bg-green-900/20 pointer-events-none mix-blend-overlay" />}
@@ -194,7 +273,7 @@ function HomePage({ scrollToContact = false }) {
       </Section>
 
       {/* Services Section */}
-      <Section className="bg-white">
+      <Section id="services" className="bg-white">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Oferta</p>
           <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
