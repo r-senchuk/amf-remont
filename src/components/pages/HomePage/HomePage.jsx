@@ -92,14 +92,14 @@ function HomePage({ scrollToContact = false }) {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
                 href="tel:+48796019986"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
+                className="hero-cta hero-cta--primary inline-flex items-center gap-2 rounded-full bg-primary text-sm font-semibold uppercase tracking-wide text-white transition hover:-translate-y-0.5"
               >
                 <i className="material-icons text-base">call</i>
                 Zadzwoń do nas
               </a>
               <Link
                 to="/#about"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
+                className="hero-cta hero-cta--secondary inline-flex items-center gap-2 rounded-full text-sm font-semibold uppercase tracking-wide text-white transition hover:-translate-y-0.5"
               >
                 Dowiedz się więcej
                 <i className="material-icons text-base">arrow_forward</i>
