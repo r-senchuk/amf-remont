@@ -116,6 +116,23 @@ button,
 button * {
   transition: var(--transition-base);
 }
+.contact-footer-note .contact-footer-cta {
+  padding: 0.85rem 2.25rem;
+  border: 0;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+  line-height: 1.2;
+}
+.contact-footer-note .contact-footer-cta--primary {
+  box-shadow: 0 16px 32px rgba(255, 148, 42, 0.35);
+}
+.contact-footer-note .contact-footer-cta--secondary {
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.16);
+}
+@media (min-width: 768px) {
+  .contact-footer-note .contact-footer-cta {
+    padding: 1rem 3rem;
+  }
+}
 
 /* Smooth scroll behavior */
 html {
