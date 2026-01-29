@@ -28,6 +28,12 @@
   --color-brand-bg-lighter: #f4f7f9;
   --color-brand-bg-dark: #486e71;
   
+  /* Mappings for Legacy CSS compatibility */
+  --color-text-primary: var(--color-brand-text);
+  --color-text-secondary: var(--color-brand-text-secondary);
+  --font-family-primary: var(--font-sans);
+  --font-family-secondary: var(--font-display);
+
   /* Custom Shadows */
   --shadow-card: 0 4px 8px rgba(38, 50, 56, 0.15);
   --shadow-card-hover: 0 8px 16px rgba(38, 50, 56, 0.2);

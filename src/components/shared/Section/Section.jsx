@@ -1,12 +1,12 @@
 const paddingClasses = {
   none: 'py-0',
-  compact: 'py-14 sm:py-16',
-  normal: 'py-16 sm:py-20',
-  loose: 'py-20 sm:py-24'
+  compact: 'py-12 sm:py-16', // 48px / 64px
+  normal: 'py-16 sm:py-20 lg:py-24', // 64px / 80px / 96px
+  loose: 'py-20 sm:py-24 lg:py-32' // 80px / 96px / 128px
 };
 
 const widthClasses = {
-  narrow: 'max-w-5xl',
+  narrow: 'max-w-4xl',
   base: 'max-w-6xl',
   wide: 'max-w-7xl'
 };
