@@ -61,17 +61,30 @@ function HomePage({ scrollToContact = false }) {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
+      {/* Hero Section */}
       <section className="relative isolate bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div
           className="absolute inset-0"
           style={{ backgroundImage: 'url(/assets/backgrounds/backgr.webp)', backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
 
-        <img src="/assets/images/kut2.png" alt="" className="hero-corner hero-corner--tl" aria-hidden="true" />
-        <img src="/assets/images/kut1.png" alt="" className="hero-corner hero-corner--br" aria-hidden="true" />
+        {/* Decorative corner images */}
+        <img 
+          src="/assets/images/kut2.png" 
+          alt="" 
+          className="absolute top-0 left-0 w-[140px] sm:w-[170px] lg:w-[220px] -translate-x-[8%] translate-y-[12%] sm:-translate-x-[6%] sm:translate-y-[8%] lg:-translate-x-[5%] lg:translate-y-[6%] drop-shadow-2xl z-10 pointer-events-none" 
+          aria-hidden="true" 
+        />
+        <img 
+          src="/assets/images/kut1.png" 
+          alt="" 
+          className="absolute bottom-0 right-0 w-[140px] sm:w-[170px] lg:w-[220px] translate-x-[8%] translate-y-[40%] sm:translate-x-[6%] sm:translate-y-[35%] lg:translate-x-[5%] lg:translate-y-[30%] drop-shadow-2xl z-10 pointer-events-none" 
+          aria-hidden="true" 
+        />
 
         <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-16 text-center sm:px-6 md:py-24 lg:px-8">
-          <div className="hero-card w-full max-w-4xl space-y-8">
+          {/* Hero Card */}
+          <div className="relative z-20 mx-auto w-full max-w-4xl space-y-8 rounded-3xl border border-white/10 bg-slate-900/55 p-8 px-8 py-10 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-md sm:p-12 lg:p-14">
             <div className="flex flex-col items-center gap-4 text-center">
               <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
                 <img src="/assets/logo/logo.svg" alt="AMF GROUP" className="h-12 w-auto" />
@@ -92,14 +105,14 @@ function HomePage({ scrollToContact = false }) {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
                 href="tel:+48796019986"
-                className="hero-cta hero-cta--primary inline-flex items-center gap-2 rounded-full bg-primary text-sm font-semibold uppercase tracking-wide text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-9 py-4 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_16px_32px_rgba(26,73,167,0.35)] transition hover:-translate-y-0.5 md:px-12"
               >
                 <i className="material-icons text-base">call</i>
                 Zadzwoń do nas
               </a>
               <Link
                 to="/#about"
-                className="hero-cta hero-cta--secondary inline-flex items-center gap-2 rounded-full text-sm font-semibold uppercase tracking-wide text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-9 py-4 text-sm font-semibold uppercase tracking-wide text-white shadow-[0_16px_32px_rgba(15,23,42,0.22)] transition hover:-translate-y-0.5 hover:bg-white/20 md:px-12"
               >
                 Dowiedz się więcej
                 <i className="material-icons text-base">arrow_forward</i>

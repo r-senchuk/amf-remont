@@ -14,7 +14,7 @@ import './css/tailwind.css';
 import './css/design-system.css';
 import './css/global.css';
 import './css/main.css';
-import './css/types.css';
+
 import './css/ol-article.css';
 import './css/project.css';
 
