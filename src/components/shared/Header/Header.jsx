@@ -61,7 +61,7 @@ function Header() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-slate-950/90 backdrop-blur-md relative"
+        className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-slate-950/90 backdrop-blur-md"
         style={{
           backgroundImage:
             'linear-gradient(120deg, rgba(26,73,167,0.16), rgba(15,23,42,0)), repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 10px)'
@@ -97,13 +97,7 @@ function Header() {
                   {label}
                 </a>
               ))}
-              <a
-                href="/contact"
-                onClick={handleContactClick}
-                className="rounded-full bg-primary px-3 py-1.5 text-[0.6rem] text-white shadow-card transition hover:shadow-card-hover"
-              >
-                Kontakt
-              </a>
+
             </nav>
 
             <div className="flex flex-1 items-center justify-end gap-3 text-white/70">

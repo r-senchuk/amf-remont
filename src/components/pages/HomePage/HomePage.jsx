@@ -60,6 +60,9 @@ function HomePage({ scrollToContact = false }) {
 
   return (
     <div className="flex flex-col">
+      {/* Design Fix: Fixed background for gap behind header */}
+      <div className="fixed top-0 left-0 right-0 h-24 bg-slate-900 z-0" aria-hidden="true" />
+      
       {/* Hero Section */}
       {/* Hero Section */}
       <section className="relative isolate bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">

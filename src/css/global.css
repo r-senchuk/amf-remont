@@ -23,6 +23,12 @@ body {
   flex-direction: column;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* Web Component default styles */
 amf-header,
 amf-footer {

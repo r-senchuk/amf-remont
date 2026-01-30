@@ -662,6 +662,7 @@ body > * > div[otype]#breadcrumbs > div > div[otype] {
   font-size: var(--font-size-xs);
   color: rgba(84, 110, 122, 0.25);
 }
+/* REMOVED: Legacy footer styles - replaced by React component
 footer {
   background: var(--color-bg-dark);
 }
@@ -719,6 +720,7 @@ footer #footer_copyright p {
 footer #footer_copyright p strong {
   font-weight: 300;
 }
+*/
 .kontakt_pad {
   text-align: center;
   align-self: center;

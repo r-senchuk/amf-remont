@@ -23,7 +23,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative mt-auto bg-gradient-to-r from-slate-900 to-slate-800 py-8 text-white">
+    <footer className="relative mt-auto bg-gradient-to-r from-slate-900 to-slate-800 py-8 text-white z-10">
       <div className="mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8">
         <p className="text-center text-sm font-medium text-white/70">
           © {currentYear} <span className="font-semibold text-white/80">Wykończenie wnętrz we Wrocławiu</span>
