@@ -11,12 +11,11 @@ import router from './routes';
 import './css/tailwind.css';
 
 // Import global styles
-
 import './css/global.css';
 import './css/main.css';
 
+// Import component-specific styles
 import './css/ol-article.css';
-
 
 // Remove loading class from body when app is ready
 document.body.classList.remove('loading');

@@ -1,12 +1,24 @@
 /**
  * useScrollRestoration Hook
  * Handles scroll position restoration on navigation
+ * 
+ * @typedef {Object} ScrollRestorationHook
+ * @property {() => void} restoreScroll - Restores scroll position for current route
  */
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+/**
+ * Map to store scroll positions for each route
+ * @type {Map<string, number>}
+ */
 const scrollPositions = new Map();
 
+/**
+ * Hook that saves and restores scroll positions when navigating between routes
+ * 
+ * @returns {void}
+ */
 export function useScrollRestoration() {
   const location = useLocation();
 

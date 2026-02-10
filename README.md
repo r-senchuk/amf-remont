@@ -53,8 +53,7 @@ amf-remont/
 │       │   ├── Header/           # Site header component
 │       │   ├── Footer/           # Site footer component
 │       └── pages/                # Page components
-│           ├── HomePage/         # Home page
-│           ├── AboutPage/        # About page
+│           ├── HomePage/         # Home page (includes About section)
 │           ├── ServicesPage/     # Services page
 │           ├── GalleryPage/      # Gallery page
 │           └── ContactPage/      # Contact section building blocks (used within HomePage)
@@ -142,7 +141,6 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'gallery', element: <GalleryPage /> },
       // /contact renders HomePage and scrolls to the embedded contact section
@@ -218,6 +216,15 @@ All design tokens are defined in `src/css/design-system.css`.
 - Node.js 20.19+ (or 22.12+) and npm
 - Make (for build commands)
 
+### TypeScript Support
+
+The project includes TypeScript configuration and JSDoc type annotations for improved developer experience:
+
+- **tsconfig.json**: Configured for React 19 with strict type checking
+- **JSDoc Types**: Added to key components and hooks for IDE autocompletion
+- **Gradual Adoption**: Components use JSDoc types while maintaining .jsx extensions
+- **Future Migration**: Ready for full .tsx migration when needed
+
 ### Dev Container
 
 - Ready-to-use VS Code Dev Container config in `.devcontainer/devcontainer.json`.
@@ -286,6 +293,7 @@ make clean
 - **SEO Optimization**: Dynamic meta tags via useSEO hook
 - **Scroll Restoration**: Saves/restores scroll positions
 - **Photo Gallery**: JSON-based gallery with GLightbox
+- **Error Handling**: Global Error Boundary with user-friendly error recovery
 - **Material Icons**: Google Material Icons integration
 - **Mobile Navigation**: Materialize sidenav for mobile
 - **Scroll to Top**: Button to scroll to top of page

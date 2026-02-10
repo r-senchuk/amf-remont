@@ -1,15 +1,28 @@
 /**
  * useSEO Hook
  * Updates document meta tags based on current route
+ * 
+ * @typedef {Object} RouteMeta
+ * @property {string} title - Page title
+ * @property {string} description - Meta description
+ * @property {string} ogTitle - Open Graph title
+ * @property {string} ogDescription - Open Graph description
+ * @property {string} ogImage - Open Graph image URL
  */
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { routesMeta } from '../routes';
 
+/**
+ * Hook that updates SEO meta tags based on current route
+ * 
+ * @returns {void}
+ */
 export function useSEO() {
   const location = useLocation();
 
   useEffect(() => {
+    /** @type {RouteMeta} */
     const meta = routesMeta[location.pathname] || routesMeta['/'];
     
     // Update title
