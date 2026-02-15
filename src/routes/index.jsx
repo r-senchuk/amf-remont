@@ -7,7 +7,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App.jsx';
 
 const HomePage = lazy(() => import('../components/pages/HomePage/HomePage.jsx'));
-const ServicesPage = lazy(() => import('../components/pages/ServicesPage/ServicesPage.jsx'));
+
 const GalleryPage = lazy(() => import('../components/pages/GalleryPage/GalleryPage.jsx'));
 
 // Route metadata for SEO
@@ -19,13 +19,7 @@ const routesMeta = {
     ogDescription: 'Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu z 24-miesięczną gwarancją.',
     ogImage: '/assets/logo/logo.svg'
   },
-  '/services': {
-    title: 'Oferta - AMF GROUP | Usługi remontowe we Wrocławiu',
-    description: 'Kompleksowe usługi remontowe: zabudowy g-k, gładź gipsowa, malowanie, tapetowanie, sufity podwieszane, glazura i terakota. Remonty pod klucz.',
-    ogTitle: 'Oferta - AMF GROUP | Usługi remontowe',
-    ogDescription: 'Specjalizujemy się w kompleksowych remontach: od zabudów g-k po wykończenie łazienek. Remonty pod klucz we Wrocławiu.',
-    ogImage: '/assets/logo/logo.svg'
-  },
+
   '/gallery': {
     title: 'Galeria - AMF GROUP | Zrealizowane projekty',
     description: 'Zobacz nasze zrealizowane projekty remontowe. Galeria zdjęć z remontów mieszkań, domów i lokali użytkowych we Wrocławiu.',
@@ -60,10 +54,7 @@ const router = createBrowserRouter([
         index: true,
         element: withSuspense(<HomePage />)
       },
-      {
-        path: 'services',
-        element: withSuspense(<ServicesPage />)
-      },
+
       {
         path: 'gallery',
         element: withSuspense(<GalleryPage />)

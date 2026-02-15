@@ -256,19 +256,24 @@ function HomePage({ scrollToContact = false }) {
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Dlaczego my</p>
           <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Nasze atuty</h2>
         </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featureList.map((feature) => (
-            <div
-              key={feature.title}
-              className="flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <i className="material-icons text-xl">{feature.icon}</i>
-              </span>
-              <h3 className="text-lg font-semibold text-slate-900">{feature.title}</h3>
-              <p className="text-sm leading-relaxed text-slate-600">{feature.copy}</p>
-            </div>
-          ))}
+        <div className="mx-auto mt-8 max-w-3xl">
+          <dl className="-my-4 divide-y divide-slate-200">
+            {featureList.map((feature) => (
+              <div key={feature.title} className="flex gap-4 py-4 sm:gap-5">
+                <div className="flex shrink-0 items-center justify-center rounded-lg">
+                  <span className="material-icons text-3xl text-primary" aria-hidden="true">{feature.icon}</span>
+                </div>
+                <div>
+                  <dt className="text-base font-bold leading-6 text-slate-900">
+                    {feature.title}
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-slate-600">
+                    {feature.copy}
+                  </dd>
+                </div>
+              </div>
+            ))}
+          </dl>
         </div>
       </Section>
 
@@ -288,29 +293,27 @@ function HomePage({ scrollToContact = false }) {
         </div>
       </Section>
 
-      {/* Services Section */}
       <Section id="services" className="bg-white">
-        <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Oferta</p>
-          <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
-          <p className="mt-2 text-base text-slate-600 sm:text-lg">
-            Kompleksowe usługi remontowe – od konstrukcji po detale wykończenia.
-          </p>
-        </div>
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">Oferta</p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl">Specjalizujemy się w:</h2>
+            <p className="mt-2 text-base text-slate-600 sm:text-lg">
+              Kompleksowe usługi remontowe – od konstrukcji po detale wykończenia.
+            </p>
+          </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <article
-              key={service.title}
-              className={`flex h-full flex-col gap-3 rounded-2xl border border-slate-100 p-6 shadow-card transition hover:-translate-y-1 hover:shadow-card-hover ${service.muted ? 'bg-slate-50' : 'bg-white'}`}
-            >
-              <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 ${service.accent ? 'text-accent-green' : 'text-primary'}`}>
-                <i className="material-icons text-xl">{service.icon}</i>
-              </span>
-              <h3 className="text-lg font-semibold text-slate-900">{service.title}</h3>
-              <p className="text-sm leading-relaxed text-slate-600">{service.description}</p>
-            </article>
-          ))}
+          <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => (
+              <div key={service.title} className="flex flex-col gap-3">
+                <span className="material-icons text-4xl text-primary" aria-hidden="true">{service.icon}</span>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">{service.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{service.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 
