@@ -25,38 +25,38 @@ const strengths = [
 const serviceCategories = [
   {
     title: 'Zabudowy i konstrukcje g-k',
-    icon: 'wall',
+    icon: 'construction',
     items: [
-      { title: 'Zabudowy z płyt g-k', description: 'Zabudowy i sufity z płyt kartonowo-gipsowych.' },
-      { title: 'Montaż ścian z płyt k-g', description: 'Montaż ścian i zabudów systemowych.' },
-      { title: 'Sufity podwieszane', description: 'Systemy sufitów podwieszanych z oświetleniem.' },
-      { title: 'Suche tynki', description: 'Suche tynki kartonowo-gipsowe.' }
+      { icon: 'home', title: 'Zabudowy z płyt g-k', description: 'Zabudowy i sufity z płyt kartonowo-gipsowych.' },
+      { icon: 'handyman', title: 'Montaż ścian z płyt k-g', description: 'Montaż ścian i zabudów systemowych.' },
+      { icon: 'wb_incandescent', title: 'Sufity podwieszane', description: 'Systemy sufitów podwieszanych z oświetleniem.' },
+      { icon: 'construction', title: 'Suche tynki', description: 'Suche tynki kartonowo-gipsowe.' }
     ]
   },
   {
     title: 'Wykończenia ścian i sufitu',
     icon: 'palette',
     items: [
-      { title: 'Gładź gipsowa / szpachlowanie', description: 'Gładź gipsowa, szpachlowanie ścian i sufitów.' },
-      { title: 'Malowanie', description: 'Malowanie ścian, sufitów i elementów dekoracyjnych.' },
-      { title: 'Tapetowanie', description: 'Tapetowanie ścian i wykończenia dekoracyjne.' },
-      { title: 'Ściany dekoracyjne', description: 'Beton architektoniczny, tynki i detale.' }
+      { icon: 'engineering', title: 'Gładź gipsowa / szpachlowanie', description: 'Gładź gipsowa, szpachlowanie ścian i sufitów.' },
+      { icon: 'format_paint', title: 'Malowanie', description: 'Malowanie ścian, sufitów i elementów dekoracyjnych.' },
+      { icon: 'wallpaper', title: 'Tapetowanie', description: 'Tapetowanie ścian i wykończenia dekoracyjne.' },
+      { icon: 'brush', title: 'Ściany dekoracyjne', description: 'Beton architektoniczny, tynki i detale.' }
     ]
   },
   {
     title: 'Podłogi i posadzki',
     icon: 'layers',
     items: [
-      { title: 'Układanie paneli', description: 'Panele podłogowe i wykończenia listew.' },
-      { title: 'Wylewki samopoziomujące i wyrównawcze', description: 'Wylewki samopoziomujące i wyrównawcze.' }
+      { icon: 'view_column', title: 'Układanie paneli', description: 'Panele podłogowe i wykończenia listew.' },
+      { icon: 'format_color_fill', title: 'Wylewki samopoziomujące i wyrównawcze', description: 'Wylewki samopoziomujące i wyrównawcze.' }
     ]
   },
   {
     title: 'Płytki i łazienki',
     icon: 'bathroom',
     items: [
-      { title: 'Układanie glazury i terakoty', description: 'Układanie glazury i terakoty.' },
-      { title: 'Łazienki kompleksowo', description: 'Kompleksowe wykończenie łazienek.' }
+      { icon: 'grid_on', title: 'Układanie glazury i terakoty', description: 'Układanie glazury i terakoty.' },
+      { icon: 'bathtub', title: 'Łazienki kompleksowo', description: 'Kompleksowe wykończenie łazienek.' }
     ]
   }
 ];

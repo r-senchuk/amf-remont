@@ -8,7 +8,7 @@ import ContactSection from './ContactSection';
 import Gallery from '../../shared/Gallery/Gallery';
 import Section from '../../shared/Section/Section';
 import useGalleryData from '../../../hooks/useGalleryData';
-import services from '../../../data/services';
+import services, { strengths, serviceCategories } from '../../../data/services';
 
 const featureList = [
   { icon: 'grade', title: 'Doświadczenie', copy: 'Setki zrealizowanych projektów – tworzymy wnętrza, które zachwycają.' },
@@ -303,14 +303,26 @@ function HomePage({ scrollToContact = false }) {
             </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <div key={service.title} className="flex flex-col gap-3">
-                <span className="material-icons text-4xl text-primary" aria-hidden="true">{service.icon}</span>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900">{service.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600">{service.description}</p>
+          <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+            {serviceCategories.map((category) => (
+              <div key={category.title} className="overflow-hidden rounded-2xl border-t-4 border-primary bg-white shadow-md ring-1 ring-slate-200">
+                <div className="border-b border-slate-200 bg-slate-50/50 px-6 py-4">
+                  <h3 className="flex items-center gap-3 font-bold text-slate-900">
+                    <span className="material-icons text-primary" aria-hidden="true">{category.icon}</span>
+                    {category.title}
+                  </h3>
                 </div>
+                <ul className="divide-y divide-slate-100">
+                  {category.items.map((item) => (
+                    <li key={item.title} className="group flex items-start gap-4 px-6 py-4 hover:bg-slate-50 even:bg-slate-50/30">
+                      <span className="material-icons mt-0.5 text-2xl text-slate-400 transition-colors group-hover:text-primary" aria-hidden="true">{item.icon}</span>
+                      <div>
+                        <strong className="block text-sm font-semibold text-slate-900">{item.title}</strong>
+                        <span className="block text-sm text-slate-500">{item.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
