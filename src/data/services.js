@@ -14,12 +14,12 @@ const services = [
 ];
 
 const strengths = [
-  { title: 'Doświadczenie', description: 'Sprawdzone realizacje remontów i wykończeń.', icon: 'grade' },
-  { title: 'Remonty pod klucz', description: 'Koordynacja prac od startu po odbiór.', icon: 'house' },
-  { title: 'Kreatywne rozwiązania', description: 'Funkcjonalne pomysły dopasowane do wnętrza.', icon: 'emoji_objects' },
-  { title: 'Osobiste podejście', description: 'Indywidualne spojrzenie na potrzeby inwestora.', icon: 'handshake' },
-  { title: 'Terminowość', description: 'Dobra organizacja i dotrzymanie ustaleń.', icon: 'alarm' },
-  { title: 'Lokalizacja', description: 'Wrocław i okolice.', icon: 'location_on' }
+  { title: 'Doświadczenie', description: 'Setki zrealizowanych projektów - tworzymy wnętrza, które zachwycają.', icon: 'verified_user' },
+  { title: 'Remonty Pod Klucz', description: 'Od planu po ostatnią pędzelkę, wszystko załatwimy, a Ty tylko cieszysz się efektem.', icon: 'home_repair_service' },
+  { title: 'Kreatywne Rozwiązania', description: 'Innowacyjne podejście do remontów - Twoje mieszkanie będzie unikatowe.', icon: 'lightbulb' },
+  { title: 'Osobiste Podejście', description: 'Pracujemy dla Ciebie, a nie dla projektu - dopasowujemy się do Twoich potrzeb.', icon: 'handshake' },
+  { title: 'Terminowość', description: 'Liczy się każdy dzień. U nas termin to nie puste słowo.', icon: 'schedule' },
+  { title: 'Lokalizacja', description: 'Jesteśmy tu, gdzie Ty. Działamy na terenie Wrocławia.', icon: 'location_city' }
 ];
 
 const serviceCategories = [

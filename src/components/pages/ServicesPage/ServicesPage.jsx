@@ -18,32 +18,35 @@ function ServicesPage() {
         </div>
       </header>
 
-      <Section>
-        <div className="text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-primary/60">Nasze atuty</p>
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl">Nasze atuty w skrócie</h2>
-          <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
-            Doświadczenie, podejście i lokalizacja we Wrocławiu i okolicach.
-          </p>
-        </div>
+      <Section className="bg-slate-50/30">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Dlaczego my</p>
+            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Nasze atuty</h2>
+            <p className="mx-auto mt-4 max-w-3xl text-base text-slate-600">
+              Konkretne wartości, na których opieramy każdą realizację.
+            </p>
+          </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
-          {strengths.map((strength) => (
-            <div
-              key={strength.title}
-              className="flex items-center gap-3 rounded-full border border-slate-200 bg-white/60 px-5 py-3 text-left shadow-sm backdrop-blur-sm transition-colors hover:border-primary/20 hover:bg-white"
-            >
-              <span className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <span className="material-icons text-xl leading-none">{strength.icon}</span>
-              </span>
-              <div className="leading-tight">
-                <p className="text-sm font-bold text-slate-900">{strength.title}</p>
-                <p className="text-xs text-slate-500">{strength.description}</p>
+          <dl className="mt-12 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:gap-x-12">
+            {strengths.map((strength) => (
+              <div key={strength.title} className="relative pl-16">
+                <dt className="text-lg font-bold leading-7 text-slate-900">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="material-icons text-2xl leading-none" aria-hidden="true">{strength.icon}</span>
+                  </div>
+                  {strength.title}
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-slate-600">
+                  {strength.description}
+                </dd>
               </div>
-            </div>
-          ))}
+            ))}
+          </dl>
         </div>
+      </Section>
 
+      <Section>
         <div className="mt-20 text-center">
           <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl">Oferta naszej firmy remontowej</h2>
           <p className="mx-auto max-w-2xl text-base text-slate-600 sm:text-lg">
