@@ -14,9 +14,9 @@ const GalleryPage = lazy(() => import('../components/pages/GalleryPage/GalleryPa
 const routesMeta = {
   '/': {
     title: 'AMF GROUP - Wykończenie wnętrz we Wrocławiu',
-    description: 'Profesjonalne wykończenie wnętrz we Wrocławiu. Remonty pod klucz, 24-miesięczna gwarancja. Setki zrealizowanych projektów. Zadzwoń już dziś!',
+    description: 'Profesjonalne wykończenie wnętrz we Wrocławiu. Remonty pod klucz. Setki zrealizowanych projektów. Zadzwoń już dziś!',
     ogTitle: 'AMF GROUP - Wykończenie wnętrz we Wrocławiu',
-    ogDescription: 'Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu z 24-miesięczną gwarancją.',
+    ogDescription: 'Tworzymy Twoje wymarzone wnętrze - od pomysłu do klucza. Profesjonalne remonty pod klucz we Wrocławiu.',
     ogImage: '/assets/logo/logo.svg'
   },
 

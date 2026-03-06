@@ -103,7 +103,7 @@ function HomePage({ scrollToContact = false }) {
               Wykończenie wnętrz we <span className="text-primary">Wrocławiu</span>
             </h1>
             <p className="max-w-3xl text-lg text-white/85 sm:text-xl">
-              AMF GROUP Remont – zmiana, którą możesz rozpocząć już dziś. Kompleksowe projekty, nadzór i 24-miesięczna gwarancja.
+              AMF GROUP Remont – zmiana, którą możesz rozpocząć już dziś. Kompleksowe projekty i nadzór.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a
@@ -122,7 +122,7 @@ function HomePage({ scrollToContact = false }) {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
               <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
                 <img src="/assets/icons/kitchen.svg" alt="" className="h-10 w-10 opacity-80" />
                 <div className="text-left text-sm font-semibold leading-tight text-white/80">Kuchnie i łazienki pod klucz</div>
@@ -134,10 +134,6 @@ function HomePage({ scrollToContact = false }) {
               <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
                 <img src="/assets/icons/hummer.svg" alt="" className="h-10 w-10 opacity-80" />
                 <div className="text-left text-sm font-semibold leading-tight text-white/80">Nadzór kierownika projektu</div>
-              </div>
-              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
-                <img src="/assets/icons/key.jpg" alt="" className="h-10 w-10 rounded-md object-cover opacity-80" />
-                <div className="text-left text-sm font-semibold leading-tight text-white/80">24-miesięczna gwarancja</div>
               </div>
             </div>
           </div>

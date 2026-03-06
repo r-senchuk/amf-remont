@@ -12,7 +12,6 @@ import './css/tailwind.css';
 
 // Import global styles
 import './css/global.css';
-import './css/main.css';
 
 // Import component-specific styles
 import './css/ol-article.css';
