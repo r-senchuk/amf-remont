@@ -25,6 +25,7 @@ help:
 	@echo "  $(YELLOW)make clean$(RESET)      Remove build artifacts and node_modules"
 	@echo "  $(YELLOW)make clean-dist$(RESET) Remove build artifacts (keep node_modules)"
 	@echo "  $(YELLOW)make reinstall$(RESET)  Clean and reinstall dependencies"
+	@echo "  $(YELLOW)make deploy$(RESET)     Deploy to AWS S3 (requires AWS credentials and S3_BUCKET env var)"
 	@echo ""
 
 # Install dependencies
@@ -75,3 +76,14 @@ clean-dist:
 # Reinstall dependencies (clean + install)
 reinstall: clean install
 	@echo "$(GREEN)Reinstall complete!$(RESET)"
+
+# Deploy to AWS S3
+deploy: build
+	@echo "$(CYAN)Deploying to AWS S3...$(RESET)"
+	@if [ -z "$$S3_BUCKET" ]; then \
+		echo "$(YELLOW)Error: S3_BUCKET environment variable is not set.$(RESET)"; \
+		echo "$(YELLOW)Usage: S3_BUCKET=my-bucket-name make deploy$(RESET)"; \
+		exit 1; \
+	fi
+	aws s3 sync dist/ s3://$$S3_BUCKET --delete
+	@echo "$(GREEN)Deployment complete!$(RESET)"
