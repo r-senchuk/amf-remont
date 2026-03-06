@@ -1,0 +1,28 @@
+/**
+ * React Application Entry Point
+ * Initializes the React application
+ */
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import router from './routes';
+
+// Import Tailwind CSS (must be first)
+import './css/tailwind.css';
+
+// Import global styles
+import './css/global.css';
+
+// Import component-specific styles
+import './css/ol-article.css';
+
+// Remove loading class from body when app is ready
+document.body.classList.remove('loading');
+
+// Create React root and render the app
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
+

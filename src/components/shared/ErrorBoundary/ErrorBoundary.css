@@ -1,0 +1,106 @@
+/**
+ * Error Boundary Styles
+ */
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--color-bg-light);
+  color: var(--color-text-primary);
+}
+
+.error-boundary-content {
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.error-boundary-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.error-boundary-message {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+.error-boundary-details {
+  background: var(--color-bg-light);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.error-boundary-error {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  word-break: break-word;
+}
+
+.error-boundary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.error-boundary-retry-button,
+.error-boundary-home-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-boundary-retry-button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+}
+
+.error-boundary-retry-button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.error-boundary-home-button {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.error-boundary-home-button:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .error-boundary-content {
+    padding: 1.5rem;
+  }
+
+  .error-boundary-title {
+    font-size: 1.5rem;
+  }
+
+  .error-boundary-actions {
+    flex-direction: column;
+  }
+}
