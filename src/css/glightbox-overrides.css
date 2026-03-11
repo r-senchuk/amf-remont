@@ -12,11 +12,45 @@
   object-fit: contain;
 }
 
-/* Hide caption/description completely (match design #2) */
-.glightbox-container .gslide-description,
-.glightbox-container .gslide-description *,
+/* Caption in bottom-left corner (match design #2) */
+.glightbox-container .gslide-description {
+  position: absolute !important;
+  left: 18px !important;
+  bottom: 18px !important;
+  right: auto !important;
+  top: auto !important;
+  width: auto !important;
+  max-width: min(520px, calc(100vw - 36px)) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+  z-index: 9999 !important;
+}
+
+.glightbox-container .gslide-description:empty {
+  display: none !important;
+}
+
+/* Different GLightbox versions use different wrapper classnames; cover common ones */
+.glightbox-container .gslide-description .gdesc-inner,
 .glightbox-container .gdesc-inner,
 .glightbox-container .gdesc-outer,
-.glightbox-container .gdesc {
+.glightbox-container .gdesc,
+.glightbox-container .gslide-title {
+  display: inline-block !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75) !important;
+}
+
+.glightbox-container .gslide-description .gdesc-inner:empty,
+.glightbox-container .gdesc-inner:empty,
+.glightbox-container .gslide-title:empty {
   display: none !important;
 }

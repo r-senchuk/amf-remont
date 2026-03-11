@@ -101,8 +101,8 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
           ? toGalleryPath(photo.webpFilename)
           : toGalleryPath(photo.filename),
         type: 'image',
-        // Keep the lightbox clean (like design #2): no caption/description bar
-        title: ''
+        // Show caption in the bottom-left corner (styled via glightbox-overrides.css)
+        title: photo.title || photo.alt || ''
       }));
 
       if (isCancelled) return;
