@@ -91,7 +91,9 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
     async function setupLightbox() {
       const [{ default: GLightbox }] = await Promise.all([
         import('glightbox'),
-        import('glightbox/dist/css/glightbox.css')
+        import('glightbox/dist/css/glightbox.css'),
+        // Must load after glightbox.css so our overrides win in the cascade
+        import('../../../css/glightbox-overrides.css')
       ]);
 
       const lightboxItems = displayPhotos.map((photo) => ({
@@ -99,7 +101,8 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
           ? toGalleryPath(photo.webpFilename)
           : toGalleryPath(photo.filename),
         type: 'image',
-        title: photo.title || photo.alt || ''
+        // Keep the lightbox clean (like design #2): no caption/description bar
+        title: ''
       }));
 
       if (isCancelled) return;

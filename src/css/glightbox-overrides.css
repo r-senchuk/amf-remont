@@ -1,0 +1,22 @@
+/* GLightbox overrides: remove white description/footer block under images */
+
+.glightbox-container .gslide,
+.glightbox-container .ginner-container,
+.glightbox-container .gslide-media,
+.glightbox-container .gslide-image {
+  background: transparent !important;
+}
+
+.glightbox-container .gslide-image img {
+  background: transparent !important;
+  object-fit: contain;
+}
+
+/* Hide caption/description completely (match design #2) */
+.glightbox-container .gslide-description,
+.glightbox-container .gslide-description *,
+.glightbox-container .gdesc-inner,
+.glightbox-container .gdesc-outer,
+.glightbox-container .gdesc {
+  display: none !important;
+}
