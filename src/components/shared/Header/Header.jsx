@@ -105,10 +105,6 @@ function Header() {
               <a href="tel:+48796019986" className="transition hover:text-white">
                 +48 796 019 986
               </a>
-              <span className="text-white/30">•</span>
-              <a href="tel:+48795621905" className="transition hover:text-white">
-                +48 795 621 905
-              </a>
             </div>
           </div>
         </div>
@@ -207,10 +203,6 @@ function Header() {
                 <a href="tel:+48796019986" className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 hover:bg-white/10">
                   <i className="material-icons text-base text-accent-orange">phone</i>
                   <span className="text-sm font-semibold text-white">+48 796 019 986</span>
-                </a>
-                <a href="tel:+48795621905" className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 hover:bg-white/10">
-                  <i className="material-icons text-base text-accent-orange">phone</i>
-                  <span className="text-sm font-semibold text-white">+48 795 621 905</span>
                 </a>
               </div>
             </div>
