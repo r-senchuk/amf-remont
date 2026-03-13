@@ -77,55 +77,9 @@ function ContactChannels() {
               </div>
             </div>
             
-            {/* Maks */}
-            <div className="flex gap-3">
-              <span className="h-9 w-9 flex items-center justify-center rounded-full bg-accent-green/10 text-accent-green flex-shrink-0 mt-1">
-                <i className="material-icons text-base">person</i>
-              </span>
-              <div className="flex-1">
-                <div className="mb-2">
-                  <span className="font-medium text-slate-800 block text-[0.9375rem]">
-                    Maks – koordynacja prac
-                  </span>
-                  <a 
-                    href="tel:+48795621905" 
-                    className="text-accent-green font-semibold text-base hover:underline decoration-accent-green decoration-2 underline-offset-2 transition-all"
-                  >
-                    +48 795 621 905
-                  </a>
-                </div>
-                {/* Maks Messengers */}
-                <div className="flex gap-3">
-                  <a 
-                    href="whatsapp://send?phone=+48795621905" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    title="WhatsApp"
-                    className="group flex items-center justify-center w-9 h-9 rounded-full bg-slate-50 hover:bg-green-100 transition-all duration-200 shadow-sm hover:shadow hover:-translate-y-0.5"
-                  >
-                    <img src="/assets/social/wa.svg" alt="WhatsApp" className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href="https://t.me/+48795621905" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    title="Telegram"
-                    className="group flex items-center justify-center w-9 h-9 rounded-full bg-slate-50 hover:bg-sky-100 transition-all duration-200 shadow-sm hover:shadow hover:-translate-y-0.5"
-                  >
-                    <img src="/assets/social/tlegr.svg" alt="Telegram" className="w-5 h-5" />
-                  </a>
-                  <a 
-                    href="viber://chat?number=%2B48795621905" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    title="Viber"
-                    className="group flex items-center justify-center w-9 h-9 rounded-full bg-slate-50 hover:bg-purple-100 transition-all duration-200 shadow-sm hover:shadow hover:-translate-y-0.5"
-                  >
-                    <img src="/assets/social/vb.svg" alt="Viber" className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-            </div>
+            
+                
+              
           </div>
         </article>
 
