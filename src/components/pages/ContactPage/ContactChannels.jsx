@@ -37,11 +37,12 @@ function ContactChannels() {
           {/* Contact Details */}
           <div className="border-t border-slate-100 pt-4 flex flex-col gap-5">
             {/* Anatolij */}
-            <div className="flex gap-3">
-              <span className="h-9 w-9 flex items-center justify-center rounded-full bg-primary/10 text-primary flex-shrink-0 mt-1">
+            <div className="flex justify-center">
+              <div className="flex items-start gap-3">
+                <span className="h-9 w-9 flex items-center justify-center rounded-full bg-primary/10 text-primary flex-shrink-0 mt-1">
                 <i className="material-icons text-base">person</i>
-              </span>
-              <div className="flex-1">
+                </span>
+                <div className="flex flex-col items-center text-center">
                 <div className="mb-2">
                   <span className="font-medium text-slate-800 block text-[0.9375rem]">
                     Anatolij – wyceny i terminy
@@ -54,7 +55,7 @@ function ContactChannels() {
                   </a>
                 </div>
                 {/* Anatolij Messengers */}
-                <div className="flex gap-3">
+                <div className="flex justify-center gap-3">
                   <a 
                     href="whatsapp://send?phone=+48796019986" 
                     target="_blank" 
@@ -74,12 +75,9 @@ function ContactChannels() {
                     <img src="/assets/social/tlegr.svg" alt="Telegram" className="w-5 h-5" />
                   </a>
                 </div>
+                </div>
               </div>
             </div>
-            
-            
-                
-              
           </div>
         </article>
 
