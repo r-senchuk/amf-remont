@@ -123,13 +123,14 @@ function HomePage({ scrollToContact = false }) {
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
-                <img src="/assets/icons/kitchen.svg" alt="" className="h-10 w-10 opacity-80" />
-                <div className="text-left text-sm font-semibold leading-tight text-white/80">Kuchnie i łazienki pod klucz</div>
-              </div>
+              
               <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
                 <img src="/assets/icons/painting.svg" alt="" className="h-10 w-10 opacity-80" />
                 <div className="text-left text-sm font-semibold leading-tight text-white/80">Malowanie i dekoracje</div>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
+                <img src="/assets/icons/kitchen.svg" alt="" className="h-10 w-10 opacity-80" />
+                <div className="text-left text-sm font-semibold leading-tight text-white/80"> Łazienki pod klucz</div>
               </div>
               <div className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 shadow-sm backdrop-blur">
                 <img src="/assets/icons/hummer.svg" alt="" className="h-10 w-10 opacity-80" />
