@@ -183,10 +183,10 @@ function Gallery({ photos, variant = 'full', showLink = false, className = '' })
                   
                   {/* Final fallback img tag */}
                   <img
-                    src={thumbPath}
-                    alt={photo.alt || photo.title || ''}
+                    src={photo.thumbnail || photo.filename}
+                    alt={photo.alt || `Realizacja ${photo.title || index + 1}`}
+                    className="h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-[1.03]"
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
                       e.target.style.opacity = '0.3';
                       e.target.alt = `Błąd ładowania`;

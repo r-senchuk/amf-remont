@@ -157,6 +157,7 @@ function HomePage({ scrollToContact = false }) {
                 src="/assets/images/image.A.webp"
                 alt="Nowoczesne wykończenie wnętrza"
                 className="h-full w-full object-cover"
+                loading="lazy"
               />
               <p className="bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
                 Styl i jakość wykończenia
@@ -170,6 +171,7 @@ function HomePage({ scrollToContact = false }) {
                 src="/assets/icons/key.jpg"
                 alt="Wykończenie pod klucz"
                 className="h-full w-full object-cover"
+                loading="lazy"
               />
               <p className="bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
                 Wykończenie pod klucz
@@ -183,6 +185,7 @@ function HomePage({ scrollToContact = false }) {
                 src="/assets/images/image.C.webp"
                 alt="Prace wykończeniowe w toku"
                 className="h-full w-full object-cover"
+                loading="lazy"
               />
               <p className="bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500">
                 Nadzór i realizacja
@@ -210,6 +213,7 @@ function HomePage({ scrollToContact = false }) {
                 src="/assets/images/image.A.webp"
                 alt="Nowoczesne wykończenie wnętrza"
                 className="h-full w-full object-cover"
+                loading="lazy"
               />
             </div>
             <div className="overflow-hidden rounded-2xl bg-white shadow-card">
@@ -217,6 +221,7 @@ function HomePage({ scrollToContact = false }) {
                 src="/assets/icons/key.jpg"
                 alt="Wykończenie pod klucz"
                 className="h-full w-full object-cover"
+                loading="lazy"
               />
             </div>
             <div className="overflow-hidden rounded-2xl shadow-card">
@@ -224,6 +229,7 @@ function HomePage({ scrollToContact = false }) {
                 src="/assets/images/image.C.webp"
                 alt="Prace wykończeniowe w toku"
                 className="h-full w-full object-cover"
+                loading="lazy"
               />
             </div>
           </div>

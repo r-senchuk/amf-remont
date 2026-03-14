@@ -63,7 +63,7 @@ function ContactChannels() {
                     title="WhatsApp"
                     className="group flex items-center justify-center w-9 h-9 rounded-full bg-slate-50 hover:bg-green-100 transition-all duration-200 shadow-sm hover:shadow hover:-translate-y-0.5"
                   >
-                    <img src="/assets/social/wa.svg" alt="WhatsApp" className="w-5 h-5" />
+                    <img src="/assets/social/wa.svg" alt="WhatsApp" className="w-5 h-5" loading="lazy" />
                   </a>
                   <a 
                     href="https://t.me/+48796019986" 
@@ -72,7 +72,7 @@ function ContactChannels() {
                     title="Telegram"
                     className="group flex items-center justify-center w-9 h-9 rounded-full bg-slate-50 hover:bg-sky-100 transition-all duration-200 shadow-sm hover:shadow hover:-translate-y-0.5"
                   >
-                    <img src="/assets/social/tlegr.svg" alt="Telegram" className="w-5 h-5" />
+                    <img src="/assets/social/tlegr.svg" alt="Telegram" className="w-5 h-5" loading="lazy" />
                   </a>
                 </div>
                 </div>
